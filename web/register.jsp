@@ -20,7 +20,7 @@
             </div>
             <div class="sidebar1">
                 <ul class="nav">
-                    <li><a href="index.jsp">Home</a></li>
+                    <li><a href="restaurant_list.jsp">Find Restaurants</a></li>
                     <li><a href="login.jsp">Login</a></li>
                     <li><a href="member.php">Member</a></li>
                     <li><a href="product_list.php">Product List</a></li>

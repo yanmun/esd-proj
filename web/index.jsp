@@ -20,7 +20,7 @@
                 <!-- end .header --></div>
             <div class="sidebar1">
                 <ul class="nav">
-                      <li><a href="product_list.php">Find Restaurants</a></li>
+                    <li><a href="restaurant_list.jsp">Find Restaurants</a></li>
                     <li><a href="register.jsp">Register</a></li>
                     <li><a href="login.php">Login</a></li>
                     <li><a href="member.php">Member</a></li>    
