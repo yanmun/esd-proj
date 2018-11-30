@@ -14,8 +14,9 @@
     <body>
         <h1>Takeaway King</h1>
         <ul>
-            <li><a href=""></a></li>
-            <li></li>
+            <li><a href="">Find Restaurants</a></li>
+            <li><a href="login.jsp">Sign in</a></li>
+            
         </ul>
     </body>
 </html>
