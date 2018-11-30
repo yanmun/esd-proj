@@ -52,6 +52,13 @@ public class RegisterController extends HttpServlet {
 //        processRequest(request, response);
             response.setContentType("text/html;charset=UTF-8");
             PrintWriter out =  response.getWriter();
+            String fname = request.getParameter("fname");
+            String lname = request.getParameter("lname");
+            String username = request.getParameter("username");
+            String password  = request.getParameter("password");
+            String tel = request.getParameter("tel");
+            String email = request.getParameter("email");
+            
             
             
     }
