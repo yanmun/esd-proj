@@ -20,7 +20,6 @@
       <jsp:include page="sidebar.jsp" />
             <div class="content">
                 <p>Cart</p>
-                HI
                 <!-- end .content --></div>
           <jsp:include page="footer.jsp" />
           </div>
