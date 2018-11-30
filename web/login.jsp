@@ -18,6 +18,8 @@
             <p>Password: <input type="password" name="password"></p>
             
             <p><input type="submit"></p>
+            <p><a href="">Forget Password?</a></p>
+            
         </form>
         
     </body>

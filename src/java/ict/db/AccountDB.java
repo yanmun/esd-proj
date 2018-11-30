@@ -5,10 +5,23 @@
  */
 package ict.db;
 
+import java.sql.Connection;
+import java.sql.Statement;
+
 /**
  *
  * @author pearh
  */
-public class AccountDB {
+public class AccountDB extends DB{
     
+    public AccountDB(String url, String username, String password) {
+        super(url, username, password);
+    }
+    
+    public void createTable(){
+         Statement stmnt = null;
+        Connection cnnt = null;
+        
+        
+    }
 }
