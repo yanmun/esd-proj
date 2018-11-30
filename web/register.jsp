@@ -11,7 +11,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Register</title>
         <style type="text/css">
-            <jsp:include page="style.css" />
+            <jsp:include page="css/style.css" />
         </style>
     </head>
     <body>
@@ -21,7 +21,7 @@
             <div class="sidebar1">
                 <ul class="nav">
                     <li><a href="index.jsp">Home</a></li>
-                    <li><a href="login.php">Login</a></li>
+                    <li><a href="login.jsp">Login</a></li>
                     <li><a href="member.php">Member</a></li>
                     <li><a href="product_list.php">Product List</a></li>
                     <li><a href="cart.php">Cart</a></li>
