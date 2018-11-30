@@ -15,13 +15,14 @@
         </style>
     </head>
     <body>
-          <div class="container">
-         <jsp:include page="header.jsp" />
-      <jsp:include page="sidebar.jsp" />
+        <div class="container">
+            <jsp:include page="header.jsp" />
+            <jsp:include page="sidebar.jsp" />
             <div class="content">
                 <p>Cart</p>
-                <!-- end .content --></div>
-          <jsp:include page="footer.jsp" />
-          </div>
+                <!-- end .content -->
+            </div>
+            <jsp:include page="footer.jsp" />
+        </div>
     </body>
 </html>
