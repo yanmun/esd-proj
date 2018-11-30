@@ -9,7 +9,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Register</title>
+        <title>Restaurant Register</title>
         <style type="text/css">
             <jsp:include page="css/style.css" />
         </style>
@@ -22,10 +22,19 @@
                 <h1>Restaurant Register</h1>
                 <form method="post" action="main">
                     <input type="hidden" name="action" value="register">
+                    <input type="hidden" name="state" value="open">
                     <table border="0">
+<!--                        <tr>
+                            <td><p align="left">More than one restaurant? </p></td>
+                            <td><p><input type="button" value="add" style="width: 100%;"></p></td>
+                        </tr> -->
                         <tr>
                             <td><p align="left">Restaurant Name: </p></td>
-                            <td><p><input type="text" name="rname" maxlength="50" size="30"></p></td>
+                            <td><p><input type="text" name="rname" maxlength="50" style="width:100%;"></p></td>
+                        </tr>
+                        <tr>
+                            <td><p align="left">Working Hour: </p></td>
+                            <td><p><input type="text" name="hr" maxlength="9" style="width:100%;" placeholder="0000-0000"></p></td>
                         </tr>
                         <tr>
                             <td><p align="left">District: </p></td>
@@ -38,6 +47,10 @@
                                     </select>
                                 </p>
                             </td>
+                        </tr>
+                        <tr>
+                            <td><p align="left">Restaurant Addresss: </p></td>
+                            <td><p><textarea rows="4" cols="30" name="address"></textarea></p></td>
                         </tr>
                         <tr>
                             <td><p align="left">Restaurant Type: </p></td>
@@ -54,16 +67,16 @@
                         </tr>
                         <tr>
                             <td><p align="left">Restaurant Tel: </p></td>
-                            <td><p><input type="text" name="rtel" maxlength="8" size="30"></p></td>
+                            <td><p><input type="text" name="rtel" maxlength="8" style="width:100%;"></p></td>
                         </tr>
                         <tr>
                             <td><p align="left">Restaurant Email: </p></td>
-                            <td><p><input type="email" name="remail" maxlength="40" size="30"></p></td>
+                            <td><p><input type="email" name="remail" maxlength="40" style="width:100%;"></p></td>
                         </tr>
                         <tr>
                             <td></td>
-                            <td><p><input type="submit" value="Register" style="width: 100%"></p></td>
-                        </tr> 
+                            <td><p><input type="submit" value="Register" style="width: 100%;"></p></td>
+                        </tr>
                     </table>
                 </form>
             </div>
