@@ -20,7 +20,7 @@ public class DB {
      String username ;
     String password;
     
-    public DB(String url, String username, String password){
+    public DB(){
         url =  "jdbc:mysql://localhost:3306/cms";
         username = "root";
         password= "";

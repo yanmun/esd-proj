@@ -5,6 +5,7 @@
  */
 package ict.servlet;
 
+import ict.db.AccountDB;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -20,6 +21,7 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "RegisterController", urlPatterns = {"/RegisterController"})
 public class RegisterController extends HttpServlet {
 
+    private AccountDB accountDb;
    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -51,6 +53,7 @@ public class RegisterController extends HttpServlet {
             throws ServletException, IOException {
 //        processRequest(request, response);
             response.setContentType("text/html;charset=UTF-8");
+            accountDb = new AccountDB();
             PrintWriter out =  response.getWriter();
             String fname = request.getParameter("fname");
             String lname = request.getParameter("lname");
@@ -58,6 +61,10 @@ public class RegisterController extends HttpServlet {
             String password  = request.getParameter("password");
             String tel = request.getParameter("tel");
             String email = request.getParameter("email");
+            String type = request.getParameter("userType");
+            
+            
+            
             
             
             

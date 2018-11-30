@@ -17,8 +17,8 @@ import java.sql.Statement;
  */
 public class AccountDB extends DB{
     
-    public AccountDB(String url, String username, String password) {
-        super(url, username, password);
+    public AccountDB() {
+        super();
     }
     
     public void createTable(){
@@ -51,18 +51,20 @@ public class AccountDB extends DB{
         
     }
     
-     public boolean addRecord(String id, String name, String tel, String type) {
+     public boolean addRecord(String fname, String lname, String username, String password, String tel, String email, String type) {
         Connection cnnct = null;
         PreparedStatement pStmnt = null;
         boolean isSuccess = false;
         try {
             cnnct = getConnection();
-            String preQueryStatement = "INSERT INTO user VALUES (?,?,?,?)";
+            String preQueryStatement = "INSERT INTO user VALUES (?,?,?,?,?)";
             pStmnt = cnnct.prepareStatement(preQueryStatement);
-            pStmnt.setString(1, id);
-            pStmnt.setString(2, name);
+            pStmnt.setString(1, username);
+            pStmnt.setString(2, password);
             pStmnt.setString(3, tel);
-            pStmnt.setString(4, type);
+            pStmnt.setString(4, email);
+            pStmnt.setString(5, fname);
+            pStmnt.setString(6, lname);
             int rowCount = pStmnt.executeUpdate();
             if (rowCount >= 1) {
                 isSuccess = true;
