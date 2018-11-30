@@ -31,5 +31,10 @@ public class DB {
         System.setProperty("jdbc.drivers", "com.mysql.jdbc.Driver");
         return (Connection) DriverManager.getConnection(url, username, password);
     }
+     
+    public void createTable(){
+      
+        
+    }
     
 }
