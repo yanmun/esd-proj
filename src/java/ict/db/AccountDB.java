@@ -104,40 +104,33 @@ public class AccountDB extends DB {
         }
         return isFound;
     }
-
-    //    public CustomerBean queryCustByID(String id) {
-//        Connection cnnct = null;
-//        PreparedStatement pStmnt = null;
-//
-//        CustomerBean cb = null;
-//        try {
-//            cnnct = getConnection();
-//            String preQueryStatement = "SELECT * FROM CUSTOMER WHERE CUSTID=?";
-//            ResultSet re = null;
-//            pStmnt = cnnct.prepareStatement(preQueryStatement);
-//            pStmnt.setString(1, id);
-//            re = pStmnt.executeQuery();
-//            if (re.next()) {
-//                cb = new CustomerBean();
-//                cb.setId(re.getString(1));
-//                cb.setName(re.getString(2));
-//                cb.setTel(re.getString(3));
-//                cb.setAge(re.getInt(4));
-//            }
-//            pStmnt.close();
-//            cnnct.close();
-//        } catch (SQLException ex) {
-//            while (ex != null) {
-//                ex.printStackTrace();
-//                ex = ex.getNextException();
-//            }
-//        } catch (IOException ex) {
-//            ex.printStackTrace();
-//        } catch (ClassNotFoundException ex) {
-//            ex.printStackTrace();
-//        } catch (ClassNotFoundException ex) {
-//            ex.printStackTrace();
-//        }
-//        return cb;
-//    }
+    public boolean findExistAccount(String username, String pd) {
+        Connection cnnct = null;
+        PreparedStatement pStmnt = null;
+        boolean isFound = false;
+        try {
+            cnnct = getConnection();
+            String preQueryStatement = "SELECT * FROM account WHERE username=? and password=?";
+            ResultSet re = null;
+            pStmnt = cnnct.prepareStatement(preQueryStatement);
+            pStmnt.setString(1, username);
+            pStmnt.setString(2, pd);
+            re = pStmnt.executeQuery();
+            if (re.next()) {
+                isFound = true;
+            }
+            pStmnt.close();
+            cnnct.close();
+        } catch (SQLException ex) {
+            while (ex != null) {
+                ex.printStackTrace();
+                ex = ex.getNextException();
+            }
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        } catch (ClassNotFoundException ex) {
+            ex.printStackTrace();
+        }
+        return isFound;
+    }
 }

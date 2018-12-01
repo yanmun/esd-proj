@@ -5,6 +5,7 @@
  */
 package ict.servlet;
 
+import ict.db.AccountDB;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -20,7 +21,9 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "LoginController", urlPatterns = {"/LoginController"})
 public class LoginController extends HttpServlet {
 
-  
+    private AccountDB db;
+    private PrintWriter out;
+
 //    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
 //            throws ServletException, IOException {
 //        response.setContentType("text/html;charset=UTF-8");
@@ -37,33 +40,31 @@ public class LoginController extends HttpServlet {
 //            out.println("</html>");
 //        }
 //    }
-
-  
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 //        processRequest(request, response);
     }
 
-  
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-//        processRequest(request, response);
-        response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out =  response.getWriter();
+//        processRequest(request, response););
         verifyAccount(request, response);
 
-      
     }
-    
-    
-    
-    private void verifyAccount(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-         String username = request.getParameter("username");
+
+    private void verifyAccount(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String username = request.getParameter("username");
         String password = request.getParameter("password");
-        
-     
+        db = new AccountDB();
+        out = response.getWriter();
+        boolean verifyAccount = db.findExistAccount(username, password);
+        if(verifyAccount) {
+            out.print("Welcome!");
+        } else {
+            out.print("username or password wrong");
+        }
     }
 
     /**
