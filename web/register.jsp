@@ -40,7 +40,7 @@
                             <td><p align="left">Username: </p></td>
                             <td><p><input type="text" name="username" maxlength="15" size="15"></p></td>
                             
-                            
+                          
                         </tr>
                         <tr>
                             <td><p align="left">Password: </p></td>
