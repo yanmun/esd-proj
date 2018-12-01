@@ -57,7 +57,7 @@ public class AccountDB extends DB{
         boolean isSuccess = false;
         try {
             cnnct = getConnection();
-            String preQueryStatement = "INSERT INTO user VALUES (?,?,?,?,?)";
+            String preQueryStatement = "INSERT INTO user VALUES (?,?,?,?,?,?,?)";
             pStmnt = cnnct.prepareStatement(preQueryStatement);
             pStmnt.setString(1, username);
             pStmnt.setString(2, password);

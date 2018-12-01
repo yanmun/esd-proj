@@ -1,10 +1,9 @@
-
 -- phpMyAdmin SQL Dump
 -- version 4.7.7
 -- https://www.phpmyadmin.net/
 --
 -- 主機: 127.0.0.1
--- 產生時間： 2018 年 11 月 30 日 16:36
+-- 產生時間： 2018 年 12 月 01 日 11:17
 -- 伺服器版本: 10.1.30-MariaDB
 -- PHP 版本： 7.2.2
 
@@ -59,6 +58,23 @@ INSERT INTO `accounttype` (`accountTypeID`, `accountType`) VALUES
 ('0002', 'Restaurant Owner'),
 ('0003', 'System Administrator');
 
+-- --------------------------------------------------------
+
+--
+-- 資料表結構 `restaurant`
+--
+
+CREATE TABLE `restaurant` (
+  `restID` char(6) NOT NULL,
+  `restName` varchar(40) NOT NULL,
+  `restTypeID` char(4) NOT NULL,
+  `restTel` char(8) NOT NULL,
+  `restEmail` varchar(40) NOT NULL,
+  `address` varchar(100) NOT NULL,
+  `ownerID` varchar(15) NOT NULL,
+  `status` varchar(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
 --
 -- 已匯出資料表的索引
 --
@@ -75,6 +91,12 @@ ALTER TABLE `account`
 --
 ALTER TABLE `accounttype`
   ADD PRIMARY KEY (`accountTypeID`);
+
+--
+-- 資料表索引 `restaurant`
+--
+ALTER TABLE `restaurant`
+  ADD PRIMARY KEY (`restID`);
 
 --
 -- 已匯出資料表的限制(Constraint)
