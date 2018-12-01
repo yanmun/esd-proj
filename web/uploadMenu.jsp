@@ -13,15 +13,19 @@
         <style type="text/css">
             <jsp:include page="css/style.css" />
         </style>
-        <script src="./jslib/jquery-3.3.1.js"></script>
+        <script src="./jslib/jquery-3.3.1.js">
+            
+        </script>
     </head>
     <body>
           <div class="container">
             <jsp:include page="header.jsp" />
             <jsp:include page="sidebar.jsp" />
             <div class="content">
+                
+                <h1>Upload Menu(s)</h1>
                 <form action="action" method="get">
-                    <input type="file" accept=".png, .jpeg">
+                    <input type="file" accept=".png, .jpeg" id="photo_upload">
                     <input type="submit" value="Upload File">
                     <img src="" alt="">
                 </form>
