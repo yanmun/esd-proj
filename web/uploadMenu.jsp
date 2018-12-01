@@ -14,18 +14,35 @@
             <jsp:include page="css/style.css" />
         </style>
         <script src="./jslib/jquery-3.3.1.js">
-            
+            $(".photo_upload").change(function () {
+                readURL(this);
+            })
+
+            function readURL(input) {
+
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+
+                    reader.onload = function (e) {
+                        $('.img > img').attr('src', e.target.result);
+                        $(".container_index > img").attr('src', e.target.result);
+                        localStorage.setItem("user_icon", e.target.result);
+                    }
+
+                    reader.readAsDataURL(input.files[0]);
+                }
+            }
         </script>
     </head>
     <body>
-          <div class="container">
+        <div class="container">
             <jsp:include page="header.jsp" />
             <jsp:include page="sidebar.jsp" />
             <div class="content">
-                
+
                 <h1>Upload Menu(s)</h1>
-                <form action="action" method="get">
-                    <input type="file" accept=".png, .jpeg" id="photo_upload">
+                <form action="action" method="post">
+                    <input type="file" accept=".png, .jpeg" class="photo_upload" name="menu_photo">
                     <input type="submit" value="Upload File">
                     <img src="" alt="">
                 </form>
