@@ -5,6 +5,7 @@
  */
 package ict.servlet;
 
+import ict.db.MenuDB;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -51,8 +52,10 @@ public class UploadMenuController extends HttpServlet {
 //        processRequest(request, response);
         PrintWriter out = response.getWriter();
         String [] pics = request.getParameterValues("menu_photo");
+        String status = request.getParameter("status");
         for(int i=0;i<pics.length;i++){
-           
+            String path = "./image/"+pics[i];
+           MenuDB db = new MenuDB("200001", path, status);
         }
         
     }
