@@ -13,6 +13,7 @@
         <style type="text/css">
             <jsp:include page="css/style.css" />
         </style>
+        <script src="./jslib/jquery-3.3.1.js"></script>
     </head>
     <body>
           <div class="container">

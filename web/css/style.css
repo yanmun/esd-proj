@@ -39,7 +39,7 @@ a:hover, a:active, a:focus { /* this group of selectors will give a keyboard nav
 
 /* ~~this fixed width container surrounds the other divs~~ */
 .container {
-	width: 70%;
+	width: 76%;
 	background-color: #FFF;
 	margin: 0 auto; /* the auto value on the sides, coupled with the width, centers the layout */
 }
