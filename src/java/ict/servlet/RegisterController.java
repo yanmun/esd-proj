@@ -21,23 +21,30 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "RegisterController", urlPatterns = {"/RegisterController"})
 public class RegisterController extends HttpServlet {
 
-    
-
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet RegisterController</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet RegisterController at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
+//        response.setContentType("text/html;charset=UTF-8");
+//        try (PrintWriter out = response.getWriter()) {
+//            /* TODO output your page here. You may use following sample code. */
+//            out.println("<!DOCTYPE html>");
+//            out.println("<html>");
+//            out.println("<head>");
+//            out.println("<title>Servlet RegisterController</title>");
+//            out.println("</head>");
+//            out.println("<body>");
+//            out.println("<h1>Servlet RegisterController at " + request.getContextPath() + "</h1>");
+//            out.println("</body>");
+//            out.println("</html>");
+//        }
+        String fname = request.getParameter("fname");
+        String lname = request.getParameter("lname");
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
+        String tel = request.getParameter("tel");
+        String email = request.getParameter("email");
+        String type = request.getParameter("userType");
+        AccountDB db = new AccountDB(fname, lname, username, password, tel, email, type);
+        db.addRecord();
     }
 
     @Override
@@ -49,32 +56,7 @@ public class RegisterController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-//        processRequest(request, response);
-        response.setContentType("text/html;charset=UTF-8");
-
-        PrintWriter out = response.getWriter();
-        String fname = request.getParameter("fname");
-        String lname = request.getParameter("lname");
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");
-        String tel = request.getParameter("tel");
-        String email = request.getParameter("email");
-        String type = request.getParameter("userType");
-//        accountDb = new AccountDB(fname, lname, username, password, tel, email, type);
-        AccountDB custDb = new AccountDB("ko", "Chan", "hll87878", "9324923", "23989222", "hlllily@yahoo.com.hk", "0001");
- boolean isAdded = custDb.addRecord();
-        if (isAdded) {
-            out.println("yes");
-        } else {
-            out.println(fname);
-            out.println(lname);
-            out.println(username);
-            out.println(password);
-            out.println(tel);
-            out.println(email);
-            out.println(type);
-        }
-
+        processRequest(request, response);
 //            if(accountDb.findExistID())
     }
 
