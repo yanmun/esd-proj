@@ -21,8 +21,8 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "RegisterController", urlPatterns = {"/RegisterController"})
 public class RegisterController extends HttpServlet {
 
-    private AccountDB accountDb;
-   
+    
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -31,7 +31,7 @@ public class RegisterController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet RegisterController</title>");            
+            out.println("<title>Servlet RegisterController</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet RegisterController at " + request.getContextPath() + "</h1>");
@@ -40,39 +40,43 @@ public class RegisterController extends HttpServlet {
         }
     }
 
- 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 //        processRequest(request, response);
     }
 
-
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 //        processRequest(request, response);
-            response.setContentType("text/html;charset=UTF-8");
-            
-            PrintWriter out =  response.getWriter();
-            String fname = request.getParameter("fname");
-            String lname = request.getParameter("lname");
-            String username = request.getParameter("username");
-            String password  = request.getParameter("password");
-            String tel = request.getParameter("tel");
-            String email = request.getParameter("email");
-            String type = request.getParameter("userType");
-            accountDb = new AccountDB(fname, lname, username, password, tel, email, type);
-            
-            accountDb.addRecord();
-//            if(accountDb.findExistID())
-                
-            
-            
-            
-            
-    }
+        response.setContentType("text/html;charset=UTF-8");
 
+        PrintWriter out = response.getWriter();
+        String fname = request.getParameter("fname");
+        String lname = request.getParameter("lname");
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
+        String tel = request.getParameter("tel");
+        String email = request.getParameter("email");
+        String type = request.getParameter("userType");
+//        accountDb = new AccountDB(fname, lname, username, password, tel, email, type);
+        AccountDB custDb = new AccountDB("ko", "Chan", "hll87878", "9324923", "23989222", "hlllily@yahoo.com.hk", "0001");
+ boolean isAdded = custDb.addRecord();
+        if (isAdded) {
+            out.println("yes");
+        } else {
+            out.println(fname);
+            out.println(lname);
+            out.println(username);
+            out.println(password);
+            out.println(tel);
+            out.println(email);
+            out.println(type);
+        }
+
+//            if(accountDb.findExistID())
+    }
 
     @Override
     public String getServletInfo() {
