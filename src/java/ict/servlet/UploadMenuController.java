@@ -51,7 +51,9 @@ public class UploadMenuController extends HttpServlet {
 //        processRequest(request, response);
         PrintWriter out = response.getWriter();
         String [] pics = request.getParameterValues("menu_photo");
-        
+        for(int i=0;i<pics.length;i++){
+           
+        }
         
     }
 

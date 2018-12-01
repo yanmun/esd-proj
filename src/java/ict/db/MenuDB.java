@@ -5,22 +5,58 @@
  */
 package ict.db;
 
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
 /**
  *
  * @author pearh
  */
-public class MenuDB extends DB{
+public class MenuDB extends DB {
 
-    public MenuDB(){
-        
+    private String id;
+    private String path;
+    private String status;
+
+    public MenuDB(String id, String path, String status) {
+        this.id = id;
+        this.path = path;
+        this.status = status;
     }
-    
-    
+
     @Override
     public boolean addRecord() {
-        
-        
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Connection cnnct = null;
+        PreparedStatement pStmnt = null;
+        boolean isSuccess = false;
+        try {
+            cnnct = getConnection();
+            String preQueryStatement = "INSERT INTO menu VALUES (?,?,?)";
+            pStmnt = cnnct.prepareStatement(preQueryStatement);
+            pStmnt.setString(1, id);
+            pStmnt.setString(2, path);
+            pStmnt.setString(3, status);
+
+            int rowCount = pStmnt.executeUpdate();
+            if (rowCount >= 1) {
+                isSuccess = true;
+            }
+            pStmnt.close();
+            cnnct.close();
+        } catch (SQLException ex) {
+            while (ex != null) {
+                ex.printStackTrace();
+                ex = ex.getNextException();
+            }
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        } catch (ClassNotFoundException ex) {
+            ex.printStackTrace();
+        }
+        return isSuccess;
+
     }
-    
+
 }
