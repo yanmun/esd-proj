@@ -17,8 +17,18 @@ import java.sql.Statement;
  */
 public class AccountDB extends DB{
     
-    public AccountDB() {
+    private String fname;
+    private String lname;
+    private String username;
+    private String password;
+    private String tel;
+    private String email; 
+    private String type;
+    
+    public AccountDB(String fname, String lname, String username, String password, String tel, String email, String type) {
         super();
+        
+        
     }
     
     public void createTable(){
@@ -51,7 +61,7 @@ public class AccountDB extends DB{
         
     }
     
-     public boolean addRecord(String fname, String lname, String username, String password, String tel, String email, String type) {
+     public boolean addRecord() {
         Connection cnnct = null;
         PreparedStatement pStmnt = null;
         boolean isSuccess = false;

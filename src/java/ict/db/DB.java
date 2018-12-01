@@ -34,6 +34,9 @@ public abstract class DB {
      
     public abstract void createTable();
     
+    
+    public abstract boolean addRecord();
+    
    
     
 }

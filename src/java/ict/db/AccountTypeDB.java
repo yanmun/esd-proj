@@ -14,20 +14,19 @@ import java.sql.Statement;
  *
  * @author pearh
  */
-public class AccountTypeDB extends DB{
-    
-    
-    public void createTable(){
-         Statement stmnt = null;
+public class AccountTypeDB extends DB {
+
+    public void createTable() {
+        Statement stmnt = null;
         Connection cnnt = null;
-         try {
+        try {
             cnnt = getConnection();
             stmnt = cnnt.createStatement();
             String sql
-                    = "CREATE TABLE `accounttype` (\n" +
-"  `accountTypeID` char(4) NOT NULL,\n" +
-"  `accountType` varchar(20) NOT NULL\n" +
-") ENGINE=InnoDB DEFAULT CHARSET=latin1;";
+                    = "CREATE TABLE `accounttype` (\n"
+                    + "  `accountTypeID` char(4) NOT NULL,\n"
+                    + "  `accountType` varchar(20) NOT NULL\n"
+                    + ") ENGINE=InnoDB DEFAULT CHARSET=latin1;";
             stmnt.execute(sql);
             stmnt.close();
             cnnt.close();
@@ -39,8 +38,15 @@ public class AccountTypeDB extends DB{
         } catch (IOException ex) {
             ex.printStackTrace();
         }
-        
+
+    }
+
+    @Override
+    public boolean addRecord() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
     
+  
+
 }

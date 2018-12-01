@@ -53,7 +53,7 @@ public class RegisterController extends HttpServlet {
             throws ServletException, IOException {
 //        processRequest(request, response);
             response.setContentType("text/html;charset=UTF-8");
-            accountDb = new AccountDB();
+            
             PrintWriter out =  response.getWriter();
             String fname = request.getParameter("fname");
             String lname = request.getParameter("lname");
@@ -62,7 +62,7 @@ public class RegisterController extends HttpServlet {
             String tel = request.getParameter("tel");
             String email = request.getParameter("email");
             String type = request.getParameter("userType");
-            
+            accountDb = new AccountDB(fname, lname, username, password, tel, email, type);
             
             
             
