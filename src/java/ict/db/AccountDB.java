@@ -83,7 +83,7 @@ public class AccountDB extends DB{
         boolean isFound = false;
                 try {
             cnnct = getConnection();
-            String preQueryStatement = "SELECT * FROM account WHERE CUSTID=?";
+            String preQueryStatement = "SELECT * FROM account WHERE username=?";
             ResultSet re = null;
             pStmnt = cnnct.prepareStatement(preQueryStatement);
             pStmnt.setString(1, username);
