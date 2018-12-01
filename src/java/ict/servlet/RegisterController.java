@@ -21,6 +21,9 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "RegisterController", urlPatterns = {"/RegisterController"})
 public class RegisterController extends HttpServlet {
 
+    private AccountDB db;
+    private PrintWriter out;
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 //        response.setContentType("text/html;charset=UTF-8");
@@ -43,25 +46,41 @@ public class RegisterController extends HttpServlet {
         String tel = request.getParameter("tel");
         String email = request.getParameter("email");
         String type = request.getParameter("userType");
-        AccountDB db = new AccountDB(fname, lname, username, password, tel, email, type);
+        db = new AccountDB(fname, lname, username, password, tel, email, type);
         db.addRecord();
+        
+
+//        String username = request.getParameter("username");
+//        boolean alreadyExist = db.findExistID(username);
+//        if (alreadyExist) {
+//            out = response.getWriter();
+//            out.println("NOPE");
+//        } else {
+//            String fname = request.getParameter("fname");
+//            String lname = request.getParameter("lname");
+//            String password = request.getParameter("password");
+//            String tel = request.getParameter("tel");
+//            String email = request.getParameter("email");
+//            String type = request.getParameter("userType");
+//            db = new AccountDB(fname, lname, username, password, tel, email, type);
+//            db.addRecord();
     }
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+        protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 //        processRequest(request, response);
     }
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+        protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
 //            if(accountDb.findExistID())
     }
 
     @Override
-    public String getServletInfo() {
+        public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
 
