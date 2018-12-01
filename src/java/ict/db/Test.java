@@ -13,15 +13,12 @@ public class Test {
  
 
     public static void main(String[] arg) {
-        String url = "jdbc:mysql://localhost:3306/ITP4511_DB";
-        String username = "root";
-        String password = "";
-        AccountDB custDb = new AccountDB("ko", "Chan", "hll87878", "9324923", "23989222", "hlllily@yahoo.com.hk", "0001");
-        boolean isAdded = custDb.addRecord();
-        if (isAdded) {
-            System.out.println("Peter is added");
+        AccountDB db = new AccountDB();
+        boolean a = db.findExistID("0");
+        if (a) {
+            System.out.println("Find");
         } else {
-            System.out.println("Added failed");
+            System.out.println("failed");
         }
     
     }

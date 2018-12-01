@@ -16,16 +16,16 @@ import java.sql.Statement;
  *
  * @author pearh
  */
-public class AccountDB extends DB{
-    
+public class AccountDB extends DB {
+
     private String fname;
     private String lname;
     private String username;
     private String password;
     private String tel;
-    private String email; 
+    private String email;
     private String type;
-    
+
     public AccountDB(String fname, String lname, String username, String password, String tel, String email, String type) {
         super();
         this.fname = fname;
@@ -34,14 +34,14 @@ public class AccountDB extends DB{
         this.password = password;
         this.tel = tel;
         this.email = email;
-        this.type = type;        
-        
+        this.type = type;
+
     }
-    
-    public AccountDB(){
-   
+
+    public AccountDB() {
+
     }
-    
+
     public boolean addRecord() {
         Connection cnnct = null;
         PreparedStatement pStmnt = null;
@@ -75,13 +75,12 @@ public class AccountDB extends DB{
         }
         return isSuccess;
     }
-    
-    
-    public boolean findExistID(String username){
+
+    public boolean findExistID(String username) {
         Connection cnnct = null;
         PreparedStatement pStmnt = null;
         boolean isFound = false;
-                try {
+        try {
             cnnct = getConnection();
             String preQueryStatement = "SELECT * FROM account WHERE username=?";
             ResultSet re = null;
@@ -102,11 +101,10 @@ public class AccountDB extends DB{
             ex.printStackTrace();
         } catch (ClassNotFoundException ex) {
             ex.printStackTrace();
-        }        
+        }
         return isFound;
-        
     }
-    
+
     //    public CustomerBean queryCustByID(String id) {
 //        Connection cnnct = null;
 //        PreparedStatement pStmnt = null;
