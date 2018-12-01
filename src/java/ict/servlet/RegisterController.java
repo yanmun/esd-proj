@@ -63,7 +63,8 @@ public class RegisterController extends HttpServlet {
             String email = request.getParameter("email");
             String type = request.getParameter("userType");
             accountDb = new AccountDB(fname, lname, username, password, tel, email, type);
-            
+//            if(accountDb.findExistID())
+                
             
             
             

@@ -7,6 +7,7 @@ package ict.db;
 
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -15,6 +16,14 @@ import java.sql.Statement;
  * @author pearh
  */
 public class AccountTypeDB extends DB {
+    private String accountID;
+    private String type;
+    
+    
+    public AccountTypeDB(String id, String type){
+        this.accountID = id;
+        this.type = type;
+    }
 
     public void createTable() {
         Statement stmnt = null;
@@ -43,8 +52,34 @@ public class AccountTypeDB extends DB {
 
     @Override
     public boolean addRecord() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+         Connection cnnct = null;
+        PreparedStatement pStmnt = null;
+        boolean isSuccess = false;
+        try {
+            cnnct = getConnection();
+            String preQueryStatement = "INSERT INTO accounttype VALUES (?,?)";
+            pStmnt = cnnct.prepareStatement(preQueryStatement);
+            pStmnt.setString(1, accountID);
+            pStmnt.setString(2, type);
+         
+            int rowCount = pStmnt.executeUpdate();
+            if (rowCount >= 1) {
+                isSuccess = true;
+            }
+            pStmnt.close();
+            cnnct.close();
+        } catch (SQLException ex) {
+            while (ex != null) {
+                ex.printStackTrace();
+                ex = ex.getNextException();
+            }
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+        return isSuccess;
     }
+    
+   
     
     
   

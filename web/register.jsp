@@ -49,8 +49,8 @@
                         </tr>
                         <tr>
                             <td><p align="left">Type: </p></td>
-                            <td><p><input type="radio" value="normal" name="userType">Normal User</p></td>
-                            <td><p><input type="radio" value="normal" name="userType">Restaurant Operator </p></td>
+                            <td><p><input type="radio" value="0001" name="userType">Normal User</p></td>
+                            <td><p><input type="radio" value="0002" name="userType">Restaurant Operator </p></td>
                         </tr>
                         <tr>
                             <td></td>
