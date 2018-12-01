@@ -14,7 +14,7 @@ import java.sql.SQLException;
  *
  * @author pearh
  */
-public class DB {
+public abstract class DB {
     
       String url;
      String username ;
@@ -32,9 +32,8 @@ public class DB {
         return (Connection) DriverManager.getConnection(url, username, password);
     }
      
-    public void createTable(){
-      
-        
-    }
+    public abstract void createTable();
+    
+   
     
 }
