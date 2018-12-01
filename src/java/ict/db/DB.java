@@ -27,13 +27,10 @@ public abstract class DB {
             
     }
     
-     public Connection getConnection() throws SQLException, IOException {
+     public Connection getConnection() throws SQLException, IOException, ClassNotFoundException {
         System.setProperty("jdbc.drivers", "com.mysql.jdbc.Driver");
         return (Connection) DriverManager.getConnection(url, username, password);
-    }
-     
-    public abstract void createTable();
-    
+    }    
     
     public abstract boolean addRecord();
     

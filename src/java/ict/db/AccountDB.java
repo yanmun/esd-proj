@@ -42,36 +42,6 @@ public class AccountDB extends DB{
    
     }
     
-    public void createTable(){
-         Statement stmnt = null;
-        Connection cnnt = null;
-         try {
-            cnnt = getConnection();
-            stmnt = cnnt.createStatement();
-            String sql
-                    = "CREATE TABLE if not exist `account` (\n" +
-"  `username` varchar(15) NOT NULL,\n" +
-"  `password` varchar(25) NOT NULL,\n" +
-"  `tel` char(8) NOT NULL,\n" +
-"  `email` varchar(40) NOT NULL,\n" +
-"  `firstName` varchar(15) NOT NULL,\n" +
-"  `lastName` varchar(15) NOT NULL,\n" +
-"  `accountTypeID` char(4) NOT NULL\n" +
-") ENGINE=InnoDB DEFAULT CHARSET=latin1;";
-            stmnt.execute(sql);
-            stmnt.close();
-            cnnt.close();
-        } catch (SQLException ex) {
-            while (ex != null) {
-                ex.printStackTrace();
-                ex = ex.getNextException();
-            }
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-        
-    }
-    
     public boolean addRecord() {
         Connection cnnct = null;
         PreparedStatement pStmnt = null;
@@ -99,6 +69,8 @@ public class AccountDB extends DB{
                 ex = ex.getNextException();
             }
         } catch (IOException ex) {
+            ex.printStackTrace();
+        } catch (ClassNotFoundException ex) {
             ex.printStackTrace();
         }
         return isSuccess;
@@ -128,8 +100,9 @@ public class AccountDB extends DB{
             }
         } catch (IOException ex) {
             ex.printStackTrace();
-        }
-        
+        } catch (ClassNotFoundException ex) {
+            ex.printStackTrace();
+        }        
         return isFound;
         
     }
@@ -161,6 +134,8 @@ public class AccountDB extends DB{
 //                ex = ex.getNextException();
 //            }
 //        } catch (IOException ex) {
+//            ex.printStackTrace();
+//        } catch (ClassNotFoundException ex) {
 //            ex.printStackTrace();
 //        } catch (ClassNotFoundException ex) {
 //            ex.printStackTrace();

@@ -25,31 +25,6 @@ public class AccountTypeDB extends DB {
         this.type = type;
     }
 
-    public void createTable() {
-        Statement stmnt = null;
-        Connection cnnt = null;
-        try {
-            cnnt = getConnection();
-            stmnt = cnnt.createStatement();
-            String sql
-                    = "CREATE TABLE `accounttype` (\n"
-                    + "  `accountTypeID` char(4) NOT NULL,\n"
-                    + "  `accountType` varchar(20) NOT NULL\n"
-                    + ") ENGINE=InnoDB DEFAULT CHARSET=latin1;";
-            stmnt.execute(sql);
-            stmnt.close();
-            cnnt.close();
-        } catch (SQLException ex) {
-            while (ex != null) {
-                ex.printStackTrace();
-                ex = ex.getNextException();
-            }
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-
-    }
-
     @Override
     public boolean addRecord() {
          Connection cnnct = null;
@@ -75,13 +50,9 @@ public class AccountTypeDB extends DB {
             }
         } catch (IOException ex) {
             ex.printStackTrace();
+        } catch (ClassNotFoundException ex) {
+            ex.printStackTrace();
         }
         return isSuccess;
     }
-    
-   
-    
-    
-  
-
 }
