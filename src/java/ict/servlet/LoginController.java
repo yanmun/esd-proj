@@ -5,14 +5,19 @@
  */
 package ict.servlet;
 
+import ict.bean.UserInfo;
 import ict.db.AccountDB;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -21,7 +26,7 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "LoginController", urlPatterns = {"/LoginController"})
 public class LoginController extends HttpServlet {
 
-    private AccountDB db;
+    private AccountDB db = new AccountDB();
     private PrintWriter out;
 
 //    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -40,30 +45,77 @@ public class LoginController extends HttpServlet {
 //            out.println("</html>");
 //        }
 //    }
-    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        verifyAccount(request, response);
+        doPost(request, response);
     }
 
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        verifyAccount(request, response);
-
+    protected void doPost(HttpServletRequest request,
+            HttpServletResponse response) throws ServletException, IOException {
+        String action = request.getParameter("action");
+        if (!isAuthenticated(request)
+                && !("authenticate".equals(action))) {
+            doLogin(request, response);
+            return;
+        }
+        if ("authenticate".equals(action)) {
+            try {
+                doAuthenticate(request, response);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else if ("logout".equals(action)) {
+            doLogout(request, response);
+        } else {
+            response.sendError(HttpServletResponse.SC_NOT_IMPLEMENTED);
+        }
     }
 
-    private void verifyAccount(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    private void doAuthenticate(HttpServletRequest request, HttpServletResponse response)
+            throws IOException, ServletException, ClassNotFoundException {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
-        db = new AccountDB();
-        out = response.getWriter();
-        boolean verifyAccount = db.findExistAccount(username, password);
-        if(verifyAccount) {
-            out.print("Welcome!");
+        String targetURL;
+        if (db.isValidUser(username, password)) {
+            HttpSession session = request.getSession(true);
+            UserInfo bean = new UserInfo();
+            bean.setUsername(username);
+            bean.setPassword(password);
+            session.setAttribute("userInfo", bean);
+            targetURL = "welcome.jsp";
         } else {
-            out.print("username or password wrong");
+            targetURL = "loginError.jsp";
         }
+        RequestDispatcher rd;
+        rd = getServletContext().getRequestDispatcher("/" + targetURL);
+        rd.forward(request, response);
+    }
+
+    private boolean isAuthenticated(HttpServletRequest request) {
+        boolean result = false;
+        HttpSession session = request.getSession();
+        if (session.getAttribute("userInfo") != null) {
+            result = true;
+        }
+        return result;
+    }
+
+    private void doLogin(HttpServletRequest request, HttpServletResponse response)
+            throws IOException, ServletException {
+        String targetURL = "login.jsp";
+        RequestDispatcher rd;
+        rd = getServletContext().getRequestDispatcher("/" + targetURL);
+        rd.forward(request, response);
+    }
+
+    private void doLogout(HttpServletRequest request, HttpServletResponse response)
+            throws IOException, ServletException {
+        HttpSession session = request.getSession(false);
+        if (session != null) {
+            session.removeAttribute("userInfo");
+            session.invalidate();
+        }
+        doLogin(request, response);
     }
 
     /**

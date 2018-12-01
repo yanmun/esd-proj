@@ -104,7 +104,7 @@ public class AccountDB extends DB {
         }
         return isFound;
     }
-    public boolean findExistAccount(String username, String pd) {
+    public boolean isValidUser(String username, String pd) {
         Connection cnnct = null;
         PreparedStatement pStmnt = null;
         boolean isFound = false;

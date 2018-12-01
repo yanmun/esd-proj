@@ -21,6 +21,7 @@
             <div class="content">
                 <h1>Login form</h1>
                 <form action="LoginController" method="post">
+                    <input type="hidden" name="action" value="authenticate">
                     <table border="0">
                         <tr>
                             <td><p align="left">Username: </p></td>
