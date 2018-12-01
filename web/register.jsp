@@ -4,6 +4,11 @@
     Author     : 170068072
 --%>
 
+<%@page import="ict.db.AccountDB"%>
+<% 
+        AccountDB db = new AccountDB();
+   %>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -20,7 +25,7 @@
       <jsp:include page="sidebar.jsp" />
             <div class="content">
                 <h1>Register</h1>
-                <form method="post" action="main">
+                <form method="post" action="RegisterController">
                     <input type="hidden" name="action" value="register">
                     <table border="0">
                         <tr>
@@ -34,6 +39,8 @@
                         <tr>
                             <td><p align="left">Username: </p></td>
                             <td><p><input type="text" name="username" maxlength="15" size="15"></p></td>
+                            
+                            
                         </tr>
                         <tr>
                             <td><p align="left">Password: </p></td>

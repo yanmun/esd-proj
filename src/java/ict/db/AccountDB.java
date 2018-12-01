@@ -38,6 +38,10 @@ public class AccountDB extends DB{
         
     }
     
+    public AccountDB(){
+   
+    }
+    
     public void createTable(){
          Statement stmnt = null;
         Connection cnnt = null;
@@ -101,7 +105,7 @@ public class AccountDB extends DB{
     }
     
     
-    public boolean findExistID(){
+    public boolean findExistID(String username){
         Connection cnnct = null;
         PreparedStatement pStmnt = null;
         boolean isFound = false;
