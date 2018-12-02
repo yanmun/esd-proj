@@ -26,7 +26,7 @@
             <div class="content">
                 <h1>Register</h1>
                 <form method="post" action="RegisterController">
-                    <input type="hidden" name="action" value="register">
+                    <input type="hidden" name="action" value="userRegister">
                     <table border="0">
                         <tr>
                             <td><p align="left">FirstName: </p></td>

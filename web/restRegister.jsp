@@ -21,7 +21,7 @@
             <div class="content">
                 <h1>Restaurant Register</h1>
                 <form method="post" action="main">
-                    <input type="hidden" name="action" value="register">
+                    <input type="hidden" name="action" value="restRegister">
                     <input type="hidden" name="state" value="open">
                     <table border="0">
 <!--                        <tr>

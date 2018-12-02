@@ -27,31 +27,46 @@ public class RegisterController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         db = new AccountDB();
-        String username = request.getParameter("username");
-        boolean alreadyExist = db.findExistID(username);
-        if (alreadyExist) {
-            out = response.getWriter();
-            response.setContentType("text/html;charset=UTF-8");
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet RegisterController</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>The username is already used, please enter other username.</h1>");
-            out.println("<a href='register.jsp'>Enter again</a>");
-            out.println("</body>");
-            out.println("</html>");
-        } else {
-            String fname = request.getParameter("fname");
-            String lname = request.getParameter("lname");
-            String password = request.getParameter("password");
-            String tel = request.getParameter("tel");
-            String email = request.getParameter("email");
+        String action = request.getParameter("userRegister");
+        if ("userRegister".equals(action)) {
+            String username = request.getParameter("username");
             String type = request.getParameter("userType");
-            db = new AccountDB(fname, lname, username, password, tel, email, type);
-            db.addRecord();
+            boolean alreadyExist = db.findExistID(username);
+            if (alreadyExist) {
+                out = response.getWriter();
+                response.setContentType("text/html;charset=UTF-8");
+                out.println("<!DOCTYPE html>");
+                out.println("<html>");
+                out.println("<head>");
+                out.println("<title>Servlet RegisterController</title>");
+                out.println("</head>");
+                out.println("<body>");
+                out.println("<h1>The username is already used, please enter other username.</h1>");
+                out.println("<a href='register.jsp'>Enter again</a>");
+                out.println("</body>");
+                out.println("</html>");
+            } else if ("0001".equals(type)) {
+                String fname = request.getParameter("fname");
+                String lname = request.getParameter("lname");
+                String password = request.getParameter("password");
+                String tel = request.getParameter("tel");
+                String email = request.getParameter("email");
+                db = new AccountDB(fname, lname, username, password, tel, email, type);
+                db.addRecord();
+            } else if ("0002".equals(type)) {
+                String fname = request.getParameter("fname");
+                String lname = request.getParameter("lname");
+                String password = request.getParameter("password");
+                String tel = request.getParameter("tel");
+                String email = request.getParameter("email");
+                db = new AccountDB(fname, lname, username, password, tel, email, type);
+                db.addRecord();
+                response.sendRedirect("restRegister.jsp");
+            }
+        } else if ("restRegister".equals(action)) {
+            
         }
+
     }
 
     @Override

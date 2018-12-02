@@ -15,6 +15,7 @@ ul, ol, dl { /* Due to variations between browsers, it's best practices to zero 
     padding: 0;
     margin: 0;
 }
+
 h1, h2, h3, h4, h5, h6, p {
     margin-top: 0;	 /* removing the top margin gets around an issue where margins can escape from their containing div. The remaining bottom margin will hold it away from any elements that follow. */
     padding-right: 15px;
