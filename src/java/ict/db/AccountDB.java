@@ -5,6 +5,7 @@
  */
 package ict.db;
 
+import ict.bean.UserBean;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -132,5 +133,74 @@ public class AccountDB extends DB {
             ex.printStackTrace();
         }
         return isFound;
+    }
+    
+    public UserBean queryUserByID(String username) {
+        Connection cnnct = null;
+        PreparedStatement pStmnt = null;
+
+        UserBean ub = null;
+        try {
+            cnnct = getConnection();
+            String preQueryStatement = "SELECT * FROM account WHERE username=?";
+            ResultSet re = null;
+            pStmnt = cnnct.prepareStatement(preQueryStatement);
+            pStmnt.setString(1, username);
+            re = pStmnt.executeQuery();
+            if (re.next()) {
+                ub = new UserBean();
+                ub.setUsername(re.getString(1));
+                ub.setPassword(re.getString(2));
+                ub.setTel(re.getString(3));
+                ub.setEmail(re.getString(4));
+                ub.setFname(re.getString(5));
+                ub.setLname(re.getString(6));
+            }
+            pStmnt.close();
+            cnnct.close();
+        } catch (SQLException ex) {
+            while (ex != null) {
+                ex.printStackTrace();
+                ex = ex.getNextException();
+            }
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        } catch (ClassNotFoundException ex) {
+            ex.printStackTrace();
+        }
+        return ub;
+    }
+    
+    public boolean editRecord(UserBean ub) {
+        Connection cnnct = null;
+        PreparedStatement pStmnt = null;
+        boolean isSuccess = false;
+        try {
+            cnnct = getConnection();
+            String preQueryStatement = "UPDATE ACCOUNT SET password=?,tel=?,email=?,fname=?,lname=?  WHERE username=?";
+            pStmnt = cnnct.prepareStatement(preQueryStatement);
+            pStmnt.setString(1, ub.getPassword());
+            pStmnt.setString(2, ub.getTel());
+            pStmnt.setString(3, ub.getEmail());
+            pStmnt.setString(4, ub.getFname());
+            pStmnt.setString(5, ub.getLname());
+            pStmnt.setString(6, ub.getUsername());
+            int rowCount = pStmnt.executeUpdate();
+            if (rowCount >= 1) {
+                isSuccess = true;
+            }
+            pStmnt.close();
+            cnnct.close();
+        } catch (SQLException ex) {
+            while (ex != null) {
+                ex.printStackTrace();
+                ex = ex.getNextException();
+            }
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        } catch (ClassNotFoundException ex) {
+            ex.printStackTrace();
+        }
+        return isSuccess;
     }
 }

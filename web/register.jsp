@@ -29,22 +29,20 @@
                     <input type="hidden" name="action" value="userRegister">
                     <table border="0">
                         <tr>
+                            <td><p align="left">Username: </p></td>
+                            <td><p><input type="text" name="username" maxlength="15" size="15"></p></td>  
+                        </tr>
+                        <tr>
+                            <td><p align="left">Password: </p></td>
+                            <td><p><input type="password" name="password" maxlength="25" size="15"></p></td>
+                        </tr>
+                        <tr>
                             <td><p align="left">FirstName: </p></td>
                             <td><p><input type="text" name="fname" maxlength="15" size="15"></p></td>
                         </tr>
                         <tr>
                             <td><p align="left">LastName: </p></td>
                             <td><p><input type="text" name="lname" maxlength="15" size="15"></p></td>
-                        </tr>
-                        <tr>
-                            <td><p align="left">Username: </p></td>
-                            <td><p><input type="text" name="username" maxlength="15" size="15"></p></td>
-                            
-                          
-                        </tr>
-                        <tr>
-                            <td><p align="left">Password: </p></td>
-                            <td><p><input type="password" name="password" maxlength="25" size="15"></p></td>
                         </tr>
                         <tr>
                             <td><p align="left">Tel: </p></td>

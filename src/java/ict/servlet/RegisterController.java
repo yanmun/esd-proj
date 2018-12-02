@@ -27,7 +27,7 @@ public class RegisterController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         db = new AccountDB();
-        String action = request.getParameter("userRegister");
+        String action = request.getParameter("action");
         if ("userRegister".equals(action)) {
             String username = request.getParameter("username");
             String type = request.getParameter("userType");
