@@ -106,7 +106,7 @@ public class AccountDB extends DB {
         }
         return isFound;
     }
-    
+
     public boolean isValidUser(String username, String pd) {
         Connection cnnct = null;
         PreparedStatement pStmnt = null;
@@ -136,7 +136,7 @@ public class AccountDB extends DB {
         }
         return isFound;
     }
-    
+
     public UserBean queryUserByID(String username) {
         Connection cnnct = null;
         PreparedStatement pStmnt = null;
@@ -173,7 +173,7 @@ public class AccountDB extends DB {
         }
         return ub;
     }
-    
+
     public ArrayList queryCustByName(String name) {
         Connection cnnct = null;
         PreparedStatement pStmnt = null;
@@ -211,7 +211,7 @@ public class AccountDB extends DB {
         }
         return users;
     }
-    
+
     public boolean delRecord(String username) {
         Connection cnnct = null;
         PreparedStatement pStmnt = null;
@@ -239,7 +239,7 @@ public class AccountDB extends DB {
         }
         return isSuccess;
     }
-    
+
     public boolean editRecord(UserBean ub) {
         Connection cnnct = null;
         PreparedStatement pStmnt = null;
@@ -272,7 +272,7 @@ public class AccountDB extends DB {
         }
         return isSuccess;
     }
-    
+
     public ArrayList queryCust() {
         Connection cnnct = null;
         PreparedStatement pStmnt = null;
@@ -308,5 +308,36 @@ public class AccountDB extends DB {
             ex.printStackTrace();
         }
         return users;
+    }
+
+    public ArrayList getAllID() {
+        Connection cnnct = null;
+        PreparedStatement pStmnt = null;
+     //   ArrayList<UserBean> users = new ArrayList();
+        ArrayList <String> user_ids = new ArrayList();
+        try {
+            cnnct = getConnection();
+            String preQueryStatement = "SELECT username FROM ACCOUNT";
+            ResultSet re = null;
+            pStmnt = cnnct.prepareStatement(preQueryStatement);
+            re = pStmnt.executeQuery();
+            while (re.next()) {
+//                ub = new UserBean();
+                user_ids.add(re.getString(1));
+             
+            }
+            pStmnt.close();
+            cnnct.close();
+        } catch (SQLException ex) {
+            while (ex != null) {
+                ex.printStackTrace();
+                ex = ex.getNextException();
+            }
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        } catch (ClassNotFoundException ex) {
+            ex.printStackTrace();
+        }
+        return user_ids;
     }
 }
