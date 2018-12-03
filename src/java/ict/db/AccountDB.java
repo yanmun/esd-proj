@@ -172,6 +172,43 @@ public class AccountDB extends DB {
         return ub;
     }
     
+    public ArrayList queryCustByName(String name) {
+        Connection cnnct = null;
+        PreparedStatement pStmnt = null;
+        ArrayList<UserBean> users = new ArrayList();
+        UserBean ub = null;
+        try {
+            cnnct = getConnection();
+            String preQueryStatement = "SELECT * FROM ACCOUNT WHERE USERNAME=?";
+            ResultSet re = null;
+            pStmnt = cnnct.prepareStatement(preQueryStatement);
+            pStmnt.setString(1, name);
+            re = pStmnt.executeQuery();
+            while (re.next()) {
+                ub = new UserBean();
+                ub.setUsername(re.getString(1));
+                ub.setPassword(re.getString(2));
+                ub.setTel(re.getString(3));
+                ub.setEmail(re.getString(4));
+                ub.setFname(re.getString(5));
+                ub.setLname(re.getString(6));
+                users.add(ub);
+            }
+            pStmnt.close();
+            cnnct.close();
+        } catch (SQLException ex) {
+            while (ex != null) {
+                ex.printStackTrace();
+                ex = ex.getNextException();
+            }
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        } catch (ClassNotFoundException ex) {
+            ex.printStackTrace();
+        }
+        return users;
+    }
+    
     public boolean delRecord(String username) {
         Connection cnnct = null;
         PreparedStatement pStmnt = null;

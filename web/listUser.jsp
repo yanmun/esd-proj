@@ -20,8 +20,14 @@
             <jsp:include page="header.jsp" />
             <jsp:include page="sidebar.jsp" />
             <div class="content">
-                <% ArrayList<UserBean> users = (ArrayList<UserBean>) request.getAttribute("user");
-                    out.println("<h1>All User</h1>");
+                <h1>All User</h1>
+                <form method="post" action="handleEdit">
+                    <input type="hidden" name="action" value="search">
+                    Search user<br><input type="text" name="username">
+                    <input type="submit" value="search">
+                </form>
+                <br>
+                <% ArrayList<UserBean> users = (ArrayList<UserBean>) request.getAttribute("users");
                     out.println("<table border='1'>");
                     out.println("<tr>");
                     out.println("<th>username</th><th>password</th><th>tel</th><th>email</th><th>first name</th><th>last name</th>");
@@ -35,12 +41,17 @@
                         out.println("<td>" + u.getEmail() + "</td>");
                         out.println("<td>" + u.getFname() + "</td>");
                         out.println("<td>" + u.getLname() + "</td>");
-                        out.println("<td><a href=\"handleCustomer?action=getEditCustomer&username=" + u.getUsername() + "\">Edit</a></td>");
-                        out.println("<td><a href=\"handleCustomer?action=delete&username=" + u.getUsername() + "\">Delete</a></td>");
+                        out.println("<td><a href=\"handleEdit?action=getEditCustomer&username=" + u.getUsername() + "\">Edit</a></td>");
+                        out.println("<td><a href=\"handleEdit?action=delete&username=" + u.getUsername() + "\">Delete</a></td>");
                         out.println("</tr>");
                     }
                     out.println("</table>");
                 %>
+                <br>
+                <form method="post" action="handleEdit">
+                    <input type="hidden" name="action" value="create">
+                    <input type="submit" value="Create new user">
+                </form>
             </div>
             <jsp:include page = "footer.jsp" />
         </div>

@@ -36,11 +36,19 @@ public class HandleEdit extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
-        if ("delete".equalsIgnoreCase(action)) {
-            String id = request.getParameter("id");
-            if (id != null) {
-                db.delRecord(id);
-                response.sendRedirect("handleCustomer?action=list");
+        if ("list".equalsIgnoreCase(action)) {            // call the query db to get retrieve for all customer  
+            db = new AccountDB();
+            ArrayList<UserBean> users = db.queryCust(); // set the result into the attribute
+            request.setAttribute("users", users); // redirect the result to the listCustomers.jsp
+            RequestDispatcher rd;
+            rd = getServletContext().getRequestDispatcher("/listUser.jsp");
+            rd.forward(request, response);
+        } else if ("delete".equalsIgnoreCase(action)) {
+            String username = request.getParameter("username");
+            if (username != null) {
+                db = new AccountDB();
+                db.delRecord(username);
+                response.sendRedirect("handleEdit?action=list");
             }
         } else if ("getEditCustomer".equalsIgnoreCase(action)) {
             String username = request.getParameter("username");
@@ -71,6 +79,17 @@ public class HandleEdit extends HttpServlet {
                     response.sendRedirect("welcome.jsp");
                 }
             }
+        } else if ("search".equalsIgnoreCase(action)) {
+            String username = request.getParameter("username");
+            if (username != null) {
+                ArrayList<UserBean> users = db.queryCustByName(username);
+                request.setAttribute("users", users); // redirect the result to the listCustomers.jsp
+                RequestDispatcher rd;
+                rd = getServletContext().getRequestDispatcher("/listUser.jsp");
+                rd.forward(request, response);
+            }
+        } else if ("create".equalsIgnoreCase(action)) {
+            response.sendRedirect("register.jsp");
         }
     }
 }

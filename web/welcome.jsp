@@ -43,11 +43,6 @@
                         out.println("</tr>");
                         out.println("</table>");
                 %>
-                <br>
-                <form method = "post" action = "LoginController">
-                    <input type = "hidden" name = "action" value = "logout">
-                    <input type = "submit" value = "Logout" name = "logoutButton">
-                </form>
             </div>
             <jsp:include page = "footer.jsp" />
         </div>
