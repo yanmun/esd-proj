@@ -21,7 +21,6 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "UploadMenuController", urlPatterns = {"/UploadMenuController"})
 public class UploadMenuController extends HttpServlet {
 
-
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -30,7 +29,7 @@ public class UploadMenuController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet UploadMenuController</title>");            
+            out.println("<title>Servlet UploadMenuController</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet UploadMenuController at " + request.getContextPath() + "</h1>");
@@ -38,7 +37,6 @@ public class UploadMenuController extends HttpServlet {
             out.println("</html>");
         }
     }
-
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -51,13 +49,20 @@ public class UploadMenuController extends HttpServlet {
             throws ServletException, IOException {
 //        processRequest(request, response);
         PrintWriter out = response.getWriter();
-        String [] pics = request.getParameterValues("menu_photo");
+        String[] pics = request.getParameterValues("menu_photo");
         String status = request.getParameter("status");
-        for(int i=0;i<pics.length;i++){
-            String path = "./image/"+pics[i];
-           MenuDB db = new MenuDB("200001", path, status);
+        for (int i = 0; i < pics.length; i++) {
+            String path = "./image/" + pics[i];
+            MenuDB db = new MenuDB("200001", path, "700001",status);
+            if(db.addRecord()){
+                out.println("yes");
+            }else{
+                out.println(path);
+              
+            }
+            
         }
-        
+
     }
 
     /**

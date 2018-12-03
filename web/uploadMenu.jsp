@@ -44,7 +44,7 @@
             <div class="content">
 
                 <h1>Upload Menu(s)</h1>
-                <form action="action" method="post">
+                <form action="UploadMenuController" method="post">
                     <input type="file" accept=".png, .jpeg" class="photo_upload" name="menu_photo">
                     <input type="hidden" value="public" name="status">
                     <input type="submit" value="Upload File">
