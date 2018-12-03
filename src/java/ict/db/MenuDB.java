@@ -35,7 +35,7 @@ public class MenuDB extends DB {
         boolean isSuccess = false;
         try {
             cnnct = getConnection();
-            String preQueryStatement = "INSERT INTO menu VALUES (?,?,?)";
+            String preQueryStatement = "INSERT INTO menu VALUES (?,?,?,?)";
             pStmnt = cnnct.prepareStatement(preQueryStatement);
             pStmnt.setString(1, id);
             pStmnt.setString(2, path);

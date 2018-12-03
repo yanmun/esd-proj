@@ -21,6 +21,7 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "UploadMenuController", urlPatterns = {"/UploadMenuController"})
 public class UploadMenuController extends HttpServlet {
 
+    private MenuDB db;
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -53,7 +54,7 @@ public class UploadMenuController extends HttpServlet {
         String status = request.getParameter("status");
         for (int i = 0; i < pics.length; i++) {
             String path = "./image/" + pics[i];
-            MenuDB db = new MenuDB("200001", path, "700001",status);
+           db = new MenuDB("200001", path, "700001",status);
             if(db.addRecord()){
                 out.println("yes");
             }else{
