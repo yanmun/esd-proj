@@ -8,6 +8,7 @@ package ict.db;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
@@ -26,6 +27,10 @@ public class MenuDB extends DB {
         this.path = path;
         this.restID = restID;
         this.status = status;
+    }
+    
+    public MenuDB(){
+        
     }
 
     @Override
@@ -59,6 +64,36 @@ public class MenuDB extends DB {
         }
         return isSuccess;
 
+    }
+    
+    public boolean findExistID(String id){
+       
+       Connection cnnct = null;
+        PreparedStatement pStmnt = null;
+        boolean isFound = false;
+        try {
+            cnnct = getConnection();
+            String preQueryStatement = "SELECT * FROM menu WHERE menuid=?";
+            ResultSet re = null;
+            pStmnt = cnnct.prepareStatement(preQueryStatement);
+            pStmnt.setString(1, id);
+            re = pStmnt.executeQuery();
+            if (re.next()) {
+                isFound = true;
+            }
+            pStmnt.close();
+            cnnct.close();
+        } catch (SQLException ex) {
+            while (ex != null) {
+                ex.printStackTrace();
+                ex = ex.getNextException();
+            }
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        } catch (ClassNotFoundException ex) {
+            ex.printStackTrace();
+        }
+        return isFound;
     }
 
 }

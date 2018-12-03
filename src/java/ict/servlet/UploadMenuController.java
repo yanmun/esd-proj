@@ -6,6 +6,7 @@
 package ict.servlet;
 
 import ict.db.MenuDB;
+import ict.random.GenerateID;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -22,6 +23,7 @@ import javax.servlet.http.HttpServletResponse;
 public class UploadMenuController extends HttpServlet {
 
     private MenuDB db;
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -52,16 +54,28 @@ public class UploadMenuController extends HttpServlet {
         PrintWriter out = response.getWriter();
         String[] pics = request.getParameterValues("menu_photo");
         String status = request.getParameter("status");
+        String restID = "700001";
         for (int i = 0; i < pics.length; i++) {
             String path = "./image/" + pics[i];
-           db = new MenuDB("200001", path, "700001",status);
-            if(db.addRecord()){
-                out.println("yes");
-            }else{
-                out.println(path);
-              
+            String id = "";
+            boolean isRepeat = true;
+            while(isRepeat){
+                id = GenerateID.genSixDigitID();
+                if(new MenuDB().findExistID(id)){
+                    isRepeat = true;
+                }else{
+                    isRepeat= false;
+                }
             }
             
+            db = new MenuDB(id, path, restID, status);
+            if (db.addRecord()) {
+                out.println("yes");
+            } else {
+                out.println(path);
+
+            }
+
         }
 
     }

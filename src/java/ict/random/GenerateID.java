@@ -16,7 +16,14 @@ public class GenerateID {
     public static String genSixDigitID(){
         Random rand = new Random();
         
-        int x = rand.nextInt(10); 
-        return ""+x;
+        String rand_num = "";
+        for(int i=1;i<=6;i++){
+            int x = rand.nextInt(10); 
+            rand_num +=x;
+        }
+        
+        return rand_num;
     }
+    
+    
 }
