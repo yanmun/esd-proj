@@ -59,7 +59,7 @@
                         </tr>
                         <tr>
                             <td></td>
-                            <td><p><input type="submit" value="Change" style="width: 100%"></p></td>
+                            <td><p><input type="submit" value="Edit" style="width: 100%"></p></td>
                         </tr>
                         <tr>
                             <td></td>
