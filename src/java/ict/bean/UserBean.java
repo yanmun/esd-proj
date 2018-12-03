@@ -77,4 +77,7 @@ public class UserBean {
         this.type = type;
     }
     
+    public String toString() {
+        return username + " " + password + " " + tel + " " + email + " " + fname + " " + lname;
+    }
 }

@@ -20,14 +20,13 @@
             <jsp:include page="header.jsp" />
             <jsp:include page="sidebar.jsp" />
             <div class="content">
-                <jsp:useBean id="userInfo" class="ict.bean.UserInfo" scope="session"/>              
+                <jsp:useBean id="userInfo" class="ict.bean.UserInfo" scope="session"/>
+                <b>Hello, <jsp:getProperty name="userInfo" property="username" /></b>
                 <%
                     String name = userInfo.getUsername();
                     AccountDB db = new AccountDB();
                     UserBean u = db.queryUserByID(name);
-                %>
-                <b>Hello, <jsp:getProperty name="userInfo" property="username" /></b>
-                <%
+                    
                     out.println("<h1>Customers</h1>");
                     out.println("<table border='1'>");
                     out.println("<tr>");
@@ -44,6 +43,7 @@
                         out.println("</tr>");
                         out.println("</table>");
                 %>
+                <br>
                 <form method = "post" action = "LoginController">
                     <input type = "hidden" name = "action" value = "logout">
                     <input type = "submit" value = "Logout" name = "logoutButton">

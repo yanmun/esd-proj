@@ -35,7 +35,7 @@
                         <tr>
                             <td><p align="left">Username: </p></td>
                             <td><p><%=name%></p></td>
-                            <input type="hidden" name="username"  value="<%=name%>">
+                        <input type="hidden" name="username"  value="<%=name%>">
                         </tr>
                         <tr>
                             <td><p align="left">Password: </p></td>
@@ -60,6 +60,10 @@
                         <tr>
                             <td></td>
                             <td><p><input type="submit" value="Change" style="width: 100%"></p></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td><p><input type="button" value="Back" style="width: 100%" onclick="javascript:window.location.href = 'welcome.jsp'"></p></td>
                         </tr> 
                     </table>
                 </form>

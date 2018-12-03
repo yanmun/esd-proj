@@ -177,7 +177,7 @@ public class AccountDB extends DB {
         boolean isSuccess = false;
         try {
             cnnct = getConnection();
-            String preQueryStatement = "UPDATE ACCOUNT SET password=?,tel=?,email=?,fname=?,lname=?  WHERE username=?";
+            String preQueryStatement = "UPDATE ACCOUNT SET password=?,tel=?,email=?,firstName=?,lastName=?  WHERE username=?";
             pStmnt = cnnct.prepareStatement(preQueryStatement);
             pStmnt.setString(1, ub.getPassword());
             pStmnt.setString(2, ub.getTel());

@@ -5,22 +5,30 @@
  */
 package ict.db;
 
+import ict.bean.UserBean;
+
 /**
  *
  * @author pearh
  */
 public class Test {
- 
 
     public static void main(String[] arg) {
         AccountDB db = new AccountDB();
-        boolean a = db.findExistID("0");
-        if (a) {
-            System.out.println("Find");
+        UserBean user = new UserBean();
+        user.setUsername("a");
+        user.setPassword("123");
+        user.setTel("32165478");
+        user.setEmail("123@com");
+        user.setFname("firstname:");
+        user.setLname("lastname");
+        boolean change = db.editRecord(user);
+        if (change) {
+            System.out.print("OK");
         } else {
-            System.out.println("failed");
+            System.out.print("NO");
         }
-    
+
     }
 
 }
