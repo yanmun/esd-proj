@@ -8,6 +8,7 @@ package ict.servlet;
 import ict.db.AccountDB;
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -53,6 +54,10 @@ public class RegisterController extends HttpServlet {
                 String email = request.getParameter("email");
                 db = new AccountDB(fname, lname, username, password, tel, email, type);
                 db.addRecord();
+                request.setAttribute("msg", "Please Login with your new account."); // redirect the result to the listCustomers.jsp
+                RequestDispatcher rd;
+                rd = getServletContext().getRequestDispatcher("/index.jsp");
+                rd.forward(request, response);
             } else if ("0002".equals(type)) {
                 String fname = request.getParameter("fname");
                 String lname = request.getParameter("lname");
