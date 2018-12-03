@@ -34,6 +34,11 @@
                         reader.readAsDataURL(input.files[0]);
                     }
                 }
+                
+                $("#add_upload").click(function(){
+                    $("<div class='photo_upload_div'>  \n\
+            <input type='file' accept='.png, .jpeg' class='photo_upload' name='menu_photo'></div> ").insertBefore("#status_input");
+                })
             })
         </script>
     </head>
@@ -45,8 +50,12 @@
 
                 <h1>Upload Menu(s)</h1>
                 <form action="UploadMenuController" method="post">
-                    <input type="file" accept=".png, .jpeg" class="photo_upload" name="menu_photo">
-                    <input type="hidden" value="public" name="status">
+                    <div class="photo_upload_div"> 
+                        <input type="file" accept=".png, .jpeg" class="photo_upload" name="menu_photo">
+                    
+                    </div>
+                   <input type="hidden" value="public" name="status" id="status_input">
+                    <input type="button" value="+" id="add_upload">
                     <input type="submit" value="Upload File">
                     <img src="" alt="">
                 </form>
