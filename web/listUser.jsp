@@ -5,7 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import="ict.bean.*, java.util.*" %>
+<%@page import="ict.bean.*, java.util.*, ict.db.AccountTypeDB" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -30,7 +30,7 @@
                 <% ArrayList<UserBean> users = (ArrayList<UserBean>) request.getAttribute("users");
                     out.println("<table border='1'>");
                     out.println("<tr>");
-                    out.println("<th>username</th><th>password</th><th>tel</th><th>email</th><th>first name</th><th>last name</th>");
+                    out.println("<th>username</th><th>password</th><th>tel</th><th>email</th><th>first name</th><th>last name</th><th>role</th>");
                     out.println("</tr>");   // loop through the customer array to display each customer record  
                     for (int i = 0; i < users.size(); i++) {
                         UserBean u = users.get(i);
@@ -41,6 +41,10 @@
                         out.println("<td>" + u.getEmail() + "</td>");
                         out.println("<td>" + u.getFname() + "</td>");
                         out.println("<td>" + u.getLname() + "</td>");
+                        String id = u.getType();
+                        AccountTypeDB db = new AccountTypeDB();
+                        String userType = db.getType(id);
+                        out.println("<td>" + userType + "</td>");
                         out.println("<td><a href=\"handleEdit?action=getEditCustomer&username=" + u.getUsername() + "\">Edit</a></td>");
                         out.println("<td><a href=\"handleEdit?action=delete&username=" + u.getUsername() + "\">Delete</a></td>");
                         out.println("</tr>");

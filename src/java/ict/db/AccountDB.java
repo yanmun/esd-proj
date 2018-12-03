@@ -106,6 +106,7 @@ public class AccountDB extends DB {
         }
         return isFound;
     }
+    
     public boolean isValidUser(String username, String pd) {
         Connection cnnct = null;
         PreparedStatement pStmnt = null;
@@ -156,6 +157,7 @@ public class AccountDB extends DB {
                 ub.setEmail(re.getString(4));
                 ub.setFname(re.getString(5));
                 ub.setLname(re.getString(6));
+                ub.setType(re.getString(7));
             }
             pStmnt.close();
             cnnct.close();
@@ -192,6 +194,7 @@ public class AccountDB extends DB {
                 ub.setEmail(re.getString(4));
                 ub.setFname(re.getString(5));
                 ub.setLname(re.getString(6));
+                ub.setType(re.getString(7));
                 users.add(ub);
             }
             pStmnt.close();
@@ -289,6 +292,7 @@ public class AccountDB extends DB {
                 ub.setEmail(re.getString(4));
                 ub.setFname(re.getString(5));
                 ub.setLname(re.getString(6));
+                ub.setType(re.getString(7));
                 users.add(ub);
             }
             pStmnt.close();
