@@ -36,7 +36,13 @@ public class HandleEdit extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
-        if ("getEditCustomer".equalsIgnoreCase(action)) {
+        if ("delete".equalsIgnoreCase(action)) {
+            String id = request.getParameter("id");
+            if (id != null) {
+                db.delRecord(id);
+                response.sendRedirect("handleCustomer?action=list");
+            }
+        } else if ("getEditCustomer".equalsIgnoreCase(action)) {
             String username = request.getParameter("username");
             if (username != null) {
                 db = new AccountDB();
@@ -45,25 +51,25 @@ public class HandleEdit extends HttpServlet {
                 RequestDispatcher rd;
                 rd = getServletContext().getRequestDispatcher("/editUser.jsp");
                 rd.forward(request, response);
-            }
-        } else if ("edit".equalsIgnoreCase(action)) {
-            String username = request.getParameter("username");
-            String pd = request.getParameter("password");
-            String tel = request.getParameter("tel");
-            String email = request.getParameter("email");
-            String fname = request.getParameter("fname");
-            String lname = request.getParameter("lname");
-            UserBean user = new UserBean();
-            user.setUsername(username);
-            user.setPassword(pd);
-            user.setTel(tel);
-            user.setEmail(email);
-            user.setFname(fname);
-            user.setLname(lname);            
-            if (username != null) {
-                db = new AccountDB();
-                db.editRecord(user);
-                response.sendRedirect("welcome.jsp");
+            } else if ("edit".equalsIgnoreCase(action)) {
+                username = request.getParameter("username");
+                String pd = request.getParameter("password");
+                String tel = request.getParameter("tel");
+                String email = request.getParameter("email");
+                String fname = request.getParameter("fname");
+                String lname = request.getParameter("lname");
+                UserBean user = new UserBean();
+                user.setUsername(username);
+                user.setPassword(pd);
+                user.setTel(tel);
+                user.setEmail(email);
+                user.setFname(fname);
+                user.setLname(lname);
+                if (username != null) {
+                    db = new AccountDB();
+                    db.editRecord(user);
+                    response.sendRedirect("welcome.jsp");
+                }
             }
         }
     }

@@ -12,6 +12,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 /**
  *
@@ -171,6 +172,34 @@ public class AccountDB extends DB {
         return ub;
     }
     
+    public boolean delRecord(String username) {
+        Connection cnnct = null;
+        PreparedStatement pStmnt = null;
+        boolean isSuccess = false;
+        try {
+            cnnct = getConnection();
+            String preQueryStatement = "DELETE FROM ACCOUNT WHERE USERNAME=?";
+            pStmnt = cnnct.prepareStatement(preQueryStatement);
+            pStmnt.setString(1, username);
+            int rowCount = pStmnt.executeUpdate();
+            if (rowCount >= 1) {
+                isSuccess = true;
+            }
+            pStmnt.close();
+            cnnct.close();
+        } catch (SQLException ex) {
+            while (ex != null) {
+                ex.printStackTrace();
+                ex = ex.getNextException();
+            }
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        } catch (ClassNotFoundException ex) {
+            ex.printStackTrace();
+        }
+        return isSuccess;
+    }
+    
     public boolean editRecord(UserBean ub) {
         Connection cnnct = null;
         PreparedStatement pStmnt = null;
@@ -202,5 +231,41 @@ public class AccountDB extends DB {
             ex.printStackTrace();
         }
         return isSuccess;
+    }
+    
+    public ArrayList queryCust() {
+        Connection cnnct = null;
+        PreparedStatement pStmnt = null;
+        ArrayList<UserBean> users = new ArrayList();
+        UserBean ub = null;
+        try {
+            cnnct = getConnection();
+            String preQueryStatement = "SELECT * FROM ACCOUNT WHERE accountTypeID!='0003'";
+            ResultSet re = null;
+            pStmnt = cnnct.prepareStatement(preQueryStatement);
+            re = pStmnt.executeQuery();
+            while (re.next()) {
+                ub = new UserBean();
+                ub.setUsername(re.getString(1));
+                ub.setPassword(re.getString(2));
+                ub.setTel(re.getString(3));
+                ub.setEmail(re.getString(4));
+                ub.setFname(re.getString(5));
+                ub.setLname(re.getString(6));
+                users.add(ub);
+            }
+            pStmnt.close();
+            cnnct.close();
+        } catch (SQLException ex) {
+            while (ex != null) {
+                ex.printStackTrace();
+                ex = ex.getNextException();
+            }
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        } catch (ClassNotFoundException ex) {
+            ex.printStackTrace();
+        }
+        return users;
     }
 }

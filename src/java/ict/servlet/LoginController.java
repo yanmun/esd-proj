@@ -5,7 +5,7 @@
  */
 package ict.servlet;
 
-import ict.bean.UserInfo;
+import ict.bean.*;
 import ict.db.AccountDB;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -82,7 +82,15 @@ public class LoginController extends HttpServlet {
             bean.setUsername(username);
             bean.setPassword(password);
             session.setAttribute("userInfo", bean);
+            AccountDB db = new AccountDB();
+            UserBean user = db.queryUserByID(username);
+            String type = user.getType();
             targetURL = "welcome.jsp";
+//            if ("0001".equals(type) || "0002".equals(type))
+//                url = "welcome.jsp";
+//            else if ("0003".equals(type)) {
+//                url = "adminHome.jsp";
+//            }
         } else {
             targetURL = "loginError.jsp";
         }
