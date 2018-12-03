@@ -63,7 +63,7 @@ public class AccountTypeDB extends DB {
     public String getType(String id) {
         Connection cnnct = null;
         PreparedStatement pStmnt = null;
-        String type = null;
+        String type = "";
         try {
             cnnct = getConnection();
             String preQueryStatement = "SELECT accountType FROM ACCOUNTTYPEDB WHERE accountTypeID=?";
