@@ -18,11 +18,13 @@ public class MenuDB extends DB {
 
     private String id;
     private String path;
+    private String restID;
     private String status;
 
-    public MenuDB(String id, String path, String status) {
+    public MenuDB(String id, String path, String restID, String status) {
         this.id = id;
         this.path = path;
+        this.restID = restID;
         this.status = status;
     }
 
@@ -33,12 +35,12 @@ public class MenuDB extends DB {
         boolean isSuccess = false;
         try {
             cnnct = getConnection();
-            String preQueryStatement = "INSERT INTO menu VALUES (?,?,?)";
+            String preQueryStatement = "INSERT INTO menu VALUES (?,?,?,?)";
             pStmnt = cnnct.prepareStatement(preQueryStatement);
             pStmnt.setString(1, id);
             pStmnt.setString(2, path);
-            pStmnt.setString(3, status);
-
+            pStmnt.setString(3, restID);
+            pStmnt.setString(4, status);
             int rowCount = pStmnt.executeUpdate();
             if (rowCount >= 1) {
                 isSuccess = true;
