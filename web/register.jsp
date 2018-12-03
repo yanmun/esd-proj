@@ -5,9 +5,9 @@
 --%>
 
 <%@page import="ict.db.AccountDB"%>
-<% 
-        AccountDB db = new AccountDB();
-   %>
+<%
+    AccountDB db = new AccountDB();
+%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -18,11 +18,27 @@
         <style type="text/css">
             <jsp:include page="css/style.css" />
         </style>
+        <script src="./jslib/jquery-3.3.1.js">
+
+        </script>
+        <script>
+            $(document).ready(function () {
+                $("input[name=fname]").keyup(function () {
+                    var text = $(this).val();
+                    $(this).val(text.charAt(0).toUpperCase() + text.slice(1).toLowerCase());
+                });
+
+                $("input[name=lname]").keyup(function () {
+                    var text = $(this).val();
+                    $(this).val(text.charAt(0).toUpperCase() + text.slice(1).toLowerCase());
+                });
+            })
+        </script>
     </head>
     <body>
         <div class="container">
-         <jsp:include page="header.jsp" />
-      <jsp:include page="sidebar.jsp" />
+            <jsp:include page="header.jsp" />
+            <jsp:include page="sidebar.jsp" />
             <div class="content">
                 <h1>Register</h1>
                 <form method="post" action="RegisterController">
@@ -64,7 +80,7 @@
                     </table>
                 </form>
             </div>
-             <jsp:include page="footer.jsp" />
+            <jsp:include page="footer.jsp" />
         </div>
     </body>
 </html>
