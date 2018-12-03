@@ -18,26 +18,34 @@
         </script>
         <script>
             $(document).ready(function () {
-                $(".photo_upload").change(function () {
-                    readURL(this);
-                })
+//                $(".photo_upload").change(function () {
+//                    var img = $(this).siblings("img");
+//                    readURL(this, img);
+//                })
 
-                function readURL(input) {
+                function readURL(input, img) {
 
                     if (input.files && input.files[0]) {
                         var reader = new FileReader();
 
                         reader.onload = function (e) {
-                            $('img').attr('src', e.target.result);
+//                            $('img').attr('src', e.target.result);
+                            img.attr('src', e.target.result);
                         }
 
                         reader.readAsDataURL(input.files[0]);
                     }
                 }
                 
-                $("#add_upload").click(function(){
+                $(".content").on('change', '.photo_upload', function(){
+                    var img = $(this).siblings("img");
+                    readURL(this, img);
+                });
+
+                $("#add_upload").click(function () {
                     $("<div class='photo_upload_div'>  \n\
-            <input type='file' accept='.png, .jpeg' class='photo_upload' name='menu_photo'></div> ").insertBefore("#status_input");
+            <input type='file' accept='.png, .jpeg' class='photo_upload' name='menu_photo'>\n\
+ <img src='' alt=''></div> ").insertBefore("#status_input");
                 })
             })
         </script>
@@ -52,12 +60,12 @@
                 <form action="UploadMenuController" method="post">
                     <div class="photo_upload_div"> 
                         <input type="file" accept=".png, .jpeg" class="photo_upload" name="menu_photo">
-                    
+                        <img src="" alt="">
                     </div>
-                   <input type="hidden" value="public" name="status" id="status_input">
+                    <input type="hidden" value="public" name="status" id="status_input">
                     <input type="button" value="+" id="add_upload">
                     <input type="submit" value="Upload File">
-                    <img src="" alt="">
+
                 </form>
             </div>
             <jsp:include page="footer.jsp" />
