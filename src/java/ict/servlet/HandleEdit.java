@@ -59,25 +59,27 @@ public class HandleEdit extends HttpServlet {
                 RequestDispatcher rd;
                 rd = getServletContext().getRequestDispatcher("/editUser.jsp");
                 rd.forward(request, response);
-            } else if ("edit".equalsIgnoreCase(action)) {
-                username = request.getParameter("username");
-                String pd = request.getParameter("password");
-                String tel = request.getParameter("tel");
-                String email = request.getParameter("email");
-                String fname = request.getParameter("fname");
-                String lname = request.getParameter("lname");
-                UserBean user = new UserBean();
-                user.setUsername(username);
-                user.setPassword(pd);
-                user.setTel(tel);
-                user.setEmail(email);
-                user.setFname(fname);
-                user.setLname(lname);
-                if (username != null) {
-                    db = new AccountDB();
-                    db.editRecord(user);
-                    response.sendRedirect("welcome.jsp");
-                }
+            }
+        } else if ("edit".equalsIgnoreCase(action)) {
+            String username = request.getParameter("username");
+            String pd = request.getParameter("password");
+            String tel = request.getParameter("tel");
+            String email = request.getParameter("email");
+            String fname = request.getParameter("fname");
+            String lname = request.getParameter("lname");
+            String userType = request.getParameter("userType");
+            UserBean user = new UserBean();
+            user.setUsername(username);
+            user.setPassword(pd);
+            user.setTel(tel);
+            user.setEmail(email);
+            user.setFname(fname);
+            user.setLname(lname);
+            user.setType(userType);
+            if (username != null) {
+                db = new AccountDB();
+                db.editRecord(user);
+                response.sendRedirect("welcome.jsp");
             }
         } else if ("search".equalsIgnoreCase(action)) {
             String username = request.getParameter("username");

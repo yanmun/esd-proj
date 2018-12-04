@@ -24,10 +24,9 @@
                 String tel = u.getTel();
                 String email = u.getEmail();
                 String fname = u.getFname();
-                String lname = u.getLname();
+                String lname = u.getLname();                
+                String type = u.getType();
                 String id = request.getParameter("id");
-                AccountTypeDB db = new AccountTypeDB();
-                String role = db.getType(id);
             %>
             <jsp:include page="header.jsp" />
             <jsp:include page="sidebar.jsp" />
@@ -68,6 +67,10 @@
                                 out.println("<td><p><input type='radio' value='0002' name='userType'>Restaurant Operator</p></td>");
                                 out.println("<td><p><input type='radio' value='0003' name='userType'>System Administrator</p></td>");
                                 out.println("</tr>");
+                            } else {
+                        %>
+                        <input type="hidden" name="userType" value="<%=type%>">
+                        <%
                             }
                         %>
                         <tr>

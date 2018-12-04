@@ -246,14 +246,15 @@ public class AccountDB extends DB {
         boolean isSuccess = false;
         try {
             cnnct = getConnection();
-            String preQueryStatement = "UPDATE ACCOUNT SET password=?,tel=?,email=?,firstName=?,lastName=?  WHERE username=?";
+            String preQueryStatement = "UPDATE ACCOUNT SET password=?,tel=?,email=?,firstName=?,lastName=?,accountTypeID=?  WHERE username=?";
             pStmnt = cnnct.prepareStatement(preQueryStatement);
             pStmnt.setString(1, ub.getPassword());
             pStmnt.setString(2, ub.getTel());
             pStmnt.setString(3, ub.getEmail());
             pStmnt.setString(4, ub.getFname());
             pStmnt.setString(5, ub.getLname());
-            pStmnt.setString(6, ub.getUsername());
+            pStmnt.setString(6, ub.getType());
+            pStmnt.setString(7, ub.getUsername());
             int rowCount = pStmnt.executeUpdate();
             if (rowCount >= 1) {
                 isSuccess = true;
