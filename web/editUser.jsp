@@ -81,6 +81,16 @@
                         <%
                             }
                         %>
+                        <%
+                            if ("System Administrator".equals(id)) {
+                                out.println("<tr>");
+                                out.println("<td><p align='left'>Role: </p></td>");
+                                out.println("<td><p><input type='radio' value='0001' name='userType' isChecked(type,'0001')>Normal User</p></td>");
+                                out.println("<td><p><input type='radio' value='0002' name='userType' isChecked(type,'0002')>Restaurant Operator</p></td>");
+                                out.println("<td><p><input type='radio' value='0003' name='userType' isChecked(type,'0003')>System Administrator</p></td>");
+                                out.println("</tr>");
+                            } else {
+                        %>
                         <tr>
                             <td></td>
                             <td><p><input type="submit" value="Edit" style="width: 100%"></p></td>
