@@ -20,12 +20,13 @@
         <style type="text/css">
             <jsp:include page="css/style.css" />
         </style>
-        <link rel="stylesheet" href="css/element_style.css">
+        <link rel="stylesheet" href="./css/element_style.css">
         <script src="./jslib/jquery-3.3.1.js">
 
         </script>
         <script>
             var users;
+            var isError = false;
             $(document).ready(function () {
                 users = "<%=users%>";
                 users = users.replace("[", "");
@@ -45,10 +46,15 @@
                 $("input[name=username]").keyup(function () {
                     for (var i = 0; i < users_array.length; i++) {
 
-                        if ($(this).val() == users_array[i])
-                            $("#repeated_id").show();
+                        if ($(this).val() == users_array[i]){
+                            
+                            $("#repeated_id").css("display", "inline");
+                            isError = true;
+                            break;
+                        }
                         else {
                             $("#repeated_id").hide();
+                            isError = false;
                         }
                     }
                 });
@@ -60,14 +66,15 @@
             <jsp:include page="header.jsp" />
             <jsp:include page="sidebar.jsp" />
             <div class="content">
-                <h1>Register</h1>
+                <h1>Create new account</h1>
                 <form method="post" action="RegisterController">
                     <input type="hidden" name="action" value="userRegister">
                     <table border="0">
                         <tr>
                             <td><p align="left">Username: </p></td>
                             <td><p><input type="text" name="username" maxlength="15" size="15"> 
-                                    <span id="repeated_id">*This username has already been used</span></p></td>  
+                                    </p>
+                             <span id="repeated_id">*This username has already been used</span></td>  
                         </tr>
 
 
