@@ -54,10 +54,17 @@
                         }
                         else {
                             $("#repeated_id").hide();
-                            isError = false;
+                            isError = false ;
                         }
                     }
                 });
+                
+                $("form").submit(function(event){
+                    
+                    if(isError)
+                        event.preventDefault();
+                })
+                
             })
         </script>
     </head>
@@ -80,23 +87,23 @@
 
                         <tr>
                             <td><p align="left">Password: </p></td>
-                            <td><p><input type="password" name="password" maxlength="25" size="15"></p></td>
+                            <td><p><input type="password" name="password" maxlength="25" size="15" required></p></td>
                         </tr>
                         <tr>
                             <td><p align="left">FirstName: </p></td>
-                            <td><p><input type="text" name="fname" maxlength="15" size="15"></p></td>
+                            <td><p><input type="text" name="fname" maxlength="15" size="15" required></p></td>
                         </tr>
                         <tr>
                             <td><p align="left">LastName: </p></td>
-                            <td><p><input type="text" name="lname" maxlength="15" size="15"></p></td>
+                            <td><p><input type="text" name="lname" maxlength="15" size="15" required></p></td>
                         </tr>
                         <tr>
                             <td><p align="left">Tel: </p></td>
-                            <td><p><input type="text" name="tel" maxlength="8" size="15"></p></td>
+                            <td><p><input type="text" name="tel" maxlength="8" size="15" required></p></td>
                         </tr>
                         <tr>
                             <td><p align="left">Email: </p></td>
-                            <td><p><input type="email" name="email" maxlength="40" size="15"></p></td>
+                            <td><p><input type="email" name="email" maxlength="40" size="15" required></p></td>
                         </tr>
                         <tr>
                             <td><p align="left">Type: </p></td>
