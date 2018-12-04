@@ -63,7 +63,7 @@ public class AccountTypeDB extends DB {
     public String getType(String id) {
         Connection cnnct = null;
         PreparedStatement pStmnt = null;
-        String type = null;
+        String type = "";
         try {
             cnnct = getConnection();
             String preQueryStatement = "SELECT accountType FROM ACCOUNTTYPE WHERE accountTypeID=?";
@@ -71,9 +71,9 @@ public class AccountTypeDB extends DB {
             pStmnt = cnnct.prepareStatement(preQueryStatement);
             pStmnt.setString(1, id);
             re = pStmnt.executeQuery();
-//            while (re.next()) {
-//                type = re.getString(1);
-//            }
+            while (re.next()) {
+                type = re.getString(1);
+            }
             pStmnt.close();
             cnnct.close();
         } catch (SQLException ex) {

@@ -76,8 +76,11 @@ public class UserBean {
     public void setType(String type) {
         this.type = type;
     }
-    
+
+    @Override
     public String toString() {
-        return username + " " + password + " " + tel + " " + email + " " + fname + " " + lname;
+        return "UserBean{" + "fname=" + fname + ", lname=" + lname + ", username=" + username + ", password=" + password + ", tel=" + tel + ", email=" + email + ", type=" + type + '}';
     }
+    
+   
 }

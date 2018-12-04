@@ -75,7 +75,7 @@ public class LoginController extends HttpServlet {
             throws IOException, ServletException, ClassNotFoundException {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
-        String targetURL;
+        String targetURL="";
         if (db.isValidUser(username, password)) {
             HttpSession session = request.getSession(true);
             UserInfo bean = new UserInfo();
@@ -85,12 +85,11 @@ public class LoginController extends HttpServlet {
             AccountDB db = new AccountDB();
             UserBean user = db.queryUserByID(username);
             String type = user.getType();
-            targetURL = "welcome.jsp";
-//            if ("0001".equals(type) || "0002".equals(type))
-//                targetURL = "welcome.jsp";
-//            else if ("0003".equals(type)) {
-//                targetURL = "adminHome.jsp";
-//            }
+            if ("0001".equals(type) || "0002".equals(type))
+                targetURL = "welcome.jsp";
+            else if ("0003".equals(type)) {
+                targetURL = "listUser.jsp";
+            }
         } else {
             targetURL = "loginError.jsp";
         }

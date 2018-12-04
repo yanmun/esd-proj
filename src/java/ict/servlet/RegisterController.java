@@ -66,7 +66,10 @@ public class RegisterController extends HttpServlet {
                 String email = request.getParameter("email");
                 db = new AccountDB(fname, lname, username, password, tel, email, type);
                 db.addRecord();
-                response.sendRedirect("restRegister.jsp");
+                request.setAttribute("username", username); // redirect the result to the listCustomers.jsp
+                RequestDispatcher rd;
+                rd = getServletContext().getRequestDispatcher("/restRegister.jsp");
+                rd.forward(request, response);
             }
         } else if ("restRegister".equals(action)) {
             

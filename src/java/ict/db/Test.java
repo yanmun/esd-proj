@@ -14,20 +14,25 @@ import ict.bean.UserBean;
 public class Test {
 
     public static void main(String[] arg) {
+//        AccountDB db = new AccountDB();
+//        UserBean user = new UserBean();
+//        user.setUsername("a");
+//        user.setPassword("123");
+//        user.setTel("32165478");
+//        user.setEmail("123@com");
+//        user.setFname("firstname:");
+//        user.setLname("lastname");
+//        boolean change = db.editRecord(user);
+//        if (change) {
+//            System.out.print("OK");
+//        } else {
+//            System.out.print("NO");
+//        }
+
         AccountDB db = new AccountDB();
-        UserBean user = new UserBean();
-        user.setUsername("a");
-        user.setPassword("123");
-        user.setTel("32165478");
-        user.setEmail("123@com");
-        user.setFname("firstname:");
-        user.setLname("lastname");
-        boolean change = db.editRecord(user);
-        if (change) {
-            System.out.print("OK");
-        } else {
-            System.out.print("NO");
-        }
+        UserBean user = db.queryUserByID("a");
+        String type = user.getType();
+        System.out.print(user);
 
     }
 
