@@ -26,22 +26,42 @@
                     String name = userInfo.getUsername();
                     AccountDB db = new AccountDB();
                     UserBean u = db.queryUserByID(name);
-                    
-                    out.println("<h1>Customers</h1>");
-                    out.println("<table border='1'>");
+                    out.println("<hr>");
+                    out.println("<p><b>User Profile</b></p>");
+                    out.println("<table border='0'>");
                     out.println("<tr>");
-                    out.println("<th>username</th><th>password</th><th>tel</th><th>email</th><th>first name</th><th>last name</th>");
-                    out.println("</tr>");   // loop through the customer array to display each customer record  
-                        out.println("<tr>");
-                        out.println("<td>" + u.getUsername() + "</td>");
-                        out.println("<td>" + u.getPassword() + "</td>");
-                        out.println("<td>" + u.getTel() + "</td>");
-                        out.println("<td>" + u.getEmail() + "</td>");
-                        out.println("<td>" + u.getFname() + "</td>");
-                        out.println("<td>" + u.getLname() + "</td>");
-                        out.println("<td><a href=\"handleEdit?action=getEditCustomer&username=" + u.getUsername() + "\">Edit</a></td>");
-                        out.println("</tr>");
-                        out.println("</table>");
+                    out.println("<td><p align='left'>Username: </p></td>");
+                    out.println("<td><p>" + u.getUsername() + "</p></td>");
+                    out.println("</tr>");
+                    out.println("<tr>");
+                    out.println("<td><p align='left'>Password: </p></td>");
+                    out.println("<td><p>" + u.getPassword() + "</p></td>");
+                    out.println("</tr>");
+                    out.println("<tr>");
+                    out.println("<td><p align='left'>Telephone: </p></td>");
+                    out.println("<td><p>" + u.getTel() + "</p></td>");
+                    out.println("</tr>");
+                    out.println("<tr>");
+                    out.println("<td><p align='left'>Email: </p></td>");
+                    out.println("<td><p>" + u.getEmail() + "</p></td>");
+                    out.println("</tr>");
+                    out.println("<tr>");
+                    out.println("<td><p align='left'>First Name: </p></td>");
+                    out.println("<td><p>" + u.getFname() + "</p></td>");
+                    out.println("</tr>");
+                    out.println("<tr>");
+                    out.println("<td><p align='left'>Last Name: </p></td>");
+                    out.println("<td><p>" + u.getLname() + "</p></td>");
+                    out.println("</tr>");
+                    out.println("<tr>");
+                    String id = u.getType();
+                    AccountTypeDB typedb = new AccountTypeDB();
+                    String userType = typedb.getType(id);
+                    out.println("<td><p align='left'>Role: </p></td>");
+                    out.println("<td><p>" + userType + "</p></td>");
+                    out.println("</tr>");
+                    out.println("</table>");
+                    out.println("<a href=\"handleEdit?action=getEditCustomer&username=" + u.getUsername() + "\">Edit</a>");
                 %>
             </div>
             <jsp:include page = "footer.jsp" />
