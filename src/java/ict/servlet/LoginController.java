@@ -7,6 +7,7 @@ package ict.servlet;
 
 import ict.bean.*;
 import ict.db.AccountDB;
+import ict.db.AccountTypeDB;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.logging.Level;
@@ -75,20 +76,26 @@ public class LoginController extends HttpServlet {
             throws IOException, ServletException, ClassNotFoundException {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
-        String targetURL="";
+        String targetURL = "";
         if (db.isValidUser(username, password)) {
             HttpSession session = request.getSession(true);
             UserInfo bean = new UserInfo();
             bean.setUsername(username);
             bean.setPassword(password);
-            session.setAttribute("userInfo", bean);
             AccountDB db = new AccountDB();
+            UserBean ub = db.queryUserByID(username);
+            String id = ub.getType();
+            AccountTypeDB Typedb = new AccountTypeDB();
+            String userType = Typedb.getType(id);
+            bean.setType(userType);
+            session.setAttribute("userInfo", bean);
+            db = new AccountDB();
             UserBean user = db.queryUserByID(username);
             String type = user.getType();
-            if ("0001".equals(type) || "0002".equals(type))
+            if ("0001".equals(type) || "0002".equals(type)) {
                 targetURL = "welcome.jsp";
-            else if ("0003".equals(type)) {
-                targetURL = "listUser.jsp";
+            } else if ("0003".equals(type)) {
+                targetURL = "handleEdit?action=list";
             }
         } else {
             targetURL = "loginError.jsp";

@@ -27,7 +27,8 @@
                     <input type="submit" value="search">
                 </form>
                 <br>
-                <% ArrayList<UserBean> users = (ArrayList<UserBean>) request.getAttribute("users");
+                <%
+                    ArrayList<UserBean> users = (ArrayList<UserBean>) request.getAttribute("users");
                     out.println("<table border='1'>");
                     out.println("<tr>");
                     out.println("<th>username</th><th>password</th><th>tel</th><th>email</th><th>first name</th><th>last name</th><th>role</th>");
@@ -45,7 +46,10 @@
                         AccountTypeDB db = new AccountTypeDB();
                         String userType = db.getType(id);
                         out.println("<td>" + userType + "</td>");
-                        out.println("<td><a href=\"handleEdit?action=getEditCustomer&username=" + u.getUsername() + "\">Edit</a></td>");
+                %>
+                <jsp:useBean id="userInfo" class="ict.bean.UserInfo" scope="session"/>
+                <%
+                        out.println("<td><a href=\"handleEdit?action=getEditCustomer&username=" + u.getUsername() + "&id=" + userInfo.getType() + "\">Edit</a></td>");
                         out.println("<td><a href=\"handleEdit?action=delete&username=" + u.getUsername() + "\">Delete</a></td>");
                         out.println("</tr>");
                     }
@@ -53,7 +57,7 @@
                 %>
                 <br>
                 <form method="post" action="handleEdit">
-                    <input type="hidden" name="action" value="create">
+                    <input type="hidden" name="action" value="create">                    
                     <input type="submit" value="Create new user">
                 </form>
             </div>

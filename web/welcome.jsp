@@ -21,7 +21,7 @@
             <jsp:include page="sidebar.jsp" />
             <div class="content">
                 <jsp:useBean id="userInfo" class="ict.bean.UserInfo" scope="session"/>
-                <b>Hello, <jsp:getProperty name="userInfo" property="username" /></b>
+                <p><b>Hello, <jsp:getProperty name="userInfo" property="username" /></b></p>
                 <%
                     String name = userInfo.getUsername();
                     AccountDB db = new AccountDB();
@@ -61,7 +61,7 @@
                     out.println("<td><p>" + userType + "</p></td>");
                     out.println("</tr>");
                     out.println("</table>");
-                    out.println("<a href=\"handleEdit?action=getEditCustomer&username=" + u.getUsername() + "\">Edit</a>");
+                    out.println("<p><a href=\"handleEdit?action=getEditCustomer&username=" + u.getUsername() + "\">Edit</a></p>");
                 %>
             </div>
             <jsp:include page = "footer.jsp" />

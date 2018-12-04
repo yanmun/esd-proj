@@ -25,6 +25,9 @@
                 String email = u.getEmail();
                 String fname = u.getFname();
                 String lname = u.getLname();
+                String id = request.getParameter("id");
+                AccountTypeDB db = new AccountTypeDB();
+                String role = db.getType(id);
             %>
             <jsp:include page="header.jsp" />
             <jsp:include page="sidebar.jsp" />
@@ -57,6 +60,16 @@
                             <td><p align="left">Email: </p></td>
                             <td><p><input type="email" name="email" maxlength="40" size="15" value="<%=email%>"></p></td>
                         </tr>
+                        <%
+                            if ("System Administrator".equals(id)) {
+                                out.println("<tr>");
+                                out.println("<td><p align='left'>Role: </p></td>");
+                                out.println("<td><p><input type='radio' value='0001' name='userType'>Normal User</p></td>");
+                                out.println("<td><p><input type='radio' value='0002' name='userType'>Restaurant Operator</p></td>");
+                                out.println("<td><p><input type='radio' value='0003' name='userType'>System Administrator</p></td>");
+                                out.println("</tr>");
+                            }
+                        %>
                         <tr>
                             <td></td>
                             <td><p><input type="submit" value="Edit" style="width: 100%"></p></td>

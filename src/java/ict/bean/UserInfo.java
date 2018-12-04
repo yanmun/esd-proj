@@ -14,8 +14,17 @@ import java.io.Serializable;
 public class UserInfo implements Serializable{
     private String username;
     private String password;
+    private String type;
 
     public UserInfo() {
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     public String getUsername() {
