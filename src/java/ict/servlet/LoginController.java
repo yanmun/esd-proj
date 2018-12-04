@@ -87,9 +87,9 @@ public class LoginController extends HttpServlet {
             String type = user.getType();
             targetURL = "welcome.jsp";
 //            if ("0001".equals(type) || "0002".equals(type))
-//                url = "welcome.jsp";
+//                targetURL = "welcome.jsp";
 //            else if ("0003".equals(type)) {
-//                url = "adminHome.jsp";
+//                targetURL = "adminHome.jsp";
 //            }
         } else {
             targetURL = "loginError.jsp";

@@ -27,7 +27,6 @@
                         out.println("</p>");
                     }
                 %>
-
             </div>
             <jsp:include page="footer.jsp" />
         </div>

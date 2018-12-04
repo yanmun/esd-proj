@@ -7,8 +7,7 @@
         <li><a href="cart.php">Cart</a></li>
         <li><a href="uploadMenu.jsp">upload menu</a></li>
         <li><a href="handleEdit?action=list">All User</a></li>
-        <li><a href="LoginController?action=logout">Logout</a></li>
-      
+        <li><a href="LoginController?action=logout">Logout</a></li>      
     </ul> 
     <p>If you would like the navigation along the top, simply move the ul.nav to the top of the page and recreate the styling.</p>
 </div>
