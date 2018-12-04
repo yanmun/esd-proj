@@ -14,6 +14,12 @@
         <style type="text/css">
             <jsp:include page="css/style.css" />
         </style>
+        <script language="javascript">
+            function isChecked(type, vale) {
+                if (type == vale)
+                    return 'checked = "checked"';
+            }
+        </script>
     </head>
     <body>
         <div class="container">
@@ -24,7 +30,7 @@
                 String tel = u.getTel();
                 String email = u.getEmail();
                 String fname = u.getFname();
-                String lname = u.getLname();                
+                String lname = u.getLname();
                 String type = u.getType();
                 String id = request.getParameter("id");
             %>
@@ -61,13 +67,15 @@
                         </tr>
                         <%
                             if ("System Administrator".equals(id)) {
-                                out.println("<tr>");
-                                out.println("<td><p align='left'>Role: </p></td>");
-                                out.println("<td><p><input type='radio' value='0001' name='userType'>Normal User</p></td>");
-                                out.println("<td><p><input type='radio' value='0002' name='userType'>Restaurant Operator</p></td>");
-                                out.println("<td><p><input type='radio' value='0003' name='userType'>System Administrator</p></td>");
-                                out.println("</tr>");
-                            } else {
+                        %>
+                        <tr>
+                            <td><p align='left'>Role: </p></td>
+                            <td><p><input type='radio' value='0001' name='userType' isChecked(<%=type%>,'0001')>Normal User</p></td>
+                            <td><p><input type='radio' value='0002' name='userType' isChecked(<%=type%>,'0002')>Restaurant Operator</p></td>
+                            <td><p><input type='radio' value='0003' name='userType' isChecked(<%=type%>,'0003')>System Administrator</p></td>
+                        </tr>
+                        <%
+                        } else {
                         %>
                         <input type="hidden" name="userType" value="<%=type%>">
                         <%
