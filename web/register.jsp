@@ -20,6 +20,7 @@
         <style type="text/css">
             <jsp:include page="css/style.css" />
         </style>
+        <link rel="stylesheet" href="css/element_style.css">
         <script src="./jslib/jquery-3.3.1.js">
 
         </script>
@@ -30,7 +31,7 @@
                 users = users.replace("[", "");
                 users = users.replace("]", "");
                 var users_array = users.split(", ");
-           
+              
                 $("input[name=fname]").keyup(function () {
                     var text = $(this).val();
                     $(this).val(text.charAt(0).toUpperCase() + text.slice(1).toLowerCase());
@@ -43,9 +44,12 @@
 
                 $("input[name=username]").keyup(function () {
                     for (var i = 0; i < users_array.length; i++) {
-                       
+
                         if ($(this).val() == users_array[i])
-                            alert("nsds");
+                            $("#repeated_id").show();
+                        else {
+                            $("#repeated_id").hide();
+                        }
                     }
                 });
             })
@@ -62,10 +66,11 @@
                     <table border="0">
                         <tr>
                             <td><p align="left">Username: </p></td>
-                            <td><p><input type="text" name="username" maxlength="15" size="15"></p></td>  
+                            <td><p><input type="text" name="username" maxlength="15" size="15"> 
+                                    <span id="repeated_id">*This username has already been used</span></p></td>  
                         </tr>
 
-                            
+
                         <tr>
                             <td><p align="left">Password: </p></td>
                             <td><p><input type="password" name="password" maxlength="25" size="15"></p></td>
