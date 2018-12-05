@@ -23,6 +23,12 @@ public class RestaurantDB extends DB {
     private String rtype;
     private String rtel;
     private String remail;
+    private String restID;
+    private String pic_path;
+    private String desc;
+    private int views;
+       
+    
 
     public RestaurantDB(String rname, String hr, String district, String address, String rtype, String rtel, String remail) {
         super();
