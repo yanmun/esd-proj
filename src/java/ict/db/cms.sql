@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主機: 127.0.0.1
--- 產生時間： 2018 年 12 月 01 日 20:15
+-- 產生時間： 2018 年 12 月 05 日 09:56
 -- 伺服器版本: 10.1.30-MariaDB
 -- PHP 版本： 7.2.2
 
@@ -43,7 +43,8 @@ CREATE TABLE `account` (
 --
 
 INSERT INTO `account` (`username`, `password`, `tel`, `email`, `firstName`, `lastName`, `accountTypeID`) VALUES
-('hll', '9334', '24132374', 'hym7743@gmail.com', 'jajasjk', 'asasds', '0001'),
+('admin', '123', '999', 'admin@gmail.com', 'Siu', 'Jer', '0003'),
+('hll', '9334', '24132374', 'hym7743@gmail.com', 'jajasjk', 'asasds', '0002'),
 ('hlllily1119', '4345', '24132374', 'hym7743@gmail.com', 'jajasjk', 'asasds', '0001');
 
 -- --------------------------------------------------------
@@ -69,6 +70,34 @@ INSERT INTO `accounttype` (`accountTypeID`, `accountType`) VALUES
 -- --------------------------------------------------------
 
 --
+-- 資料表結構 `fav_menu`
+--
+
+CREATE TABLE `fav_menu` (
+  `menuid` char(6) NOT NULL,
+  `username` varchar(25) NOT NULL,
+  `isFav` varchar(4) DEFAULT NULL,
+  `time` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- 資料表結構 `fav_rest`
+--
+
+CREATE TABLE `fav_rest` (
+  `restID` char(6) NOT NULL,
+  `username` varchar(25) NOT NULL,
+  `isFav` varchar(4) DEFAULT NULL,
+  `comment` varchar(250) DEFAULT NULL,
+  `comment_date` date DEFAULT NULL,
+  `comment_time` time DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- 資料表結構 `menu`
 --
 
@@ -78,6 +107,18 @@ CREATE TABLE `menu` (
   `restID` char(6) NOT NULL,
   `status` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- 資料表的匯出資料 `menu`
+--
+
+INSERT INTO `menu` (`menuid`, `menupath`, `restID`, `status`) VALUES
+('200001', './image/1642694-200.png', '700001', 'public'),
+('256315', './image/veg.png', '700001', 'public'),
+('720029', './image/veg.png', '700001', 'public'),
+('936731', './image/veg.png', '700001', 'public'),
+('985080', './image/1642694-200.png', '700001', 'public'),
+('991146', './image/1642694-200.png', '700001', 'public');
 
 -- --------------------------------------------------------
 
@@ -91,10 +132,22 @@ CREATE TABLE `restaurant` (
   `restTypeID` char(4) NOT NULL,
   `restTel` char(8) NOT NULL,
   `restEmail` varchar(40) NOT NULL,
+  `district` varchar(20) NOT NULL,
   `address` varchar(100) NOT NULL,
   `ownerID` varchar(15) NOT NULL,
-  `status` varchar(10) NOT NULL
+  `status` varchar(10) NOT NULL,
+  `rest_pic` varchar(30) NOT NULL,
+  `rest_desc` varchar(100) NOT NULL,
+  `open_hrs` varchar(20) NOT NULL,
+  `num_view` int(8) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- 資料表的匯出資料 `restaurant`
+--
+
+INSERT INTO `restaurant` (`restID`, `restName`, `restTypeID`, `restTel`, `restEmail`, `district`, `address`, `ownerID`, `status`, `rest_pic`, `rest_desc`, `open_hrs`, `num_view`) VALUES
+('700001', 'Toraji ', '4001', '12345679', 'gg@gmail.com', '', 'TY', 'hll', 'open', '', '', '', 0);
 
 -- --------------------------------------------------------
 
@@ -117,6 +170,48 @@ INSERT INTO `restauranttype` (`restTypeID`, `restType`) VALUES
 ('4003', 'Japanese Restaurant'),
 ('4004', 'Korean Restaurant');
 
+-- --------------------------------------------------------
+
+--
+-- 資料表結構 `rest_tag`
+--
+
+CREATE TABLE `rest_tag` (
+  `restID` char(6) NOT NULL,
+  `tagid` char(4) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- 資料表結構 `tags`
+--
+
+CREATE TABLE `tags` (
+  `tagid` char(4) NOT NULL,
+  `tagname` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- 資料表的匯出資料 `tags`
+--
+
+INSERT INTO `tags` (`tagid`, `tagname`) VALUES
+('3001', 'Dessert'),
+('3002', 'Hot pot'),
+('3003', 'Mixian'),
+('3004', 'Cha chaan teng'),
+('3005', 'Fast food'),
+('3006', 'Hamburgers'),
+('3007', 'Pizza'),
+('3008', 'Coffee'),
+('3009', 'Sushi'),
+('3010', 'Pancake'),
+('3011', 'Udon'),
+('3012', 'Lamian'),
+('3013', 'Vegetarian diet'),
+('3014', 'Buffet');
+
 --
 -- 已匯出資料表的索引
 --
@@ -133,6 +228,20 @@ ALTER TABLE `account`
 --
 ALTER TABLE `accounttype`
   ADD PRIMARY KEY (`accountTypeID`);
+
+--
+-- 資料表索引 `fav_menu`
+--
+ALTER TABLE `fav_menu`
+  ADD PRIMARY KEY (`menuid`,`username`),
+  ADD KEY `username` (`username`);
+
+--
+-- 資料表索引 `fav_rest`
+--
+ALTER TABLE `fav_rest`
+  ADD PRIMARY KEY (`restID`,`username`),
+  ADD KEY `username` (`username`);
 
 --
 -- 資料表索引 `menu`
@@ -156,6 +265,19 @@ ALTER TABLE `restauranttype`
   ADD PRIMARY KEY (`restTypeID`);
 
 --
+-- 資料表索引 `rest_tag`
+--
+ALTER TABLE `rest_tag`
+  ADD PRIMARY KEY (`restID`,`tagid`),
+  ADD KEY `tagid` (`tagid`);
+
+--
+-- 資料表索引 `tags`
+--
+ALTER TABLE `tags`
+  ADD PRIMARY KEY (`tagid`);
+
+--
 -- 已匯出資料表的限制(Constraint)
 --
 
@@ -164,6 +286,20 @@ ALTER TABLE `restauranttype`
 --
 ALTER TABLE `account`
   ADD CONSTRAINT `account_ibfk_1` FOREIGN KEY (`accountTypeID`) REFERENCES `accounttype` (`accountTypeID`);
+
+--
+-- 資料表的 Constraints `fav_menu`
+--
+ALTER TABLE `fav_menu`
+  ADD CONSTRAINT `fav_menu_ibfk_1` FOREIGN KEY (`menuid`) REFERENCES `menu` (`menuid`),
+  ADD CONSTRAINT `fav_menu_ibfk_2` FOREIGN KEY (`username`) REFERENCES `account` (`username`);
+
+--
+-- 資料表的 Constraints `fav_rest`
+--
+ALTER TABLE `fav_rest`
+  ADD CONSTRAINT `fav_rest_ibfk_1` FOREIGN KEY (`restID`) REFERENCES `restaurant` (`restID`),
+  ADD CONSTRAINT `fav_rest_ibfk_2` FOREIGN KEY (`username`) REFERENCES `account` (`username`);
 
 --
 -- 資料表的 Constraints `menu`
@@ -177,6 +313,13 @@ ALTER TABLE `menu`
 ALTER TABLE `restaurant`
   ADD CONSTRAINT `restaurant_ibfk_1` FOREIGN KEY (`restTypeID`) REFERENCES `restauranttype` (`restTypeID`),
   ADD CONSTRAINT `restaurant_ibfk_2` FOREIGN KEY (`ownerID`) REFERENCES `account` (`username`);
+
+--
+-- 資料表的 Constraints `rest_tag`
+--
+ALTER TABLE `rest_tag`
+  ADD CONSTRAINT `rest_tag_ibfk_1` FOREIGN KEY (`restID`) REFERENCES `restaurant` (`restID`),
+  ADD CONSTRAINT `rest_tag_ibfk_2` FOREIGN KEY (`tagid`) REFERENCES `tags` (`tagid`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
