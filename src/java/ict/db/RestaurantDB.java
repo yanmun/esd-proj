@@ -30,7 +30,8 @@ public class RestaurantDB extends DB {
        
     
 
-    public RestaurantDB(String rname, String hr, String district, String address, String rtype, String rtel, String remail) {
+    public RestaurantDB(String rname, String hr, String district, String address, 
+            String rtype, String rtel, String remail, String pic_path, String desc) {
         super();
         this.rname = rname;
         this.hr = hr;
@@ -39,6 +40,10 @@ public class RestaurantDB extends DB {
         this.rtype = rtype;
         this.rtel = rtel;
         this.remail = remail;
+        this.views = 0;
+        
+        
+          
 
     }
 
