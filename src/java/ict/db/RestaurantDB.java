@@ -95,6 +95,48 @@ public class RestaurantDB extends DB {
         }
         return isSuccess;
     }
+    
+    
+//    public String add(){
+//         Connection cnnct = null;
+//        PreparedStatement pStmnt = null;
+//        String msg ="";
+//        try {
+//            cnnct = getConnection();
+//            String preQueryStatement = "INSERT INTO restaurant VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
+//            pStmnt = cnnct.prepareStatement(preQueryStatement);
+//            pStmnt.setString(1, GenerateID.genSixDigitID());
+//            pStmnt.setString(2, rname);
+//            pStmnt.setString(3, rtype);
+//            pStmnt.setString(4, rtel);
+//            pStmnt.setString(5, remail);
+//            pStmnt.setString(6, district);
+//            pStmnt.setString(7, address);
+//            pStmnt.setString(8, ownid);
+//            pStmnt.setString(9, state);
+//            pStmnt.setString(10, pic_path);
+//            pStmnt.setString(11, desc);
+//            pStmnt.setString(12, hr);
+//            pStmnt.setInt(13, views);
+//            int rowCount = pStmnt.executeUpdate();
+//            if (rowCount >= 1) {
+//                msg = "yes";
+//            }
+//            pStmnt.close();
+//            cnnct.close();
+//        } catch (SQLException ex) {
+//            while (ex != null) {
+//                msg+=ex.toString();
+//               ex.printStackTrace();
+//                ex = ex.getNextException();
+//            }
+//        } catch (IOException ex) {
+//            ex.printStackTrace();
+//        } catch (ClassNotFoundException ex) {
+//            ex.printStackTrace();
+//        }
+//        return msg;
+//    }
 
     public boolean findExistID(String username) {
         Connection cnnct = null;

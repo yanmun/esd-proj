@@ -53,19 +53,9 @@ public class RestaurantRegisterController extends HttpServlet {
             if (db.addRecord()) {
                 out.println("dfkkf");
             }else{
-                out.println(rname[i]);
-                out.println(getOpenHour(open_time[i], close_time[i], start_day[i], end_day[i]));
-                out.println(district[i]);
-                 out.println(address[i]);
-                 out.println(rtype[i]);
-                 out.println(rtel[i]);
-                 out.println(remail[i]);
-                 out.println(r_photo[i]);
-                 out.println(r_desc[i]);
-                 out.println(ownerID);
-                 out.println(state);
+             
             }
-
+//                out.println(db.add());
         }
 //        db= RestaurantDB();
     }
