@@ -55,7 +55,7 @@ public class RegisterController extends HttpServlet {
                 String email = request.getParameter("email");
                 db = new AccountDB(fname, lname, username, password, tel, email, type);
                 db.addRecord();
-                request.setAttribute("msg", "Please Login with your new account.  <a href=\"login.jsp\">Login Page</a>"); // redirect the result to the listCustomers.jsp
+                request.setAttribute("msg", "Account has been successfully created! Please Login with your new account.  <a href=\"login.jsp\">Login Page</a>"); // redirect the result to the listCustomers.jsp
                 RequestDispatcher rd;
                 rd = getServletContext().getRequestDispatcher("/index.jsp");
                 rd.forward(request, response);
