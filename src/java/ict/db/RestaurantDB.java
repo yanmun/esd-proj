@@ -5,11 +5,13 @@
  */
 package ict.db;
 
+import ict.bean.RestaurantBean;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 /**
  *
@@ -145,5 +147,48 @@ public class RestaurantDB extends DB {
             ex.printStackTrace();
         }
         return isFound;
+    }
+    
+    public ArrayList queryRest() {
+        Connection cnnct = null;
+        PreparedStatement pStmnt = null;
+        ArrayList<RestaurantBean> restaurants = new ArrayList();
+        RestaurantBean rb = null;
+        try {
+            cnnct = getConnection();
+            String preQueryStatement = "SELECT * FROM RESTAURANT";
+            ResultSet re = null;
+            pStmnt = cnnct.prepareStatement(preQueryStatement);
+            re = pStmnt.executeQuery();
+            while (re.next()) {
+                rb = new RestaurantBean();
+                rb.setRestID(re.getString(1));
+                rb.setRestName(re.getString(2));
+                rb.setRestTypeID(re.getString(3));
+                rb.setRestTel(re.getString(4));
+                rb.setRestEmail(re.getString(5));
+                rb.setDistrict(re.getString(6));
+                rb.setAddress(re.getString(7));
+                rb.setOwnerID(re.getString(8));
+                rb.setStatus(re.getString(9));
+                rb.setRest_pic(re.getString(10));
+                rb.setRest_desc(re.getString(11));
+                rb.setOpen_hrs(re.getString(12));
+                rb.setNum_view(re.getString(13));
+                restaurants.add(rb);
+            }
+            pStmnt.close();
+            cnnct.close();
+        } catch (SQLException ex) {
+            while (ex != null) {
+                ex.printStackTrace();
+                ex = ex.getNextException();
+            }
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        } catch (ClassNotFoundException ex) {
+            ex.printStackTrace();
+        }
+        return restaurants;
     }
 }

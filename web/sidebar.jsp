@@ -1,6 +1,6 @@
 <div class="sidebar1">
     <ul class="nav">
-        <li><a href="restaurant_list.jsp">Find Restaurants</a></li>
+        <li><a href="showRestaurant?action=list">Find Restaurants</a></li>
         <li><a href="register.jsp">Register</a></li>
         <li><a href="login.jsp">Login</a></li>
         <li><a href="restRegister.jsp">restRegister</a></li>
