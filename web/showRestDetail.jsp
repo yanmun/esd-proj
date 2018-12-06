@@ -59,27 +59,21 @@
                     out.println("<td></td>");
                     out.println("</tr>");
 
-                    out.println("<tr>");
-                    out.println("<td>");
-                    out.println("<p>Comment: <textarea rows='4' cols='50'></textarea></p>");
-                    out.println("</td>");
-                    out.println("<td></td>");
-                    out.println("</tr>");
-                    out.println("<tr>");
-                    out.println("<td>");
-                    out.println("<p><input type='button' value='submit'></p>");
-                    out.println("</td>");
-                    out.println("<td></td>");
-                    out.println("</tr>");
 
                 %>
                 <jsp:useBean id="userInfo" class="ict.bean.UserInfo" scope="session"/>
-                <%  
+                <%                    
                     String type = userInfo.getType();
                     if ("0001".equals(type)) {
-                        
+                        out.println("<tr>");
+                        out.println("<td>");
+                        out.println("<p>Comment: <textarea rows='4' cols='50'></textarea></p>");
+                        out.println("<p><input type='button' value='submit' onclick='welcome.jsp'></p>");
+                        out.println("</td>");
+                        out.println("<td></td>");
+                        out.println("</tr>");
                     }
-                    
+
                     RestaurantDB restDB = new RestaurantDB();
                     int view = restDB.getView(r.getRestName());
                     out.println("<tr>");
