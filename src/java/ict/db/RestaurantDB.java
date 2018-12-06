@@ -62,7 +62,7 @@ public class RestaurantDB extends DB {
         boolean isSuccess = false;
         try {
             cnnct = getConnection();
-            String preQueryStatement = "INSERT INTO restaurant VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
+            String preQueryStatement = "INSERT INTO restaurant VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
             pStmnt = cnnct.prepareStatement(preQueryStatement);
             pStmnt.setString(1, GenerateID.genSixDigitID());
             pStmnt.setString(2, rname);

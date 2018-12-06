@@ -24,11 +24,13 @@ import javax.servlet.http.HttpSession;
 public class RestaurantRegisterController extends HttpServlet {
 
     private RestaurantDB db;
+    private PrintWriter out;
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         HttpSession session = request.getSession(true);
+        out = response.getWriter();
         String action = request.getParameter("action");
         String state = request.getParameter("state");
         String[] rname = request.getParameterValues("rname");
@@ -48,7 +50,22 @@ public class RestaurantRegisterController extends HttpServlet {
         for (int i = 0; i < rname.length; i++) {
             db = new RestaurantDB(rname[i], getOpenHour(open_time[i], close_time[i], start_day[i], end_day[i]), district[i],
                     address[i], rtype[i], rtel[i], remail[i], r_photo[i], r_desc[i], ownerID, state);
-             
+            if (db.addRecord()) {
+                out.println("dfkkf");
+            }else{
+                out.println(rname[i]);
+                out.println(getOpenHour(open_time[i], close_time[i], start_day[i], end_day[i]));
+                out.println(district[i]);
+                 out.println(address[i]);
+                 out.println(rtype[i]);
+                 out.println(rtel[i]);
+                 out.println(remail[i]);
+                 out.println(r_photo[i]);
+                 out.println(r_desc[i]);
+                 out.println(ownerID);
+                 out.println(state);
+            }
+
         }
 //        db= RestaurantDB();
     }
