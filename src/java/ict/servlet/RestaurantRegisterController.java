@@ -6,7 +6,9 @@
 package ict.servlet;
 
 import ict.bean.UserBean;
+import ict.db.MenuDB;
 import ict.db.RestaurantDB;
+import ict.random.GenerateID;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -48,12 +50,23 @@ public class RestaurantRegisterController extends HttpServlet {
         String[] r_desc = request.getParameterValues("r_desc");
         String[] r_photo = request.getParameterValues("r_photo");
         for (int i = 0; i < rname.length; i++) {
+            String id="";
+             boolean isRepeat = true;
+            while(isRepeat){
+                id = GenerateID.genSixDigitID();
+                if(new RestaurantDB().findExistID(id)){
+                    isRepeat = true;
+                }else{
+                    isRepeat= false;
+                }
+            }
             db = new RestaurantDB(rname[i], getOpenHour(open_time[i], close_time[i], start_day[i], end_day[i]), district[i],
-                    address[i], rtype[i], rtel[i], remail[i], r_photo[i], r_desc[i], ownerID, state);
+                    address[i], rtype[i], rtel[i], remail[i], "./image/Restaurant/"+r_photo[i], r_desc[i], ownerID, state
+            ,id);
             if (db.addRecord()) {
                 out.println("dfkkf");
             }else{
-             
+            
             }
 //                out.println(db.add());
         }

@@ -34,8 +34,10 @@ public class RestaurantDB extends DB {
     private String ownid;
     private String state;
 
+
     public RestaurantDB(String rname, String hr, String district, String address,
-            String rtype, String rtel, String remail, String pic_path, String desc, String ownid, String state) {
+            String rtype, String rtel, String remail, String pic_path, String desc, String ownid, String state
+    ,String restID) {
         super();
         this.rname = rname;
         this.hr = hr;
@@ -49,6 +51,7 @@ public class RestaurantDB extends DB {
         this.state = state;
         this.pic_path = pic_path;
         this.desc = desc;
+        this.restID = restID;
 
     }
 
@@ -64,7 +67,7 @@ public class RestaurantDB extends DB {
             cnnct = getConnection();
             String preQueryStatement = "INSERT INTO restaurant VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
             pStmnt = cnnct.prepareStatement(preQueryStatement);
-            pStmnt.setString(1, GenerateID.genSixDigitID());
+            pStmnt.setString(1,restID);
             pStmnt.setString(2, rname);
             pStmnt.setString(3, rtype);
             pStmnt.setString(4, rtel);
