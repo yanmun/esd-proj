@@ -14,6 +14,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -59,6 +60,7 @@ public class RegisterController extends HttpServlet {
                 rd = getServletContext().getRequestDispatcher("/index.jsp");
                 rd.forward(request, response);
             } else if ("0002".equals(type)) {
+                
                 String fname = request.getParameter("fname");
                 String lname = request.getParameter("lname");
                 String password = request.getParameter("password");
@@ -66,6 +68,8 @@ public class RegisterController extends HttpServlet {
                 String email = request.getParameter("email");
                 db = new AccountDB(fname, lname, username, password, tel, email, type);
                 db.addRecord();
+                HttpSession session = request.getSession(true);
+                session.setAttribute("username", username);
                 request.setAttribute("username", username); // redirect the result to the listCustomers.jsp
                 RequestDispatcher rd;
                 rd = getServletContext().getRequestDispatcher("/restRegister.jsp");

@@ -6,6 +6,7 @@
 package ict.db;
 
 import ict.bean.RestaurantBean;
+import ict.random.GenerateID;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -53,43 +54,44 @@ public class RestaurantDB extends DB {
 
     }
     
-    public boolean addRecord() {
-        return false;
-    }
-
 //    public boolean addRecord() {
-//        Connection cnnct = null;
-//        PreparedStatement pStmnt = null;
-//        boolean isSuccess = false;
-//        try {
-//            cnnct = getConnection();
-//            String preQueryStatement = "INSERT INTO restaurant VALUES (?,?,?,?,?,?,?)";
-//            pStmnt = cnnct.prepareStatement(preQueryStatement);
-//            pStmnt.setString(1, rname);
-//            pStmnt.setString(2, hr);
-//            pStmnt.setString(3, district);
-//            pStmnt.setString(4, email);
-//            pStmnt.setString(5, fname);
-//            pStmnt.setString(6, lname);
-//            pStmnt.setString(7, type);
-//            int rowCount = pStmnt.executeUpdate();
-//            if (rowCount >= 1) {
-//                isSuccess = true;
-//            }
-//            pStmnt.close();
-//            cnnct.close();
-//        } catch (SQLException ex) {
-//            while (ex != null) {
-//                ex.printStackTrace();
-//                ex = ex.getNextException();
-//            }
-//        } catch (IOException ex) {
-//            ex.printStackTrace();
-//        } catch (ClassNotFoundException ex) {
-//            ex.printStackTrace();
-//        }
-//        return isSuccess;
+//        return false;
 //    }
+
+    public boolean addRecord() {
+        Connection cnnct = null;
+        PreparedStatement pStmnt = null;
+        boolean isSuccess = false;
+        try {
+            cnnct = getConnection();
+            String preQueryStatement = "INSERT INTO restaurant VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
+            pStmnt = cnnct.prepareStatement(preQueryStatement);
+            pStmnt.setString(1, GenerateID.genSixDigitID());
+            pStmnt.setString(2, rname);
+            pStmnt.setString(3, rtype);
+            pStmnt.setString(4, rtel);
+            pStmnt.setString(5, remail);
+            pStmnt.setString(6, district);
+            pStmnt.setString(7, address);
+            pStmnt.setString(8, address);
+            int rowCount = pStmnt.executeUpdate();
+            if (rowCount >= 1) {
+                isSuccess = true;
+            }
+            pStmnt.close();
+            cnnct.close();
+        } catch (SQLException ex) {
+            while (ex != null) {
+                ex.printStackTrace();
+                ex = ex.getNextException();
+            }
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        } catch (ClassNotFoundException ex) {
+            ex.printStackTrace();
+        }
+        return isSuccess;
+    }
 
     public boolean findExistID(String username) {
         Connection cnnct = null;
