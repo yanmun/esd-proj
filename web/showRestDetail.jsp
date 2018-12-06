@@ -85,6 +85,7 @@
 
                     out.println("</table>");
                 %>
+                <p><jsp:getProperty name="userInfo" property="type" /></p>
             </div>
             <jsp:include page="footer.jsp" />
         </div>    

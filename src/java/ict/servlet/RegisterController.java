@@ -60,7 +60,6 @@ public class RegisterController extends HttpServlet {
                 rd = getServletContext().getRequestDispatcher("/index.jsp");
                 rd.forward(request, response);
             } else if ("0002".equals(type)) {
-                
                 String fname = request.getParameter("fname");
                 String lname = request.getParameter("lname");
                 String password = request.getParameter("password");
@@ -74,11 +73,10 @@ public class RegisterController extends HttpServlet {
                 RequestDispatcher rd;
                 rd = getServletContext().getRequestDispatcher("/restRegister.jsp");
                 rd.forward(request, response);
-            }
-        } else if ("restRegister".equals(action)) {
-            
-        }
+            } else if ("restRegister".equals(action)) {
 
+            }
+        }
     }
 
     @Override
