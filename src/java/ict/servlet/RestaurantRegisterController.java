@@ -48,7 +48,7 @@ public class RestaurantRegisterController extends HttpServlet {
         for (int i = 0; i < rname.length; i++) {
             db = new RestaurantDB(rname[i], getOpenHour(open_time[i], close_time[i], start_day[i], end_day[i]), district[i],
                     address[i], rtype[i], rtel[i], remail[i], r_photo[i], r_desc[i], ownerID, state);
-
+             
         }
 //        db= RestaurantDB();
     }

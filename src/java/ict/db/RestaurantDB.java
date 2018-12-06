@@ -76,7 +76,7 @@ public class RestaurantDB extends DB {
             pStmnt.setString(10, pic_path);
             pStmnt.setString(11, desc);
             pStmnt.setString(12, hr);
-             pStmnt.setInt(13, views);
+            pStmnt.setInt(13, views);
             int rowCount = pStmnt.executeUpdate();
             if (rowCount >= 1) {
                 isSuccess = true;
@@ -197,4 +197,155 @@ public class RestaurantDB extends DB {
         }
         return restaurants;
     }
+
+    public ArrayList queryRestByName(String restName) {
+        Connection cnnct = null;
+        PreparedStatement pStmnt = null;
+        ArrayList<RestaurantBean> restaurants = new ArrayList();
+        RestaurantBean rb = null;
+        try {
+            cnnct = getConnection();
+            String preQueryStatement = "SELECT * FROM RESTAURANT WHERE RESTNAME=?";
+            ResultSet re = null;
+            pStmnt = cnnct.prepareStatement(preQueryStatement);
+            pStmnt.setString(1, restName);
+            re = pStmnt.executeQuery();
+            while (re.next()) {
+                rb = new RestaurantBean();
+                rb = new RestaurantBean();
+                rb.setRestID(re.getString(1));
+                rb.setRestName(re.getString(2));
+                rb.setRestTypeID(re.getString(3));
+                rb.setRestTel(re.getString(4));
+                rb.setRestEmail(re.getString(5));
+                rb.setDistrict(re.getString(6));
+                rb.setAddress(re.getString(7));
+                rb.setOwnerID(re.getString(8));
+                rb.setStatus(re.getString(9));
+                rb.setRest_pic(re.getString(10));
+                rb.setRest_desc(re.getString(11));
+                rb.setOpen_hrs(re.getString(12));
+                rb.setNum_view(re.getString(13));
+                restaurants.add(rb);
+            }
+            pStmnt.close();
+            cnnct.close();
+        } catch (SQLException ex) {
+            while (ex != null) {
+                ex.printStackTrace();
+                ex = ex.getNextException();
+            }
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        } catch (ClassNotFoundException ex) {
+            ex.printStackTrace();
+        }
+        return restaurants;
+    }
+
+    public RestaurantBean queryRestByID(String restname) {
+        Connection cnnct = null;
+        PreparedStatement pStmnt = null;
+
+        RestaurantBean rb = null;
+        try {
+            cnnct = getConnection();
+            updateView(restname);
+            String preQueryStatement = "SELECT * FROM restaurant WHERE restname=?";
+            ResultSet re = null;
+            pStmnt = cnnct.prepareStatement(preQueryStatement);
+            pStmnt.setString(1, restname);
+            re = pStmnt.executeQuery();
+            if (re.next()) {
+                rb = new RestaurantBean();
+                rb.setRestID(re.getString(1));
+                rb.setRestName(re.getString(2));
+                rb.setRestTypeID(re.getString(3));
+                rb.setRestTel(re.getString(4));
+                rb.setRestEmail(re.getString(5));
+                rb.setDistrict(re.getString(6));
+                rb.setAddress(re.getString(7));
+                rb.setOwnerID(re.getString(8));
+                rb.setStatus(re.getString(9));
+                rb.setRest_pic(re.getString(10));
+                rb.setRest_desc(re.getString(11));
+                rb.setOpen_hrs(re.getString(12));
+                rb.setNum_view(re.getString(13));
+            }
+            pStmnt.close();
+            cnnct.close();
+        } catch (SQLException ex) {
+            while (ex != null) {
+                ex.printStackTrace();
+                ex = ex.getNextException();
+            }
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        } catch (ClassNotFoundException ex) {
+            ex.printStackTrace();
+        }
+        return rb;
+    }
+    
+    public boolean updateView(String restname) {
+        Connection cnnct = null;
+        PreparedStatement pStmnt = null;
+        int view;
+        boolean isSuccess = false;
+        try {
+            cnnct = getConnection();
+            RestaurantDB db = new RestaurantDB();
+            view = db.getView(restname);
+            String preQueryStatement = "UPDATE RESTAURANT SET num_view=?  WHERE restname=?";
+            pStmnt = cnnct.prepareStatement(preQueryStatement);
+            pStmnt.setString(1, Integer.toString(view + 1));
+            pStmnt.setString(2, restname);
+            int rowCount = pStmnt.executeUpdate();
+            if (rowCount >= 1) {
+                isSuccess = true;
+            }
+            pStmnt.close();
+            cnnct.close();
+        } catch (SQLException ex) {
+            while (ex != null) {
+                ex.printStackTrace();
+                ex = ex.getNextException();
+            }
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        } catch (ClassNotFoundException ex) {
+            ex.printStackTrace();
+        }
+        return isSuccess;
+    }
+    
+    public int getView(String restname) {
+        Connection cnnct = null;
+        PreparedStatement pStmnt = null;
+        int view = 0;
+        try {
+            cnnct = getConnection();
+            String preQueryStatement = "SELECT num_view FROM restaurant WHERE restname=?";
+            ResultSet re = null;
+            pStmnt = cnnct.prepareStatement(preQueryStatement);
+            pStmnt.setString(1, restname);
+            re = pStmnt.executeQuery();
+            while (re.next()) {
+                view = Integer.parseInt(re.getString(1));
+            }
+            pStmnt.close();
+            cnnct.close();
+        } catch (SQLException ex) {
+            while (ex != null) {
+                ex.printStackTrace();
+                ex = ex.getNextException();
+            }
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        } catch (ClassNotFoundException ex) {
+            ex.printStackTrace();
+        }
+        return view;
+    }
+
 }
