@@ -60,9 +60,9 @@
                             <td>
                                 <p>
                                     <select name="district" style="width:100%;">
-                                        <option value="hk">Hong Kong Island</option>
-                                        <option value="kl">Kowloon </option>
-                                        <option value="nt">New Territories</option>
+                                        <option value="Hong Kong Island">Hong Kong Island</option>
+                                        <option value="Kowloon">Kowloon </option>
+                                        <option value="New Territories">New Territories</option>
                                     </select>
                                 </p>
                             </td>

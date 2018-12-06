@@ -26,29 +26,20 @@ public class RestaurantRegisterController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet RestaurantRegisterController</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet RestaurantRegisterController at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
+
+        String action = request.getParameter("action");
+        String state = request.getParameter("state");
+        String rname = request.getParameter("rname");
+        String open_time = request.getParameter("open_time");
+        String close_time = request.getParameter("close_time");
+        String start_day = request.getParameter("start_day");
+        String end_day = request.getParameter("end_day");
+        String district = request.getParameter("district");
+        String address =  request.getParameter("address");
+//           db= RestaurantDB();
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
