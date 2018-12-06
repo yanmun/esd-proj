@@ -29,17 +29,17 @@ public class RestaurantRegisterController extends HttpServlet {
 
         String action = request.getParameter("action");
         String state = request.getParameter("state");
-        String rname = request.getParameter("rname");
-        String open_time = request.getParameter("open_time");
-        String close_time = request.getParameter("close_time");
-        String start_day = request.getParameter("start_day");
-        String end_day = request.getParameter("end_day");
-        String district = request.getParameter("district");
-        String address =  request.getParameter("address");
-        String rtel = request.getParameter("rtel");
-        String remail = request.getParameter("remail");
-        String r_desc = request.getParameter("r_desc");
-        String r_photo = request.getParameter("r_photo");
+        String [] rname = request.getParameterValues("rname");
+        String [] open_time = request.getParameterValues("open_time");
+        String [] close_time = request.getParameterValues("close_time");
+        String [] start_day = request.getParameterValues("start_day");
+        String [] end_day = request.getParameterValues("end_day");
+        String [] district = request.getParameterValues("district");
+        String [] address =  request.getParameterValues("address");
+        String [] rtel = request.getParameterValues("rtel");
+        String [] remail = request.getParameterValues("remail");
+        String [] r_desc = request.getParameterValues("r_desc");
+        String [] r_photo = request.getParameterValues("r_photo");
                   
 //        db= RestaurantDB();
     }

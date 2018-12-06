@@ -28,7 +28,7 @@
                 })
                 $("#confirm_num_rest").click(function () {
                     num_rest = parseInt($("#num_rest").val());
-
+                     $("#pos").empty();
                     var str = "<form method='post' action='RestaurantRegisterController'>\n" +
                             "                    <input type='hidden' name='action' value='restRegister'>\n" +
                             "                    <input type='hidden' name='state' value='open'>";
@@ -111,7 +111,7 @@
 
                     str += "<p><input type='submit' value='Register' style='width: 100%;'></p>    </form>";
                     
-                    $("#pos").after(str);
+                    $("#pos").append(str);
                 })
             })
         </script>
@@ -124,8 +124,8 @@
                 <h1>Restaurant Information</h1>
                 <p>Please enter the number of restaurant you want to register:</p>
                 <p><input type="number" id="num_rest" min="1" max="10"></p>
-                <p id="pos"><input type="button" value="Confirm" id="confirm_num_rest"></p>
-                <div ></div>
+                <p ><input type="button" value="Confirm" id="confirm_num_rest"></p>
+                <div id="pos"></div>
 
 
             </div>
