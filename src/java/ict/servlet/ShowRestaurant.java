@@ -24,8 +24,9 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(urlPatterns = {"/showRestaurant"})
 public class ShowRestaurant extends HttpServlet {
+
     private RestaurantDB db;
-    
+
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         processRequest(request, response);
     }
@@ -43,7 +44,25 @@ public class ShowRestaurant extends HttpServlet {
             RequestDispatcher rd;
             rd = getServletContext().getRequestDispatcher("/listRest.jsp");
             rd.forward(request, response);
+        } else if ("show".equalsIgnoreCase(action)) {
+            String restName = request.getParameter("restName");
+            if (restName != null) {
+                db = new RestaurantDB();
+                RestaurantBean restaurant = db.queryRestByID(restName);
+                request.setAttribute("restaurant", restaurant);
+                RequestDispatcher rd;
+                rd = getServletContext().getRequestDispatcher("/showRestDetail.jsp");
+                rd.forward(request, response);
+            }
+        } else if ("search".equalsIgnoreCase(action)) {
+            String restName = request.getParameter("restName");
+            if (restName != null) {
+                ArrayList<RestaurantBean> restaurants = db.queryRestByName(restName);
+                request.setAttribute("restaurants", restaurants); // redirect the result to the listCustomers.jsp
+                RequestDispatcher rd;
+                rd = getServletContext().getRequestDispatcher("/listRest.jsp");
+                rd.forward(request, response);
+            }
         }
     }
-    
 }
