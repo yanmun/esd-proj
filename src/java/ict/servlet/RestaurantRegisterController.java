@@ -36,7 +36,12 @@ public class RestaurantRegisterController extends HttpServlet {
         String end_day = request.getParameter("end_day");
         String district = request.getParameter("district");
         String address =  request.getParameter("address");
-//           db= RestaurantDB();
+        String rtel = request.getParameter("rtel");
+        String remail = request.getParameter("remail");
+        String r_desc = request.getParameter("r_desc");
+        String r_photo = request.getParameter("r_photo");
+                  
+//        db= RestaurantDB();
     }
 
 
@@ -46,14 +51,7 @@ public class RestaurantRegisterController extends HttpServlet {
         processRequest(request, response);
     }
 
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
