@@ -41,13 +41,13 @@ public class RestaurantRegisterController extends HttpServlet {
         String[] rtype = request.getParameterValues("rtype");
         String[] rtel = request.getParameterValues("rtel");
         String[] remail = request.getParameterValues("remail");
-        UserBean ub = (UserBean) session.getAttribute("userInfo");
+        String ownerID = (String) session.getAttribute("username");
 
         String[] r_desc = request.getParameterValues("r_desc");
         String[] r_photo = request.getParameterValues("r_photo");
         for (int i = 0; i < rname.length; i++) {
             db = new RestaurantDB(rname[i], getOpenHour(open_time[i], close_time[i], start_day[i], end_day[i]), district[i],
-                    address[i], rtype[i], rtel[i], remail[i], r_photo[i], r_desc[i]);
+                    address[i], rtype[i], rtel[i], remail[i], r_photo[i], r_desc[i], ownerID, state);
 
         }
 //        db= RestaurantDB();

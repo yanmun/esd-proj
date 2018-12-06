@@ -19,6 +19,7 @@ import java.util.ArrayList;
  * @author Tung
  */
 public class RestaurantDB extends DB {
+
     private String rname;
     private String hr;
     private String district;
@@ -30,11 +31,11 @@ public class RestaurantDB extends DB {
     private String pic_path;
     private String desc;
     private int views;
-       
-    
+    private String ownid;
+    private String state;
 
-    public RestaurantDB(String rname, String hr, String district, String address, 
-            String rtype, String rtel, String remail, String pic_path, String desc) {
+    public RestaurantDB(String rname, String hr, String district, String address,
+            String rtype, String rtel, String remail, String pic_path, String desc, String ownid, String state) {
         super();
         this.rname = rname;
         this.hr = hr;
@@ -44,19 +45,16 @@ public class RestaurantDB extends DB {
         this.rtel = rtel;
         this.remail = remail;
         this.views = 0;
-        
-        
-          
+        this.ownid = ownid;
+        this.state = state;
+        this.pic_path = pic_path;
+        this.desc = desc;
 
     }
 
     public RestaurantDB() {
 
     }
-    
-//    public boolean addRecord() {
-//        return false;
-//    }
 
     public boolean addRecord() {
         Connection cnnct = null;
@@ -73,7 +71,12 @@ public class RestaurantDB extends DB {
             pStmnt.setString(5, remail);
             pStmnt.setString(6, district);
             pStmnt.setString(7, address);
-            pStmnt.setString(8, address);
+            pStmnt.setString(8, ownid);
+            pStmnt.setString(9, state);
+            pStmnt.setString(10, pic_path);
+            pStmnt.setString(11, desc);
+            pStmnt.setString(12, hr);
+             pStmnt.setInt(13, views);
             int rowCount = pStmnt.executeUpdate();
             if (rowCount >= 1) {
                 isSuccess = true;
@@ -121,6 +124,7 @@ public class RestaurantDB extends DB {
         }
         return isFound;
     }
+
     public boolean isValidUser(String username, String pd) {
         Connection cnnct = null;
         PreparedStatement pStmnt = null;
@@ -150,7 +154,7 @@ public class RestaurantDB extends DB {
         }
         return isFound;
     }
-    
+
     public ArrayList queryRest() {
         Connection cnnct = null;
         PreparedStatement pStmnt = null;
