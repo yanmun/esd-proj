@@ -162,7 +162,7 @@ public class RestaurantDB extends DB {
         RestaurantBean rb = null;
         try {
             cnnct = getConnection();
-            String preQueryStatement = "SELECT * FROM RESTAURANT";
+            String preQueryStatement = "SELECT * FROM RESTAURANT ORDER BY RESTNAME";
             ResultSet re = null;
             pStmnt = cnnct.prepareStatement(preQueryStatement);
             re = pStmnt.executeQuery();
@@ -205,7 +205,7 @@ public class RestaurantDB extends DB {
         RestaurantBean rb = null;
         try {
             cnnct = getConnection();
-            String preQueryStatement = "SELECT * FROM RESTAURANT WHERE RESTNAME=? ORDER BY RESTNAME";
+            String preQueryStatement = "SELECT * FROM RESTAURANT WHERE RESTNAME=?";
             ResultSet re = null;
             pStmnt = cnnct.prepareStatement(preQueryStatement);
             pStmnt.setString(1, restName);
