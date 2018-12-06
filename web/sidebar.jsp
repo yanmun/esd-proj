@@ -15,7 +15,7 @@
         
         <%
             if(session.getAttribute("userInfo")!=null){
-                out.println("<li><a href='LoginController?action=logout'>Logout</a></li>   ");
+                out.println("<li><a href='LoginController?action=logout'>Logout</a></li> ");
             }
             %>
     </ul> 
