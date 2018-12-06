@@ -4,7 +4,6 @@
         <li><a href="register.jsp">Register</a></li>
         <li><a href="login.jsp">Login</a></li>
 <!--        <li><a href="restRegister.jsp">restRegister</a></li>-->
-        <li><a href="cart.php">Cart</a></li>
         <li><a href="uploadMenu.jsp">upload menu</a></li>
         <li><a href="handleEdit?action=list">All User</a></li>
         <li><a href="LoginController?action=logout">Logout</a></li>      
