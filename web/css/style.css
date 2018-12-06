@@ -56,6 +56,10 @@ a:hover, a:active, a:focus { /* this group of selectors will give a keyboard nav
     background-color: #6699CC;
     padding-bottom: 10px;
 }
+
+.sidebar1 > p{
+    color:#6699CC;
+}
 .content {
 
     padding: 10px 0;
