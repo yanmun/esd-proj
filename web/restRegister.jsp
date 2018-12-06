@@ -13,14 +13,105 @@
         <style type="text/css">
             <jsp:include page="css/style.css" />
         </style>
-            <link rel="stylesheet" href="./css/element_style.css">
+        <link rel="stylesheet" href="./css/element_style.css">
         <script src="./jslib/jquery-3.3.1.js">
 
         </script>
         <script>
             $(document).ready(function () {
-                $("#confirm_num_rest").click(function(){
-                    alert("njdsn");
+                var num_rest;
+                $("#num_rest").keyup(function () {
+                    if (parseInt($(this).val()) < 1 || parseInt($(this).val()) > 10) {
+
+                        $(this).val("");
+                    }
+                })
+                $("#confirm_num_rest").click(function () {
+                    num_rest = parseInt($("#num_rest").val());
+
+                    var str = "<form method='post' action='RestaurantRegisterController'>\n" +
+                            "                    <input type='hidden' name='action' value='restRegister'>\n" +
+                            "                    <input type='hidden' name='state' value='open'>";
+                    for (var i = 1; i <= num_rest; i++) {
+                        str += "<table border='0'>\n" +
+                                "                 \n" +
+                                "                        <tr>\n" +
+                                "  <tr><td><p align='left'>"+i+"</p></td><td><p></p></td></tr> <td><p align='left'>Restaurant Name: </p></td>\n" +
+                                "                            <td><p><input type='text' name='rname' maxlength='50' style='width:100%;' required></p></td>\n" +
+                                "                        </tr>\n" +
+                                "                        <tr>\n" +
+                                "                            <td><p align='left'>Working Hour: </p></td>\n" +
+                                "                            <td><p> <input type='time'  name='open_time'\n" +
+                                "                                           min='00:00' max='23:59' required/> to <input type='time' id='appt' name='close_time'\n" +
+                                "                                           min='00:00' max='23:59' required/> (\n" +
+                                "                                    <select name='start_day' >\n" +
+                                "                                        <option value='Sunday'>Sunday</option>\n" +
+                                "                                        <option value='Monday'>Monday</option>\n" +
+                                "                                        <option value='Tuesday'>Tuesday</option>\n" +
+                                "                                        <option value='Wednesday'>Wednesday</option>\n" +
+                                "                                        <option value='Thursday'>Thursday</option>\n" +
+                                "                                        <option value='Friday'>Friday</option>\n" +
+                                "                                        <option value='Saturday'>Saturday</option>\n" +
+                                "                                    </select> to  <select name='end_day' >\n" +
+                                "                                        <option value='Sunday'>Sunday</option>\n" +
+                                "                                        <option value='Monday'>Monday</option>\n" +
+                                "                                        <option value='Tuesday'>Tuesday</option>\n" +
+                                "                                        <option value='Wednesday'>Wednesday</option>\n" +
+                                "                                        <option value='Thursday'>Thursday</option>\n" +
+                                "                                        <option value='Friday'>Friday</option>\n" +
+                                "                                        <option value='Saturday'>Saturday</option>\n" +
+                                "                                    </select>)</p></td>\n" +
+                                "                        </tr>\n" +
+                                "                        <tr>\n" +
+                                "                            <td><p align='left'>District: </p></td>\n" +
+                                "                            <td>\n" +
+                                "                                <p>\n" +
+                                "                                    <select name='district' style='width:100%;'>\n" +
+                                "                                        <option value='Hong Kong Island'>Hong Kong Island</option>\n" +
+                                "                                        <option value='Kowloon'>Kowloon </option>\n" +
+                                "                                        <option value='New Territories'>New Territories</option>\n" +
+                                "                                    </select>\n" +
+                                "                                </p>\n" +
+                                "                            </td>\n" +
+                                "                        </tr>\n" +
+                                "                        <tr>\n" +
+                                "                            <td><p align='left'>Restaurant Addresss: </p></td>\n" +
+                                "                            <td><p><textarea rows='4' cols='30' name='address'></textarea></p></td>\n" +
+                                "                        </tr>\n" +
+                                "                        <tr>\n" +
+                                "                            <td><p align='left'>Restaurant Type: </p></td>\n" +
+                                "                            <td>\n" +
+                                "                                <p>\n" +
+                                "                                    <select name='rtype' style='width:100%;'>\n" +
+                                "                                        <option value='4001'>Chinese</option>\n" +
+                                "                                        <option value='4002'>Western </option>\n" +
+                                "                                        <option value='4003'>Japanese </option>\n" +
+                                "                                        <option value='4004'>Korean </option>\n" +
+                                "                                    </select>\n" +
+                                "                                </p>\n" +
+                                "                            </td>\n" +
+                                "                        </tr>\n" +
+                                "                        <tr>\n" +
+                                "                            <td><p align='left'>Restaurant Tel: </p></td>\n" +
+                                "                            <td><p><input type='text' name='rtel' maxlength='8' style='width:100%;'></p></td>\n" +
+                                "                        </tr>\n" +
+                                "                        <tr>\n" +
+                                "                            <td><p align='left'>Restaurant Email: </p></td>\n" +
+                                "                            <td><p><input type='email' name='remail' maxlength='40' style='width:100%;'></p></td>\n" +
+                                "                        </tr>\n" +
+                                "                        <tr>\n" +
+                                "                            <td><p align='left'>Description: </p></td>\n" +
+                                "                            <td><p><textarea name='r_desc' cols='30' rows='10'></textarea></p></td>\n" +
+                                "                        </tr>\n" +
+                                "                        <tr>\n" +
+                                "                            <td><p align='left'>Photo of Restuarant: </p></td>\n" +
+                                "                            <td><p><input type='file' name='r_photo'> </p></td>\n" +
+                                "                        </tr> </table> <hr>";
+                    }
+
+                    str += "<p><input type='submit' value='Register' style='width: 100%;'></p>    </form>";
+                    
+                    $("#pos").after(str);
                 })
             })
         </script>
@@ -33,9 +124,10 @@
                 <h1>Restaurant Information</h1>
                 <p>Please enter the number of restaurant you want to register:</p>
                 <p><input type="number" id="num_rest" min="1" max="10"></p>
-                <p><input type="button" value="Confirm" id="confirm_num_rest"></p>
-                
-                
+                <p id="pos"><input type="button" value="Confirm" id="confirm_num_rest"></p>
+                <div ></div>
+
+
             </div>
             <jsp:include page="footer.jsp" />
         </div>
