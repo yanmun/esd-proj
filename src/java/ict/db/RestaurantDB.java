@@ -212,7 +212,6 @@ public class RestaurantDB extends DB {
             re = pStmnt.executeQuery();
             while (re.next()) {
                 rb = new RestaurantBean();
-                rb = new RestaurantBean();
                 rb.setRestID(re.getString(1));
                 rb.setRestName(re.getString(2));
                 rb.setRestTypeID(re.getString(3));
