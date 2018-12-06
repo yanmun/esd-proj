@@ -64,7 +64,7 @@
                 <jsp:useBean id="userInfo" class="ict.bean.UserInfo" scope="session"/>
                 <%                    
                     String type = userInfo.getType();
-                    if ("0001".equals(type)) {
+                    if ("Normal User".equals(type)) {
                         out.println("<tr>");
                         out.println("<td>");
                         out.println("<p>Comment: <textarea rows='4' cols='50'></textarea></p>");
