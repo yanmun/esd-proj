@@ -65,7 +65,7 @@ public class RestaurantTypeDB extends DB  {
         String type = "";
         try {
             cnnct = getConnection();
-            String preQueryStatement = "SELECT restType FROM restruranttype WHERE restTypeID=?";
+            String preQueryStatement = "SELECT restType FROM restauranttype WHERE restTypeID=?";
             ResultSet re = null;
             pStmnt = cnnct.prepareStatement(preQueryStatement);
             pStmnt.setString(1, id);
