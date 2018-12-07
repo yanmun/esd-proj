@@ -83,9 +83,9 @@ public class RestaurantRegisterController extends HttpServlet {
 
                 } else {
 
-                    request.setAttribute("msg", "Success registration! ");
-                    rd = getServletContext().getRequestDispatcher("/index.jsp");
-                    rd.forward(request, response);
+//                    request.setAttribute("msg", "Success registration! ");
+//                    rd = getServletContext().getRequestDispatcher("/index.jsp");
+//                    rd.forward(request, response);
                 }
 
             } else {
