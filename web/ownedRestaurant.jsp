@@ -3,7 +3,13 @@
     Created on : 2018年12月7日, 下午04:39:17
     Author     : pearh
 --%>
-
+<%@page import="ict.db.RestaurantDB"%>
+<%
+   
+    session.getAttribute("userInfo");
+    RestaurantDB db = new RestaurantDB();
+    
+    %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>

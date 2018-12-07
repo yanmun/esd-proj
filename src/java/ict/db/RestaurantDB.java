@@ -170,35 +170,35 @@ public class RestaurantDB extends DB {
         return isFound;
     }
 
-    public boolean isValidUser(String username, String pd) {
-        Connection cnnct = null;
-        PreparedStatement pStmnt = null;
-        boolean isFound = false;
-        try {
-            cnnct = getConnection();
-            String preQueryStatement = "SELECT * FROM account WHERE username=? and password=?";
-            ResultSet re = null;
-            pStmnt = cnnct.prepareStatement(preQueryStatement);
-            pStmnt.setString(1, username);
-            pStmnt.setString(2, pd);
-            re = pStmnt.executeQuery();
-            if (re.next()) {
-                isFound = true;
-            }
-            pStmnt.close();
-            cnnct.close();
-        } catch (SQLException ex) {
-            while (ex != null) {
-                ex.printStackTrace();
-                ex = ex.getNextException();
-            }
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        } catch (ClassNotFoundException ex) {
-            ex.printStackTrace();
-        }
-        return isFound;
-    }
+//    public boolean isValidUser(String username, String pd) {
+//        Connection cnnct = null;
+//        PreparedStatement pStmnt = null;
+//        boolean isFound = false;
+//        try {
+//            cnnct = getConnection();
+//            String preQueryStatement = "SELECT * FROM account WHERE username=? and password=?";
+//            ResultSet re = null;
+//            pStmnt = cnnct.prepareStatement(preQueryStatement);
+//            pStmnt.setString(1, username);
+//            pStmnt.setString(2, pd);
+//            re = pStmnt.executeQuery();
+//            if (re.next()) {
+//                isFound = true;
+//            }
+//            pStmnt.close();
+//            cnnct.close();
+//        } catch (SQLException ex) {
+//            while (ex != null) {
+//                ex.printStackTrace();
+//                ex = ex.getNextException();
+//            }
+//        } catch (IOException ex) {
+//            ex.printStackTrace();
+//        } catch (ClassNotFoundException ex) {
+//            ex.printStackTrace();
+//        }
+//        return isFound;
+//    }
 
     public ArrayList queryRest() {
         Connection cnnct = null;
