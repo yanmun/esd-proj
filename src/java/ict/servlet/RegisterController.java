@@ -69,6 +69,7 @@ public class RegisterController extends HttpServlet {
                 db.addRecord();
                 HttpSession session = request.getSession(true);
                 session.setAttribute("username", username);
+               
                 request.setAttribute("username", username); // redirect the result to the listCustomers.jsp
                 RequestDispatcher rd;
                 rd = getServletContext().getRequestDispatcher("/restRegister.jsp");

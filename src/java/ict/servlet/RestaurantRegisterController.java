@@ -6,6 +6,7 @@
 package ict.servlet;
 
 import ict.bean.UserBean;
+import ict.bean.UserInfo;
 import ict.db.MenuDB;
 import ict.db.RestaurantDB;
 import ict.random.GenerateID;
@@ -46,7 +47,13 @@ public class RestaurantRegisterController extends HttpServlet {
         String[] rtype = request.getParameterValues("rtype");
         String[] rtel = request.getParameterValues("rtel");
         String[] remail = request.getParameterValues("remail");
-        String ownerID = (String) session.getAttribute("username");
+        String ownerID="";
+        if (session.getAttribute("username") != null) {
+            ownerID = (String) session.getAttribute("username");
+        }
+        if(session.getAttribute("userInfo") != null) {
+             ownerID = (String) (((UserInfo) session.getAttribute("userInfo")).getUsername());
+        }
 
         String[] r_desc = request.getParameterValues("r_desc");
         String[] r_photo = request.getParameterValues("r_photo");
@@ -73,18 +80,16 @@ public class RestaurantRegisterController extends HttpServlet {
                     request.setAttribute("msg", "Success registration! Please Login with your new account.  <a href=\"login.jsp\">Login Page</a>");
                     rd = getServletContext().getRequestDispatcher("/index.jsp");
                     rd.forward(request, response);
-                    
-                }else{
-                     request.setAttribute("msg", "Success registration! ");
+
+                } else {
+
+                    request.setAttribute("msg", "Success registration! ");
                     rd = getServletContext().getRequestDispatcher("/index.jsp");
                     rd.forward(request, response);
                 }
-               
 
-                
-                
             } else {
-
+                out.println("hsf");
             }
 //                out.println(db.add());
         }
