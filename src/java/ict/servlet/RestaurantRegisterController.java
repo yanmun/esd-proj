@@ -66,14 +66,23 @@ public class RestaurantRegisterController extends HttpServlet {
                     id);
             if (db.addRecord()) {
                 session = request.getSession(false);
-                if (session != null) {
+                RequestDispatcher rd;
+                if (session.getAttribute("username") != null) {
                     session.removeAttribute("username");
                     session.invalidate();
+                    request.setAttribute("msg", "Success registration! Please Login with your new account.  <a href=\"login.jsp\">Login Page</a>");
+                    rd = getServletContext().getRequestDispatcher("/index.jsp");
+                    rd.forward(request, response);
+                    
+                }else{
+                     request.setAttribute("msg", "Success registration! ");
+                    rd = getServletContext().getRequestDispatcher("/index.jsp");
+                    rd.forward(request, response);
                 }
-                request.setAttribute("msg", "Success registration! Please Login with your new account.  <a href=\"login.jsp\">Login Page</a>"); // redirect the result to the listCustomers.jsp
-                RequestDispatcher rd;
-                rd = getServletContext().getRequestDispatcher("/index.jsp");
-                rd.forward(request, response);
+               
+
+                
+                
             } else {
 
             }

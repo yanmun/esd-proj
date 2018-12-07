@@ -23,7 +23,7 @@
                 }
 
                 if (ub.getType().equals("Restaurant Owner")) {
-                 
+                 out.println("<li><a href='restRegister.jsp'>Owned Restaurants</a></li>");
                     out.println("<li><a href='restRegister.jsp'>Restaurant Registration</a></li>");
                 }
                 
