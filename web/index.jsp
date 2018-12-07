@@ -20,7 +20,9 @@
             <jsp:include page="sidebar.jsp" />
             <div class="content">                
                 <p>Welcome!</p>
-                <% String msg = (String) request.getAttribute("msg");
+                <% 
+                    
+                    String msg = (String) request.getAttribute("msg");
                     if (msg != null) {
                         out.println("<p>");
                         out.println(msg);
