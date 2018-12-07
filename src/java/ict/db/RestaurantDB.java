@@ -34,10 +34,9 @@ public class RestaurantDB extends DB {
     private String ownid;
     private String state;
 
-
     public RestaurantDB(String rname, String hr, String district, String address,
-            String rtype, String rtel, String remail, String pic_path, String desc, String ownid, String state
-    ,String restID) {
+            String rtype, String rtel, String remail, String pic_path, String desc, String ownid, String state,
+             String restID) {
         super();
         this.rname = rname;
         this.hr = hr;
@@ -67,7 +66,7 @@ public class RestaurantDB extends DB {
             cnnct = getConnection();
             String preQueryStatement = "INSERT INTO restaurant VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
             pStmnt = cnnct.prepareStatement(preQueryStatement);
-            pStmnt.setString(1,restID);
+            pStmnt.setString(1, restID);
             pStmnt.setString(2, rname);
             pStmnt.setString(3, rtype);
             pStmnt.setString(4, rtel);
@@ -98,8 +97,7 @@ public class RestaurantDB extends DB {
         }
         return isSuccess;
     }
-    
-    
+
 //    public String add(){
 //         Connection cnnct = null;
 //        PreparedStatement pStmnt = null;
@@ -140,7 +138,6 @@ public class RestaurantDB extends DB {
 //        }
 //        return msg;
 //    }
-
     public boolean findExistID(String username) {
         Connection cnnct = null;
         PreparedStatement pStmnt = null;
@@ -199,7 +196,6 @@ public class RestaurantDB extends DB {
 //        }
 //        return isFound;
 //    }
-
     public ArrayList queryRest() {
         Connection cnnct = null;
         PreparedStatement pStmnt = null;
@@ -330,7 +326,7 @@ public class RestaurantDB extends DB {
         }
         return rb;
     }
-    
+
     public boolean updateView(String restname) {
         Connection cnnct = null;
         PreparedStatement pStmnt = null;
@@ -362,7 +358,7 @@ public class RestaurantDB extends DB {
         }
         return isSuccess;
     }
-    
+
     public int getView(String restname) {
         Connection cnnct = null;
         PreparedStatement pStmnt = null;
@@ -391,11 +387,49 @@ public class RestaurantDB extends DB {
         }
         return view;
     }
-    
-    
-    public ArrayList<RestaurantBean> queryByUsername(){
+
+    public ArrayList<RestaurantBean> queryByUsername(String username) {
         ArrayList<RestaurantBean> rests = new ArrayList<RestaurantBean>();
+        Connection cnnct = null;
+        PreparedStatement pStmnt = null;
         
+        RestaurantBean rb = null;
+        try {
+            cnnct = getConnection();
+            String preQueryStatement = "SELECT * FROM RESTAURANT WHERE username=?";
+            ResultSet re = null;
+            pStmnt = cnnct.prepareStatement(preQueryStatement);
+            pStmnt.setString(1, username);
+            re = pStmnt.executeQuery();
+            while (re.next()) {
+                rb = new RestaurantBean();
+                rb.setRestID(re.getString(1));
+                rb.setRestName(re.getString(2));
+                rb.setRestTypeID(re.getString(3));
+                rb.setRestTel(re.getString(4));
+                rb.setRestEmail(re.getString(5));
+                rb.setDistrict(re.getString(6));
+                rb.setAddress(re.getString(7));
+                rb.setOwnerID(re.getString(8));
+                rb.setStatus(re.getString(9));
+                rb.setRest_pic(re.getString(10));
+                rb.setRest_desc(re.getString(11));
+                rb.setOpen_hrs(re.getString(12));
+                rb.setNum_view(re.getString(13));
+                rests.add(rb);
+            }
+            pStmnt.close();
+            cnnct.close();
+        } catch (SQLException ex) {
+            while (ex != null) {
+                ex.printStackTrace();
+                ex = ex.getNextException();
+            }
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        } catch (ClassNotFoundException ex) {
+            ex.printStackTrace();
+        }
         return rests;
     }
 
