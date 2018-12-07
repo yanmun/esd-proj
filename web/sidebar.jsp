@@ -17,7 +17,7 @@
             UserInfo ub = (UserInfo) session.getAttribute("userInfo");
             if (ub != null) {
 //                out.println("  <li><a href='welcome.jsp'>" + ub.getType() + "</a></li>   ");
-                if (ub.getType().equals("Normal User ")) {
+                if (ub.getType().equals("Normal User")) {
                     
                     out.println("<li><a href='welcome.jsp'>Favorite Restaurant and Menu</a></li>");
                 }

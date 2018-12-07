@@ -391,5 +391,12 @@ public class RestaurantDB extends DB {
         }
         return view;
     }
+    
+    
+    public ArrayList<RestaurantBean> queryByUsername(){
+        ArrayList<RestaurantBean> rests = new ArrayList<RestaurantBean>();
+        
+        return rests;
+    }
 
 }
