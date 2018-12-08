@@ -54,10 +54,10 @@
                                            
                                         } 
                                         
-                                        out.println("<td><img src='" + rests.get(i).getRest_pic() + "' >"
+                                        out.println("<td style='width:200px;'><img src='" + rests.get(i).getRest_pic() + "' width='200' height='200'>"
                                                     + "<p> <strong>" + rests.get(i).getRestName() + "</strong></p>"
                                                     + " <p>" + rests.get(i).getAddress() + "</p>"
-                                                    + "<p>" + rests.get(i).getRestTel() + "</p>"
+                                                    + "<p> Tel:" + rests.get(i).getRestTel() + "</p>"
                                                     + "<p>"+rests.get(i).getOpen_hrs()+"</p>"
                                                     + "<p>"+rests.get(i).getStatus()+"</p></td>");
                                     }
