@@ -17,6 +17,7 @@
 
     if (session.getAttribute("userInfo") != null) {
         ub = (UserInfo) session.getAttribute("userInfo");
+       
         RestaurantDB db = new RestaurantDB();
         rests = db.queryByUsername(ub.getUsername());
     }
