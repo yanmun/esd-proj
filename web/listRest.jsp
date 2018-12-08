@@ -33,7 +33,7 @@
                         RestaurantBean r = restaurants.get(i);
                         out.println("<tr>");
                         out.println("<td width='500'>");
-                        out.println("<p><a href=\"showRestaurant?action=show&restName=" + r.getRestName() + "\">" + r.getRestName() + "</a></p>");
+                        out.println("<p><a href=\"showRestaurant?action=show&restName=" + r.getRestName() + "&restID=" + r.getRestID() +"\">" + r.getRestName() + "</a></p>");
                         out.println("</td>");
                         out.println("<td rowspan='4' width='500'><img src='" + r.getRest_pic() + "' height='100' width='150'>");
                         out.println("</td>");

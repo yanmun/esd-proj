@@ -4,6 +4,7 @@
     Author     : Tung
 --%>
 
+<%@page import="java.text.SimpleDateFormat"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="ict.bean.*, java.util.*, ict.db.*" %>
 <!DOCTYPE html>
@@ -15,8 +16,7 @@
             <jsp:include page="css/style.css" />
         </style>
     </head>
-    <body> 
-        <jsp:useBean id="userInfo" class="ict.bean.UserInfo" scope="session"/>
+    <body>         
         <div class="container">
             <jsp:include page="header.jsp" />
             <jsp:include page="sidebar.jsp" />
@@ -50,6 +50,8 @@
                     out.println("<td></td>");
                     out.println("</tr>");
 
+                    String restID = r.getRestID();
+                    
                     String id = r.getRestTypeID();
                     RestaurantTypeDB db = new RestaurantTypeDB();
                     String restType = db.getType(id);
@@ -60,6 +62,49 @@
                     out.println("<td></td>");
                     out.println("</tr>");
 
+                    out.println("<tr>");
+                    out.println("<td>");
+                    out.println("<hr>");
+                    out.println("</td>");
+                    out.println("<td></td>");
+                    out.println("</tr>");
+
+                    ArrayList<CommentBean> comments = (ArrayList<CommentBean>) request.getAttribute("comments");
+                    out.println("<tr>");
+                    out.println("<td>");
+                    out.println("<p>All Comment: </p>");
+                    out.println("</td>");
+                    out.println("<td></td>");
+                    out.println("</tr>");
+                    out.println("<table>");
+                    for (int i = 0; i < comments.size(); i++) {
+                        CommentBean c = comments.get(i);
+                        out.println("<tr>");
+                        out.println("<td>");
+                        out.println("<p>User: " + c.getUsername() + "</p>");
+                        out.println("</td>");
+                        out.println("<td>");
+                        out.println("<p>Date: " + c.getComment_date() + "</p>");
+                        out.println("</td>");
+                        out.println("<td>");
+                        out.println("<p>Time: " + c.getComment_time() + "</p>");
+                        out.println("</td>");
+                        out.println("</tr>");
+                        out.println("<tr>");
+                        out.println("<td>");
+                        out.println("<p>Comment: " + c.getComment() + "</p>");
+                        out.println("</td>");
+                        out.println("</tr>");
+                        out.println("<tr>");
+                        out.println("<td colspan='3'>");
+                        out.println("<hr>");
+                        out.println("</td>");
+                        out.println("<td></td>");
+                        out.println("</tr>");
+                    }
+                %>
+                <jsp:useBean id="userInfo" class="ict.bean.UserInfo" scope="session"/>
+                <%
                     String user = userInfo.getUsername();
                     String Restowner = r.getOwnerID();
                     if (Restowner.equals(user)) {
@@ -85,25 +130,22 @@
                         out.println("</tr>");
                     }
 
-                    out.println("<tr>");
-                    out.println("<td>");
-                    out.println("<hr>");
-                    out.println("</td>");
-                    out.println("<td></td>");
-                    out.println("</tr>");
-                    
-                    out.println("<tr>");
-                    out.println("<td>");
-                    out.println("<p><a href='showRestaurant?action=showComment&restID=" + r.getRestID() + "'>Show All Comments</a></p>");
-                    out.println("</td>");
-                    out.println("<td></td>");
-                    out.println("</tr>");
-
                     if ("Normal User".equals(type)) {
                         out.println("<tr>");
                         out.println("<td>");
-                        out.println("<p>Comment: <textarea rows='4' cols='50'></textarea></p>");
-                        out.println("<p><input type='button' value='submit' onclick='welcome.jsp'></p>");
+                        out.println("<form method='post' action='showRestaurant?action=add'>");
+                        out.println("<input type='hidden' name='restID' value='" + restID + "'>");
+                        out.println("<input type='hidden' name='username' value='" + userInfo.getUsername() + "'>");
+                        Date date = new Date();
+                        SimpleDateFormat dateF = new SimpleDateFormat("yyyy-MM-dd ");
+                        SimpleDateFormat timeF = new SimpleDateFormat("k:mm:ss");
+                        out.print("<h2 align=\"center\">" + dateF.format(date) + "</h2>");
+                        out.print("<h2 align=\"center\">" + timeF.format(date) + "</h2>");
+                        out.println("<input type='hidden' name='comment_date' value='" + dateF.format(date) + "'>");
+                        out.println("<input type='hidden' name='comment_time' value='" + timeF.format(date) + "'>");
+                        out.println("<p>Comment:</p>");
+                        out.println("<p><textarea name='comment' rows='4' cols='50'></textarea></p>");
+                        out.println("<p><input type='submit' value='submit'></p>");
                         out.println("</td>");
                         out.println("<td></td>");
                         out.println("</tr>");
@@ -115,6 +157,7 @@
                         out.println("</tr>");
                     }
 
+                    out.println("</table>");
                     out.println("</table>");
                 %>
             </div>
