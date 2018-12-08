@@ -25,6 +25,17 @@
         <style type="text/css">
             <jsp:include page="css/style.css" />
         </style>
+         <link rel="stylesheet" href="./css/element_style.css">
+        <script src="./jslib/jquery-3.3.1.js">
+
+        </script>
+        <script>
+            
+    var temp = '<%=r.getDistrict()%>';
+            $(document).ready(function(){
+                $("select[name=district] select").val(temp);
+            })
+        </script>
         <title>Edit Restaurant Info</title>
     </head>
     <body>
