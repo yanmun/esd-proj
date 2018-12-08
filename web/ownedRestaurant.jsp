@@ -17,7 +17,7 @@
 
     if (session.getAttribute("userInfo") != null) {
         ub = (UserInfo) session.getAttribute("userInfo");
-       
+
         RestaurantDB db = new RestaurantDB();
         rests = db.queryByUsername(ub.getUsername());
     }
@@ -46,45 +46,46 @@
                     <table border="1">
                         <tr>
 
-                            <%                            
+                            <%                                
                                 if (rests != null) {
                                     for (int i = 0; i < rests.size(); i++) {
                                         if (count % 3 == 0) {
                                             out.println(" </tr><tr>");
-                                           
-                                        } 
-                                        
+
+                                        }
+
                                         out.println("<td style='width:200px;'><img src='" + rests.get(i).getRest_pic() + "' width='200' height='200'>"
-                                                    + "<p> <strong>" + rests.get(i).getRestName() + "</strong></p>"
-                                                    + " <p>" + rests.get(i).getAddress() + "</p>"
-                                                    + "<p> Tel:" + rests.get(i).getRestTel() + "</p>"
-                                                    + "<p>"+rests.get(i).getOpen_hrs()+"</p>"
-                                                    + "<p>"+rests.get(i).getStatus()+"</p></td>");
+                                                + "<p> <strong>" + rests.get(i).getRestName() + "</strong></p>"
+                                                + " <p>" + rests.get(i).getAddress() + "</p>"
+                                                + "<p> Tel:" + rests.get(i).getRestTel() + "</p>"
+                                                + "<p>" + rests.get(i).getOpen_hrs() + "</p>"
+                                                + "<p>" + rests.get(i).getStatus() + "</p>"
+                                                + "<p> <a href=''>Edit</a></p></td>");
                                     }
                                 }
 
                             %>
-                       
-                
+
+
                     </table>
                 </div>
-
+                         
             </div>
             <jsp:include page="footer.jsp" />
         </div>
-
-                 <!--                        <th>Restaurant ID</th>
-                                                    <th>Restaurant Name</th>
-                                                    <th>Telephone Number</th>
-                                                    <th>Email</th>
-                                                    <th>District</th>
-                                                    <th>Address</th>
-                                                    <th>Description</th>
-                                                    <th>Restaurant Photo</th>
-                                                    <th>Status</th>
-                                                    <th>Open Hour</th>
-                                                    <th></th>
-                                                    <th></th>
-                                                    <th></th>-->
+       
+        <!--                        <th>Restaurant ID</th>
+                                           <th>Restaurant Name</th>
+                                           <th>Telephone Number</th>
+                                           <th>Email</th>
+                                           <th>District</th>
+                                           <th>Address</th>
+                                           <th>Description</th>
+                                           <th>Restaurant Photo</th>
+                                           <th>Status</th>
+                                           <th>Open Hour</th>
+                                           <th></th>
+                                           <th></th>
+                                           <th></th>-->
     </body>
 </html>
