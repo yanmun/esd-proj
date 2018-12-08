@@ -60,7 +60,7 @@
                                                 + "<p> Tel:" + rests.get(i).getRestTel() + "</p>"
                                                 + "<p>" + rests.get(i).getOpen_hrs() + "</p>"
                                                 + "<p>" + rests.get(i).getStatus() + "</p>"
-                                                + "<p> <a href=''>Edit</a></p></td>");
+                                                + "<p> <a href='EditRestaurantController?id="+rests.get(i).getRestID()+"'>Edit</a></p></td>");
                                     }
                                 }
 
