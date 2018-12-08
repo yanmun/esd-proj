@@ -33,7 +33,8 @@
             
     var temp = '<%=r.getDistrict()%>';
             $(document).ready(function(){
-                $("select[name=district] select").val(temp);
+               
+                $("#district option[value='"+temp+"']").attr('selected','selected');
             })
         </script>
         <title>Edit Restaurant Info</title>
@@ -48,7 +49,7 @@
                     <p>Telephone Number: <input type="text" name="tel" value="<%=r.getRestTel()%>"></p>
                     <p>Email: <input type="email" name="tel" value="<%=r.getRestEmail()%>"></p>
                     <p>District:    
-                        <select name='district' style='width:100%;'>
+                        <select name='district' style='' id="district">
                             <optgroup label='Hong Kong Island'>
                                 <option value='Central and Western'>Central and Western</option>
                                 <option value='Wan Chai'>Wan Chai</option>
@@ -71,6 +72,9 @@
                                 <option value='Sai Kung'>Sai Kung</option>
                                 <option value='Islands'>Islands</option>
                         </select></p>
+                        
+                        <p>Address: <textarea name=""  cols="30" rows="10"></textarea></p>
+                        
                 </form>
                 <!--                        <th>Restaurant ID</th>
                                                       <th>Restaurant Name</th>
