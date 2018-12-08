@@ -38,9 +38,27 @@
                     <p>Email: <input type="email" name="tel" value="<%=r.getRestEmail()%>"></p>
                     <p>District:    
                         <select name='district' style='width:100%;'>
-                            <option value='Hong Kong Island'>Hong Kong Island</option>
-                            <option value='Kowloon'>Kowloon </option>
-                            <option value='New Territories'>New Territories</option>
+                            <optgroup label='Hong Kong Island'>
+                                <option value='Central and Western'>Central and Western</option>
+                                <option value='Wan Chai'>Wan Chai</option>
+                                <option value='Eastern'>Eastern </option>
+                                <option value='Southern'>Southern</option>
+                            <optgroup label='Kowloon'>
+                                <option value='Yau Tsim Mong'>Yau Tsim Mong </option>
+                                <option value='Sham Shui Po'>Sham Shui Po</option>
+                                <option value='Kowloon City'>Kowloon City</option>
+                                <option value='Wong Tai Sin'>Wong Tai Sin</option>
+                                <option value='Kwun Tong'>Kwun Tong</option>
+                            <optgroup label='New Territories'>
+                                <option value='Kwai Tsing'>Kwai Tsing</option>
+                                <option value='Tsuen Wan'>Tsuen Wan</option>
+                                <option value='Tuen Mun'>Tuen Mun</option>
+                                <option value='Yuen Long'>Yuen Long</option>
+                                <option value='North'>North</option>
+                                <option value='Tai Po'>Tai Po</option>
+                                <option value='Sha Tin'>Sha Tin</option>
+                                <option value='Sai Kung'>Sai Kung</option>
+                                <option value='Islands'>Islands</option>
                         </select></p>
                 </form>
                 <!--                        <th>Restaurant ID</th>
