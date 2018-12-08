@@ -6,8 +6,8 @@
 package ict.servlet;
 
 import ict.bean.RestaurantBean;
-import ict.bean.UserBean;
-import ict.db.AccountDB;
+import ict.bean.CommentBean;
+import ict.db.CommentDB;
 import ict.db.RestaurantDB;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -26,6 +26,7 @@ import javax.servlet.http.HttpServletResponse;
 public class ShowRestaurant extends HttpServlet {
 
     private RestaurantDB db;
+    private CommentDB cdb;
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         processRequest(request, response);
@@ -63,6 +64,14 @@ public class ShowRestaurant extends HttpServlet {
                 rd = getServletContext().getRequestDispatcher("/listRest.jsp");
                 rd.forward(request, response);
             }
+        } else if ("showComment".equalsIgnoreCase(action)) {            // call the query db to get retrieve for all customer  
+            String restID = request.getParameter("restID");
+            cdb = new CommentDB();
+            ArrayList<CommentBean> comments = cdb.queryComment(restID); // set the result into the attribute
+            request.setAttribute("comments", comments); // redirect the result to the listCustomers.jsp
+            RequestDispatcher rd;
+            rd = getServletContext().getRequestDispatcher("/showComment.jsp");
+            rd.forward(request, response);
         }
     }
 }
