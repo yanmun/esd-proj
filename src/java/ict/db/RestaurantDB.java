@@ -396,7 +396,7 @@ public class RestaurantDB extends DB {
         RestaurantBean rb = null;
         try {
             cnnct = getConnection();
-            String preQueryStatement = "SELECT * FROM RESTAURANT WHERE username=?";
+            String preQueryStatement = "SELECT * FROM RESTAURANT WHERE ownerID=?";
             ResultSet re = null;
             pStmnt = cnnct.prepareStatement(preQueryStatement);
             pStmnt.setString(1, username);
