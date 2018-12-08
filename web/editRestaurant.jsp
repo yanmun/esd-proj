@@ -31,10 +31,12 @@
         </script>
         <script>
             
-    var temp = '<%=r.getDistrict()%>';
+            var temp = '<%=r.getDistrict()%>';
+            var status = '<%=r.getStatus()  %>';
             $(document).ready(function(){
                
                 $("#district option[value='"+temp+"']").attr('selected','selected');
+                $("#status option[value='"+status+"']").attr('selected','selected');
             })
         </script>
         <title>Edit Restaurant Info</title>
@@ -73,7 +75,18 @@
                                 <option value='Islands'>Islands</option>
                         </select></p>
                         
-                        <p>Address: <textarea name=""  cols="30" rows="10"></textarea></p>
+                        <p>Address:
+                           <input type="email" name="address" value="<%=r.getAddress()%>" style="width: 100%;"></p>
+                        <p>Description: <br><textarea name="r_desc" cols="30" rows="10" ><%=r.getRest_desc()  %></textarea></p>
+                        <p>Status: 
+                            <select name="status" id="status">
+                                <option value="open">Open</option>
+                                <option value="defunct">defunct</option>
+                            </select>
+                        </p>
+                        <p>Open Hour: <input type='time'  name='open_time'
+                           min='00:00' max='23:59' required/> to <input type='time' id='appt' name='close_time'
+                                min='00:00' max='23:59' required/></p>
                         
                 </form>
                 <!--                        <th>Restaurant ID</th>
