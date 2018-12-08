@@ -4,6 +4,8 @@
     Author     : pearh
 --%>
 
+<%@page import="ict.bean.RestaurantBean"%>
+<%@page import="ict.db.RestaurantDB"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -21,7 +23,9 @@
             <div class="content">                
                 <%
                     if(request.getParameter("id")!=null){
-                        
+                         RestaurantDB db = new RestaurantDB();
+                         
+                         RestaurantBean r = db.queryRestByRestID(request.getParameter("id"));
                     }
                 %>
            

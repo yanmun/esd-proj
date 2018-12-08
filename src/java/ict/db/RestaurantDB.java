@@ -432,5 +432,50 @@ public class RestaurantDB extends DB {
         }
         return rests;
     }
+    
+     public RestaurantBean queryRestByRestID(String restid) {
+        Connection cnnct = null;
+        PreparedStatement pStmnt = null;
+
+        RestaurantBean rb = null;
+        try {
+            cnnct = getConnection();
+            
+            String preQueryStatement = "SELECT * FROM restaurant WHERE restID=?";
+            ResultSet re = null;
+            pStmnt = cnnct.prepareStatement(preQueryStatement);
+            pStmnt.setString(1, restid);
+            re = pStmnt.executeQuery();
+            if (re.next()) {
+                rb = new RestaurantBean();
+                rb.setRestID(re.getString(1));
+                rb.setRestName(re.getString(2));
+                rb.setRestTypeID(re.getString(3));
+                rb.setRestTel(re.getString(4));
+                rb.setRestEmail(re.getString(5));
+                rb.setDistrict(re.getString(6));
+                rb.setAddress(re.getString(7));
+                rb.setOwnerID(re.getString(8));
+                rb.setStatus(re.getString(9));
+                rb.setRest_pic(re.getString(10));
+                rb.setRest_desc(re.getString(11));
+                rb.setOpen_hrs(re.getString(12));
+                rb.setNum_view(re.getString(13));
+            }
+            pStmnt.close();
+            cnnct.close();
+        } catch (SQLException ex) {
+            while (ex != null) {
+                ex.printStackTrace();
+                ex = ex.getNextException();
+            }
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        } catch (ClassNotFoundException ex) {
+            ex.printStackTrace();
+        }
+        return rb;
+    }
+    
 
 }
