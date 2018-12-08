@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主機: 127.0.0.1
--- 產生時間： 2018 年 12 月 08 日 18:59
+-- 產生時間： 2018 年 12 月 08 日 23:43
 -- 伺服器版本: 10.1.30-MariaDB
 -- PHP 版本： 7.2.2
 
@@ -128,7 +128,10 @@ CREATE TABLE `restaurant` (
   `status` varchar(10) NOT NULL,
   `rest_pic` varchar(70) NOT NULL,
   `rest_desc` varchar(100) NOT NULL,
-  `open_hrs` varchar(50) NOT NULL,
+  `start_hour` char(5) NOT NULL,
+  `end_hour` char(5) NOT NULL,
+  `start_day` varchar(15) NOT NULL,
+  `end_day` varchar(15) NOT NULL,
   `num_view` int(8) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -136,11 +139,11 @@ CREATE TABLE `restaurant` (
 -- 資料表的匯出資料 `restaurant`
 --
 
-INSERT INTO `restaurant` (`restID`, `restName`, `restTypeID`, `restTel`, `restEmail`, `district`, `address`, `ownerID`, `status`, `rest_pic`, `rest_desc`, `open_hrs`, `num_view`) VALUES
-('000001', 'HO LEE SIT', '4003', '12345454', '123@123', 'sdas', 'dsadsadsadsd', 'hll', 'open', 'image\\Restaurant\\samgor.jpg', 'sam gor is very good', '1100-2200', 83),
-('181415', 'samgor', '4001', '34455566', 'g@gmail.com', 'Hong Kong Island', 'ewewef', 'samgor', 'open', './image/Restaurant/22.jpg', 'rw', '23:23 - 04:03 (Sunday to Sunday)', 0),
-('713530', 'mcdonald', '4001', '34455566', 'g@gmail.com', 'Hong Kong Island', '323232', '4343', 'open', './image/Restaurant/1642694-200.png', '3232', '23:32 - 23:34 (Sunday to Sunday)', 1),
-('918541', 'Le Viet', '4002', '34455566', 'g@gmail.com', 'Kowloon', 'Shop 101-106, 108-109, 2/F, Bank Centre, 636 Nathan Road', 'hll', 'open', './image/Restaurant/leviet.jpg', 's', '08:00 - 23:00 (Sunday to Saturday)', 0);
+INSERT INTO `restaurant` (`restID`, `restName`, `restTypeID`, `restTel`, `restEmail`, `district`, `address`, `ownerID`, `status`, `rest_pic`, `rest_desc`, `start_hour`, `end_hour`, `start_day`, `end_day`, `num_view`) VALUES
+('000001', 'HO LEE SIT', '4003', '12345454', '123@123', 'Eastern', 'dsadsadsadsd', 'hll', 'open', 'image\\Restaurant\\samgor.jpg', 'sam gor is very good', '', '', '', '', 83),
+('181415', 'samgor', '4001', '34455566', 'g@gmail.com', 'Wan Chai', 'ewewef', 'samgor', 'open', './image/Restaurant/22.jpg', 'rw', '', '', '', '', 0),
+('713530', 'mcdonald', '4001', '34455566', 'g@gmail.com', 'Southern', '323232', '4343', 'open', './image/Restaurant/1642694-200.png', '3232', '', '', '', '', 1),
+('918541', 'Le Viet', '4002', '34455566', 'g@gmail.com', 'Yau Tsim Mong', 'Shop 101-106, 108-109, 2/F, Bank Centre, 636 Nathan Road', 'hll', 'open', './image/Restaurant/leviet.jpg', 's', '', '', '', '', 0);
 
 -- --------------------------------------------------------
 
