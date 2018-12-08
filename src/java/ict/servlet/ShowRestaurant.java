@@ -10,6 +10,7 @@ import ict.bean.CommentBean;
 import ict.db.CommentDB;
 import ict.db.RestaurantDB;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -47,10 +48,15 @@ public class ShowRestaurant extends HttpServlet {
             rd.forward(request, response);
         } else if ("show".equalsIgnoreCase(action)) {
             String restName = request.getParameter("restName");
+            String restID = request.getParameter("restID");
             if (restName != null) {
                 db = new RestaurantDB();
                 RestaurantBean restaurant = db.queryRestByID(restName);
                 request.setAttribute("restaurant", restaurant);
+                cdb = new CommentDB();
+                ArrayList<CommentBean> comments = cdb.queryComment(restID); // set the result into the attribute
+                request.setAttribute("comments", comments); // redirect the result to the listCustomers.jsp
+                
                 RequestDispatcher rd;
                 rd = getServletContext().getRequestDispatcher("/showRestDetail.jsp");
                 rd.forward(request, response);
@@ -60,18 +66,25 @@ public class ShowRestaurant extends HttpServlet {
             if (restName != null) {
                 ArrayList<RestaurantBean> restaurants = db.queryRestByName(restName);
                 request.setAttribute("restaurants", restaurants); // redirect the result to the listCustomers.jsp
+
                 RequestDispatcher rd;
                 rd = getServletContext().getRequestDispatcher("/listRest.jsp");
                 rd.forward(request, response);
             }
-        } else if ("showComment".equalsIgnoreCase(action)) {            // call the query db to get retrieve for all customer  
+        } else if ("addComment".equalsIgnoreCase(action)) {
             String restID = request.getParameter("restID");
-            cdb = new CommentDB();
-            ArrayList<CommentBean> comments = cdb.queryComment(restID); // set the result into the attribute
-            request.setAttribute("comments", comments); // redirect the result to the listCustomers.jsp
-            RequestDispatcher rd;
-            rd = getServletContext().getRequestDispatcher("/showComment.jsp");
-            rd.forward(request, response);
+            String username = request.getParameter("username");
+            String restName = request.getParameter("restName");
+            String comment = request.getParameter("comment");
+            String comment_date = request.getParameter("comment_date");
+            String comment_time = request.getParameter("comment_time");
+            if (comment != null) {
+                cdb = new CommentDB(restID, username, comment, comment_date, comment_time);
+                cdb.addRecord();
+//                response.sendRedirect("showRestaurant?action=show&restName=" + username + "&restID=" + restID);
+                response.sendRedirect("showRestaurant?action=show&restName=" + restName + "&restID=" + restID);
+//                response.sendRedirect("welcome.jsp");
+            }
         }
     }
 }

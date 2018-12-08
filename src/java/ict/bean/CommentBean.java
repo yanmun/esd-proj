@@ -15,6 +15,7 @@ public class CommentBean {
     private String comment;
     private String comment_date;
     private String comment_time;
+    private String msg;
 
     public CommentBean() {
     }
@@ -57,6 +58,19 @@ public class CommentBean {
 
     public void setComment_time(String comment_time) {
         this.comment_time = comment_time;
+    }
+
+    public String getMsg() {
+        return msg;
+    }
+
+    public void setMsg() {
+        this.msg = "NO COMMENT";
+    }
+
+    @Override
+    public String toString() {
+        return "CommentBean{" + "restID=" + restID + ", username=" + username + ", comment=" + comment + ", comment_date=" + comment_date + ", comment_time=" + comment_time + '}';
     }
     
     

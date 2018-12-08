@@ -18,6 +18,7 @@ import java.util.ArrayList;
  * @author Tung
  */
 public class CommentDB extends DB {
+
     private String restID;
     private String username;
     private String comment;
@@ -26,7 +27,6 @@ public class CommentDB extends DB {
 
     public CommentDB() {
     }
-    
 
     public CommentDB(String restID, String username, String comment, String comment_date, String comment_time) {
         this.restID = restID;
@@ -35,14 +35,14 @@ public class CommentDB extends DB {
         this.comment_date = comment_date;
         this.comment_time = comment_time;
     }
-    
+
     public boolean addRecord() {
         Connection cnnct = null;
         PreparedStatement pStmnt = null;
         boolean isSuccess = false;
         try {
             cnnct = getConnection();
-            String preQueryStatement = "INSERT INTO account VALUES (?,?,?,?,?,?)";
+            String preQueryStatement = "INSERT INTO fav_rest VALUES (?,?,?,?,?,?)";
             pStmnt = cnnct.prepareStatement(preQueryStatement);
             pStmnt.setString(1, restID);
             pStmnt.setString(2, username);
@@ -73,23 +73,30 @@ public class CommentDB extends DB {
         Connection cnnct = null;
         PreparedStatement pStmnt = null;
         ArrayList<CommentBean> comments = new ArrayList();
-        CommentBean cb= null;
+        CommentBean cb = null;
         try {
             cnnct = getConnection();
-            String preQueryStatement = "SELECT * FROM FAV_REST WHERE RESTID=?";
+            String preQueryStatement = "SELECT * FROM FAV_REST WHERE RESTID=? ORDER BY comment_date, comment_time DESC";
             ResultSet re = null;
             pStmnt = cnnct.prepareStatement(preQueryStatement);
             pStmnt.setString(1, restID);
             re = pStmnt.executeQuery();
-            while (re.next()) {
+            if (re != null) {
+                while (re.next()) {
+                    cb = new CommentBean();
+                    cb.setRestID(re.getString(1));
+                    cb.setUsername(re.getString(2));
+                    cb.setComment(re.getString(4));
+                    cb.setComment_date(re.getString(5));
+                    cb.setComment_time(re.getString(6));
+                    comments.add(cb);
+                }
+            } else {
                 cb = new CommentBean();
-                cb.setRestID(re.getString(1));
-                cb.setUsername(re.getString(2));
-                cb.setComment(re.getString(4));
-                cb.setComment_date(re.getString(5));
-                cb.setComment_time(re.getString(6));
+                cb.setMsg();
                 comments.add(cb);
             }
+
             pStmnt.close();
             cnnct.close();
         } catch (SQLException ex) {
@@ -104,5 +111,5 @@ public class CommentDB extends DB {
         }
         return comments;
     }
-    
+
 }

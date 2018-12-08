@@ -26,6 +26,10 @@
                     out.println("<li><a href='ownedRestaurant.jsp'>Owned Restaurants</a></li>");
                     out.println("<li><a href='restRegister.jsp'>Restaurant Registration</a></li>");
                 }
+                
+                if (ub.getType().equals("System Administrator")) {
+                    out.println("<li><a href='handleEdit?action=list'>All User</a></li>");
+                }
 
                 out.println("  <li><a href='welcome.jsp'>User Profile</a></li>   ");
             }
@@ -37,7 +41,6 @@
         %>
 <!--        <li><a href='ownedRestaurant.jsp'>Owned Restaurants</a></li>-->
         <li><a href="uploadMenu.jsp">upload menu</a></li>
-        <li><a href="handleEdit?action=list">All User</a></li>
 
 
         <%  if (session.getAttribute("userInfo") != null) {
