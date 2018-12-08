@@ -23,6 +23,11 @@ public class RestaurantBean {
     private String rest_desc;
     private String open_hrs;
     private String num_view;
+    private String num_like;
+    
+    public RestaurantBean() {
+        
+    }
 
     public String getRestID() {
         return restID;
@@ -127,8 +132,12 @@ public class RestaurantBean {
     public void setNum_view(String num_view) {
         this.num_view = num_view;
     }
-    
-    public RestaurantBean() {
-        
+
+    public String getNum_like() {
+        return num_like;
+    }
+
+    public void setNum_like(String num_like) {
+        this.num_like = num_like;
     }
 }

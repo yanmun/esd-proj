@@ -85,6 +85,14 @@ public class ShowRestaurant extends HttpServlet {
                 response.sendRedirect("showRestaurant?action=show&restName=" + restName + "&restID=" + restID);
 //                response.sendRedirect("welcome.jsp");
             }
+        } else if ("addLike".equalsIgnoreCase(action)) {
+            String restID = request.getParameter("restID");
+            String restName = request.getParameter("restName");
+            if (restID != null) {
+                db = new RestaurantDB();
+                db.updateLike(restName);
+                response.sendRedirect("showRestaurant?action=show&restName=" + restName + "&restID=" + restID);
+            }
         }
     }
 }

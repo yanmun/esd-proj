@@ -439,8 +439,7 @@ public class RestaurantDB extends DB {
 
         RestaurantBean rb = null;
         try {
-            cnnct = getConnection();
-            
+            cnnct = getConnection();            
             String preQueryStatement = "SELECT * FROM restaurant WHERE restID=?";
             ResultSet re = null;
             pStmnt = cnnct.prepareStatement(preQueryStatement);
@@ -476,6 +475,66 @@ public class RestaurantDB extends DB {
         }
         return rb;
     }
+     
+     public boolean updateLike(String restname) {
+        Connection cnnct = null;
+        PreparedStatement pStmnt = null;
+        int like;
+        boolean isSuccess = false;
+        try {
+            cnnct = getConnection();
+            RestaurantDB db = new RestaurantDB();
+            like = db.getLike(restname);
+            String preQueryStatement = "UPDATE RESTAURANT SET num_like=?  WHERE restname=?";
+            pStmnt = cnnct.prepareStatement(preQueryStatement);
+            pStmnt.setString(1, Integer.toString(like + 1));
+            pStmnt.setString(2, restname);
+            int rowCount = pStmnt.executeUpdate();
+            if (rowCount >= 1) {
+                isSuccess = true;
+            }
+            pStmnt.close();
+            cnnct.close();
+        } catch (SQLException ex) {
+            while (ex != null) {
+                ex.printStackTrace();
+                ex = ex.getNextException();
+            }
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        } catch (ClassNotFoundException ex) {
+            ex.printStackTrace();
+        }
+        return isSuccess;
+    }
     
+     public int getLike(String restname) {
+        Connection cnnct = null;
+        PreparedStatement pStmnt = null;
+        int like = 0;
+        try {
+            cnnct = getConnection();
+            String preQueryStatement = "SELECT num_like FROM restaurant WHERE restname=?";
+            ResultSet re = null;
+            pStmnt = cnnct.prepareStatement(preQueryStatement);
+            pStmnt.setString(1, restname);
+            re = pStmnt.executeQuery();
+            while (re.next()) {
+                like = Integer.parseInt(re.getString(1));
+            }
+            pStmnt.close();
+            cnnct.close();
+        } catch (SQLException ex) {
+            while (ex != null) {
+                ex.printStackTrace();
+                ex = ex.getNextException();
+            }
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        } catch (ClassNotFoundException ex) {
+            ex.printStackTrace();
+        }
+        return like;
+    }
 
 }

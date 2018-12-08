@@ -28,14 +28,18 @@
                     out.println("<td width='500'>");
                     out.println("<h1>" + r.getRestName() + "</h1>");
                     out.println("</td>");
-                    out.println("<td rowspan='4' width='500'><img src='" + r.getRest_pic() + "' >");
+                    RestaurantDB restDB = new RestaurantDB();
+                    int like = restDB.getLike(r.getRestName());
+                    out.println("<td>");
+                    out.println("<p>Like : " + like + "</p>");
                     out.println("</td>");
                     out.println("</tr>");
                     out.println("<tr>");
                     out.println("<td>");
                     out.println("<p>Description: " + r.getRest_desc() + "</p>");
                     out.println("</td>");
-                    out.println("<td></td>");
+                    out.println("<td rowspan='4' width='500'><img src='" + r.getRest_pic() + "' >");
+                    out.println("</td>");
                     out.println("</tr>");
                     out.println("<tr>");
                     out.println("<td>");
@@ -59,7 +63,7 @@
                     out.println("</td>");
                     out.println("<td></td>");
                     out.println("</tr>");
-                    
+
                     out.println("<tr>");
                     out.println("<td>");
                     out.println("<p><a href=''>All Menu</a></p>");
@@ -113,7 +117,7 @@
                     String user = userInfo.getUsername();
                     String Restowner = r.getOwnerID();
                     if (Restowner.equals(user)) {
-                        RestaurantDB restDB = new RestaurantDB();
+                        restDB = new RestaurantDB();
                         int view = restDB.getView(r.getRestName());
                         out.println("<tr>");
                         out.println("<td>");
@@ -125,7 +129,7 @@
 
                     String type = userInfo.getType();
                     if ("System Administrator".equals(type)) {
-                        RestaurantDB restDB = new RestaurantDB();
+                        restDB = new RestaurantDB();
                         int view = restDB.getView(r.getRestName());
                         out.println("<tr>");
                         out.println("<td>");
@@ -158,7 +162,7 @@
                         out.println("</tr>");
                         out.println("<tr>");
                         out.println("<td>");
-                        out.println("<p><a href=''>Add to favorite</p>");
+                        out.println("<p><a href='showRestaurant?action=addLike&restName=" + restName + "&restID=" + restID + "'>Like</a> <a href=''>Add to favorite</a></p>");
                         out.println("</td>");
                         out.println("<td></td>");
                         out.println("</tr>");
