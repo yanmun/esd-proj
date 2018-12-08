@@ -74,18 +74,6 @@
             <jsp:include page="footer.jsp" />
         </div>
        
-        <!--                        <th>Restaurant ID</th>
-                                           <th>Restaurant Name</th>
-                                           <th>Telephone Number</th>
-                                           <th>Email</th>
-                                           <th>District</th>
-                                           <th>Address</th>
-                                           <th>Description</th>
-                                           <th>Restaurant Photo</th>
-                                           <th>Status</th>
-                                           <th>Open Hour</th>
-                                           <th></th>
-                                           <th></th>
-                                           <th></th>-->
+   
     </body>
 </html>
