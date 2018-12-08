@@ -23,7 +23,7 @@
                 }
 
                 if (ub.getType().equals("Restaurant Owner")) {
-                    out.println("<li><a href='restRegister.jsp'>Owned Restaurants</a></li>");
+                    out.println("<li><a href='ownedRestaurant.jsp'>Owned Restaurants</a></li>");
                     out.println("<li><a href='restRegister.jsp'>Restaurant Registration</a></li>");
                 }
 
@@ -35,7 +35,7 @@
 //                out.println("  <li><a href='login.jsp'>Login</a></li>   ");
 //            }
         %>
-        <li><a href='ownedRestaurant.jsp'>Owned Restaurants</a></li>
+<!--        <li><a href='ownedRestaurant.jsp'>Owned Restaurants</a></li>-->
         <li><a href="uploadMenu.jsp">upload menu</a></li>
         <li><a href="handleEdit?action=list">All User</a></li>
 
