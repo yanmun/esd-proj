@@ -45,26 +45,34 @@
                     <table border="1">
                         <tr>
 
-                        <%                            
-                            if (rests != null) {
-                                for (int i = 0; i < rests.size(); i++) {
-                                    if (count % 3 == 0) {
-                                        out.println(" </tr><tr>");
-                                        out.println("<td><img src='' ></td>");
-                                    } else {
-                                        out.println("<td>rfdf</td>");
+                            <%                            
+                                if (rests != null) {
+                                    for (int i = 0; i < rests.size(); i++) {
+                                        if (count % 3 == 0) {
+                                            out.println(" </tr><tr>");
+                                           
+                                        } 
+                                        
+                                        out.println("<td><img src='" + rests.get(i).getRest_pic() + "' >"
+                                                    + "<p> <strong>" + rests.get(i).getRestName() + "</strong></p>"
+                                                    + " <p>" + rests.get(i).getAddress() + "</p>"
+                                                    + "<p>" + rests.get(i).getRestTel() + "</p>"
+                                                    + "<p>"+rests.get(i).getOpen_hrs()+"</p>"
+                                                    + "<p>"+rests.get(i).getStatus()+"</p></td>");
                                     }
                                 }
-                            }
 
-                        %>
-                        
-                        <tr>
+                            %>
+                       
+                
+                    </table>
+                </div>
 
-                            <td>dfgfdfd</td>
-                            <td>fdfdd</td>
-                            <td>dfgfgf</td>
-                            <!--                        <th>Restaurant ID</th>
+            </div>
+            <jsp:include page="footer.jsp" />
+        </div>
+
+                 <!--                        <th>Restaurant ID</th>
                                                     <th>Restaurant Name</th>
                                                     <th>Telephone Number</th>
                                                     <th>Email</th>
@@ -77,14 +85,5 @@
                                                     <th></th>
                                                     <th></th>
                                                     <th></th>-->
-                        </tr>
-                    </table>
-                </div>
-
-            </div>
-            <jsp:include page="footer.jsp" />
-        </div>
-
-
     </body>
 </html>
