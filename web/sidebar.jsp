@@ -37,7 +37,6 @@
         %>
 <!--        <li><a href='ownedRestaurant.jsp'>Owned Restaurants</a></li>-->
         <li><a href="uploadMenu.jsp">upload menu</a></li>
-        <li><a href="handleEdit?action=list">All User</a></li>
 
 
         <%  if (session.getAttribute("userInfo") != null) {
