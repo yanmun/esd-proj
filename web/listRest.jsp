@@ -40,6 +40,12 @@
                         out.println("</tr>");
                         out.println("<tr>");
                         out.println("<td>");
+                        out.println("<p>District: " + r.getDistrict() + "</p>");
+                        out.println("</td>");
+                        out.println("<td></td>");
+                        out.println("</tr>");
+                        out.println("<tr>");
+                        out.println("<td>");
                         out.println("<p>Address: " + r.getAddress() + "</p>");
                         out.println("</td>");
                         out.println("<td></td>");

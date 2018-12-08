@@ -91,12 +91,7 @@ public class LoginController extends HttpServlet {
             session.setAttribute("userInfo", bean);
             db = new AccountDB();
             UserBean user = db.queryUserByID(username);
-            String type = user.getType();
-            if ("0001".equals(type) || "0002".equals(type)) {
                 targetURL = "welcome.jsp";
-            } else if ("0003".equals(type)) {
-                targetURL = "handleEdit?action=list";
-            }
         } else {
             targetURL = "loginError.jsp";
         }

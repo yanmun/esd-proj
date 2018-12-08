@@ -26,7 +26,7 @@
                     out.println("<table border='0'>");
                     out.println("<tr>");
                     out.println("<td width='500'>");
-                    out.println("<p>" + r.getRestName() + "</p>");
+                    out.println("<h1>" + r.getRestName() + "</h1>");
                     out.println("</td>");
                     out.println("<td rowspan='4' width='500'><img src='" + r.getRest_pic() + "' >");
                     out.println("</td>");
@@ -49,13 +49,20 @@
                     out.println("</td>");
                     out.println("<td></td>");
                     out.println("</tr>");
-                                        
+
                     String id = r.getRestTypeID();
                     RestaurantTypeDB db = new RestaurantTypeDB();
                     String restType = db.getType(id);
                     out.println("<tr>");
                     out.println("<td>");
                     out.println("<p>Type: " + restType + "</p>");
+                    out.println("</td>");
+                    out.println("<td></td>");
+                    out.println("</tr>");
+                    
+                    out.println("<tr>");
+                    out.println("<td>");
+                    out.println("<p><a href=''>All Menu</a></p>");
                     out.println("</td>");
                     out.println("<td></td>");
                     out.println("</tr>");
@@ -127,10 +134,9 @@
                         out.println("<td></td>");
                         out.println("</tr>");
                     }
-                    
+
                     String restID = r.getRestID();
                     String restName = r.getRestName();
-                    
 
                     if ("Normal User".equals(type)) {
                         out.println("<tr>");
@@ -138,7 +144,7 @@
                         out.println("<form method='post' action='showRestaurant?action=addComment'>");
                         out.println("<input type='hidden' name='restID' value='" + restID + "'>");
                         out.println("<input type='hidden' name='username' value='" + userInfo.getUsername() + "'>");
-                        out.println("<input type='hidden' name='restName' value='" + restName+ "'>");
+                        out.println("<input type='hidden' name='restName' value='" + restName + "'>");
                         Date date = new Date();
                         SimpleDateFormat dateF = new SimpleDateFormat("yyyy-MM-dd ");
                         SimpleDateFormat timeF = new SimpleDateFormat("k:mm:ss");
