@@ -33,10 +33,14 @@ public class RestaurantDB extends DB {
     private int views;
     private String ownid;
     private String state;
+    private String open_time;
+    private String closeTime;
+    private String start_day;
+    private String end_day;
 
-    public RestaurantDB(String rname, String hr, String district, String address,
+    public RestaurantDB(String rname, String district, String address,
             String rtype, String rtel, String remail, String pic_path, String desc, String ownid, String state,
-             String restID) {
+             String restID, String open_time, String closeTime , String start_day, String end_day) {
         super();
         this.rname = rname;
         this.hr = hr;
@@ -51,6 +55,10 @@ public class RestaurantDB extends DB {
         this.pic_path = pic_path;
         this.desc = desc;
         this.restID = restID;
+        this.open_time = open_time;
+        this.closeTime = closeTime;
+        this.start_day = start_day;
+        this.end_day = end_day;
 
     }
 
@@ -64,7 +72,7 @@ public class RestaurantDB extends DB {
         boolean isSuccess = false;
         try {
             cnnct = getConnection();
-            String preQueryStatement = "INSERT INTO restaurant VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
+            String preQueryStatement = "INSERT INTO restaurant VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
             pStmnt = cnnct.prepareStatement(preQueryStatement);
             pStmnt.setString(1, restID);
             pStmnt.setString(2, rname);
@@ -77,8 +85,11 @@ public class RestaurantDB extends DB {
             pStmnt.setString(9, state);
             pStmnt.setString(10, pic_path);
             pStmnt.setString(11, desc);
-            pStmnt.setString(12, hr);
-            pStmnt.setInt(13, views);
+            pStmnt.setString(12, open_time);
+            pStmnt.setString(13, closeTime);
+            pStmnt.setString(14, start_day);
+            pStmnt.setString(15, end_day);
+            pStmnt.setInt(16, views);
             int rowCount = pStmnt.executeUpdate();
             if (rowCount >= 1) {
                 isSuccess = true;

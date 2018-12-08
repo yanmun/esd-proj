@@ -25,19 +25,38 @@
         <style type="text/css">
             <jsp:include page="css/style.css" />
         </style>
-         <link rel="stylesheet" href="./css/element_style.css">
+        <link rel="stylesheet" href="./css/element_style.css">
         <script src="./jslib/jquery-3.3.1.js">
 
         </script>
         <script>
-            
+
             var temp = '<%=r.getDistrict()%>';
-            var status = '<%=r.getStatus()  %>';
-            $(document).ready(function(){
-               
-                $("#district option[value='"+temp+"']").attr('selected','selected');
-                $("#status option[value='"+status+"']").attr('selected','selected');
+            var status = '<%=r.getStatus()%>';
+            var time = '<%=r.getOpen_hrs()%>';
+            var start_hr = time.charAt(0) + time.charAt(1) +
+                    time.charAt(2) + time.charAt(3) + time.charAt(4);
+            var close_time = time.charAt(8) + time.charAt(9) +
+                    time.charAt(10) + time.charAt(11) + time.charAt(12);
+
+            var start_day = "";
+
+
+            $(document).ready(function () {
+                alert(getStartDay());
+                $("#district option[value='" + temp + "']").attr('selected', 'selected');
+                $("#status option[value='" + status + "']").attr('selected', 'selected');
+                $("input[name=open_time]").val(start_hr);
+                $("input[name=close_time]").val(close_time);
             })
+
+            function getStartDay() {
+                for (var i = 0; i < time.length; i++) {
+                    if (time[i] == "t") {
+                        return i;
+                    }
+                }
+            }
         </script>
         <title>Edit Restaurant Info</title>
     </head>
@@ -74,20 +93,29 @@
                                 <option value='Sai Kung'>Sai Kung</option>
                                 <option value='Islands'>Islands</option>
                         </select></p>
-                        
-                        <p>Address:
-                           <input type="email" name="address" value="<%=r.getAddress()%>" style="width: 100%;"></p>
-                        <p>Description: <br><textarea name="r_desc" cols="30" rows="10" ><%=r.getRest_desc()  %></textarea></p>
-                        <p>Status: 
-                            <select name="status" id="status">
-                                <option value="open">Open</option>
-                                <option value="defunct">defunct</option>
-                            </select>
-                        </p>
-                        <p>Open Hour: <input type='time'  name='open_time'
-                           min='00:00' max='23:59' required/> to <input type='time' id='appt' name='close_time'
-                                min='00:00' max='23:59' required/></p>
-                        
+
+                    <p>Address:
+                        <input type="email" name="address" value="<%=r.getAddress()%>" style="width: 100%;"></p>
+                    <p>Description: <br><textarea name="r_desc" cols="30" rows="10" ><%=r.getRest_desc()%></textarea></p>
+                    <p>Status: 
+                        <select name="status" id="status">
+                            <option value="open">Open</option>
+                            <option value="defunct">defunct</option>
+                        </select>
+                    </p>
+                    <p>Open Hour: 
+                        <input type='time'  name='open_time'
+                               min='00:00' max='23:59' /> to <input type='time' id='appt' name='close_time'
+                               min='00:00' max='23:59'  value=""/> ( <select name='start_day' >
+                            <option value='Sunday'>Sunday</option>
+                            <option value='Monday'>Monday</option>
+                            <option value='Tuesday'>Tuesday</option>
+                            <option value='Wednesday'>Wednesday</option>
+                            <option value='Thursday'>Thursday</option>
+                            <option value='Friday'>Friday</option>
+                            <option value='Saturday'>Saturday</option>
+                        </select></p>
+
                 </form>
                 <!--                        <th>Restaurant ID</th>
                                                       <th>Restaurant Name</th>

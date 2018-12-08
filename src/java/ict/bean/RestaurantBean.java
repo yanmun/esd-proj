@@ -10,6 +10,7 @@ package ict.bean;
  * @author a1
  */
 public class RestaurantBean {
+
     private String restID;
     private String restName;
     private String restTypeID;
@@ -22,11 +23,15 @@ public class RestaurantBean {
     private String rest_pic;
     private String rest_desc;
     private String open_hrs;
+    private String start_hour;
+    private String end_hour;
+    private String start_day;
+    private String end_day;
     private String num_view;
     private String num_like;
-    
+
     public RestaurantBean() {
-        
+
     }
 
     public String getRestID() {
@@ -139,5 +144,39 @@ public class RestaurantBean {
 
     public void setNum_like(String num_like) {
         this.num_like = num_like;
+    }
+
+    public String getStart_hour() {
+        return start_hour;
+    }
+
+    public void getStart_hour(String start_hour) {
+        this.start_hour = start_hour;
+    }
+
+    public void setEnd_hour(String eh) {
+        this.end_hour = end_hour;
+    }
+
+    public String getEnd_hour() {
+        return end_hour;
+
+    }
+
+    public void setStart_day(String s) {
+        this.start_day = s;
+    }
+
+    public String getStart_day() {
+        return start_day;
+    }
+    
+    public void setEnd_day(String end_day){
+        this.end_day = end_day;
+        
+    } 
+    
+    public String getEnd_day(){
+        return end_day;  
     }
 }

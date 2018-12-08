@@ -68,9 +68,9 @@ public class RestaurantRegisterController extends HttpServlet {
                     isRepeat = false;
                 }
             }
-            db = new RestaurantDB(rname[i], getOpenHour(open_time[i], close_time[i], start_day[i], end_day[i]), district[i],
+            db = new RestaurantDB(rname[i],  district[i],
                     address[i], rtype[i], rtel[i], remail[i], "./image/Restaurant/" + r_photo[i], r_desc[i], ownerID, state,
-                    id);
+                    id, open_time[i],  close_time[i], start_day[i], end_day[i]);
             if (db.addRecord()) {
                 session = request.getSession(false);
                 RequestDispatcher rd;
