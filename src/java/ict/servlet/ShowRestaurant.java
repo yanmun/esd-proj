@@ -56,6 +56,7 @@ public class ShowRestaurant extends HttpServlet {
                 cdb = new CommentDB();
                 ArrayList<CommentBean> comments = cdb.queryComment(restID); // set the result into the attribute
                 request.setAttribute("comments", comments); // redirect the result to the listCustomers.jsp
+                
                 RequestDispatcher rd;
                 rd = getServletContext().getRequestDispatcher("/showRestDetail.jsp");
                 rd.forward(request, response);
@@ -70,22 +71,20 @@ public class ShowRestaurant extends HttpServlet {
                 rd = getServletContext().getRequestDispatcher("/listRest.jsp");
                 rd.forward(request, response);
             }
-        }  else if ("add".equalsIgnoreCase(action)) {
+        } else if ("addComment".equalsIgnoreCase(action)) {
             String restID = request.getParameter("restID");
             String username = request.getParameter("username");
+            String restName = request.getParameter("restName");
             String comment = request.getParameter("comment");
             String comment_date = request.getParameter("comment_date");
             String comment_time = request.getParameter("comment_time");
             if (comment != null) {
                 cdb = new CommentDB(restID, username, comment, comment_date, comment_time);
                 cdb.addRecord();
+//                response.sendRedirect("showRestaurant?action=show&restName=" + username + "&restID=" + restID);
+                response.sendRedirect("showRestaurant?action=show&restName=" + restName + "&restID=" + restID);
+//                response.sendRedirect("welcome.jsp");
             }
-            PrintWriter out = response.getWriter();
-            out.println(restID);
-            out.println(username);
-            out.println(comment_date);
-            out.println(comment_time);
-            out.println(comment);
         }
     }
 }

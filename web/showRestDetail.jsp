@@ -49,9 +49,7 @@
                     out.println("</td>");
                     out.println("<td></td>");
                     out.println("</tr>");
-
-                    String restID = r.getRestID();
-                    
+                                        
                     String id = r.getRestTypeID();
                     RestaurantTypeDB db = new RestaurantTypeDB();
                     String restType = db.getType(id);
@@ -129,18 +127,21 @@
                         out.println("<td></td>");
                         out.println("</tr>");
                     }
+                    
+                    String restID = r.getRestID();
+                    String restName = r.getRestName();
+                    
 
                     if ("Normal User".equals(type)) {
                         out.println("<tr>");
                         out.println("<td>");
-                        out.println("<form method='post' action='showRestaurant?action=add'>");
+                        out.println("<form method='post' action='showRestaurant?action=addComment'>");
                         out.println("<input type='hidden' name='restID' value='" + restID + "'>");
                         out.println("<input type='hidden' name='username' value='" + userInfo.getUsername() + "'>");
+                        out.println("<input type='hidden' name='restName' value='" + restName+ "'>");
                         Date date = new Date();
                         SimpleDateFormat dateF = new SimpleDateFormat("yyyy-MM-dd ");
                         SimpleDateFormat timeF = new SimpleDateFormat("k:mm:ss");
-                        out.print("<h2 align=\"center\">" + dateF.format(date) + "</h2>");
-                        out.print("<h2 align=\"center\">" + timeF.format(date) + "</h2>");
                         out.println("<input type='hidden' name='comment_date' value='" + dateF.format(date) + "'>");
                         out.println("<input type='hidden' name='comment_time' value='" + timeF.format(date) + "'>");
                         out.println("<p>Comment:</p>");

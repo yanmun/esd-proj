@@ -76,7 +76,7 @@ public class CommentDB extends DB {
         CommentBean cb = null;
         try {
             cnnct = getConnection();
-            String preQueryStatement = "SELECT * FROM FAV_REST WHERE RESTID=?";
+            String preQueryStatement = "SELECT * FROM FAV_REST WHERE RESTID=? ORDER BY comment_date, comment_time DESC";
             ResultSet re = null;
             pStmnt = cnnct.prepareStatement(preQueryStatement);
             pStmnt.setString(1, restID);
