@@ -67,9 +67,27 @@
                                 "                            <td>\n" +
                                 "                                <p>\n" +
                                 "                                    <select name='district' style='width:100%;'>\n" +
-                                "                                        <option value='Hong Kong Island'>Hong Kong Island</option>\n" +
-                                "                                        <option value='Kowloon'>Kowloon </option>\n" +
-                                "                                        <option value='New Territories'>New Territories</option>\n" +
+                                "                                        <optgroup label='Hong Kong Island'>\n" +
+                                "                                        <option value='Central and Western'>Central and Western</option>\n" +
+                                "                                        <option value='Wan Chai'>Wan Chai</option>\n" +
+                                "                                        <option value='Eastern'>Eastern </option>\n" +
+                                "                                        <option value='Southern'>Southern</option>\n" +
+                                "                                        <optgroup label='Kowloon'>\n" +
+                                "                                        <option value='Yau Tsim Mong'>Yau Tsim Mong </option>\n" +
+                                "                                        <option value='Sham Shui Po'>Sham Shui Po</option>\n" +
+                                "                                        <option value='Kowloon City'>Kowloon City</option>\n" +
+                                "                                        <option value='Wong Tai Sin'>Wong Tai Sin</option>\n" +
+                                "                                        <option value='Kwun Tong'>Kwun Tong</option>\n" +
+                                "                                        <optgroup label='New Territories'>\n" +
+                                "                                        <option value='Kwai Tsing'>Kwai Tsing</option>\n" +
+                                "                                        <option value='Tsuen Wan'>Tsuen Wan</option>\n" +
+                                "                                        <option value='Tuen Mun'>Tuen Mun</option>\n" +
+                                "                                        <option value='Yuen Long'>Yuen Long</option>\n" +
+                                "                                        <option value='North'>North</option>\n" +
+                                "                                        <option value='Tai Po'>Tai Po</option>\n" +
+                                "                                        <option value='Sha Tin'>Sha Tin</option>\n" +
+                                "                                        <option value='Sai Kung'>Sai Kung</option>\n" +
+                                "                                        <option value='Islands'>Islands</option>\n" +
                                 "                                    </select>\n" +
                                 "                                </p>\n" +
                                 "                            </td>\n" +
