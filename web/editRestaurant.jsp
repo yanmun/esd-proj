@@ -41,6 +41,7 @@
             var start_day = "<%=r.getStart_day()%>";
 
             var end_day = "<%=r.getEnd_day()%>";
+            var type = "<%=r.getRestTypeID() %>";
 
             $(document).ready(function () {
 
@@ -50,9 +51,11 @@
                 $("input[name=close_time]").val(close_time);
                 $("#start_day option[value='" + start_day + "']").attr('selected', 'selected');
                 $("#end_day option[value='" + end_day + "']").attr('selected', 'selected');
+                
+                $("#rtype option[value='" + type + "']").attr('selected', 'selected');
             })
 
-       
+
         </script>
         <title>Edit Restaurant Info</title>
     </head>
@@ -62,9 +65,18 @@
             <jsp:include page="sidebar.jsp" />
             <div class="content">                
                 <form action="action" method="post">
+                    <p> <img src="" alt=""></p>
                     <p>Restaurant Name: <input type="text" name="rname" value="<%=r.getRestName()%>"></p>
                     <p>Telephone Number: <input type="text" name="tel" value="<%=r.getRestTel()%>"></p>
                     <p>Email: <input type="email" name="tel" value="<%=r.getRestEmail()%>"></p>
+                    <p>Restaurant Type:
+                        <select name='rtype' style='width:100%;' id="rtype">
+                            <option value='4001'>Chinese</option>
+                            <option value='4002'>Western </option>
+                            <option value='4003'>Japanese </option>
+                            <option value='4004'>Korean </option>
+                        </select>
+                    </p>
                     <p>District:    
                         <select name='district' style='' id="district">
                             <optgroup label='Hong Kong Island'>
@@ -121,7 +133,7 @@
                             <option value='Friday'>Friday</option>
                             <option value='Saturday'>Saturday</option>
                         </select>)</p>
-
+                    <input type="submit" value="Confirm Edit">
                 </form>
                 <!--                        <th>Restaurant ID</th>
                                                       <th>Restaurant Name</th>
