@@ -4,6 +4,8 @@
     Author     : pearh
 --%>
 
+<%@page import="ict.bean.MenuBean"%>
+<%@page import="java.util.ArrayList"%>
 <%@page import="ict.db.MenuDB"%>
 <%@page import="ict.bean.RestaurantBean"%>
 <%@page import="ict.db.RestaurantDB"%>
@@ -13,6 +15,7 @@
 <%!
     RestaurantBean r;
     MenuDB mdb;
+    ArrayList<MenuBean> mb;
 
 %>
 <%
@@ -40,7 +43,7 @@
 
             var temp = '<%=r.getDistrict()%>';
             var status = '<%=r.getStatus()%>';
-
+            var success = '<%=request.getParameter("successDelete")%>';
             var start_hr = '<%=r.getStart_hour()%>';
 
             var close_time = '<%=r.getEnd_hour()%>';
@@ -53,6 +56,9 @@
 
             $(document).ready(function () {
 
+                if (success == "true") {
+                    alert("The restaurant menu has been successfully deleted!");
+                }
                 $("#district option[value='" + temp + "']").attr('selected', 'selected');
                 $("#status option[value='" + status + "']").attr('selected', 'selected');
                 $("input[name=open_time]").val(start_hr);
@@ -74,47 +80,47 @@
 
                 $("#add_upload").click(function () {
                     count++;
-                    
+
                     if (count == 1) {
                         $("#menus_table").css("display", "block");
-                         $("#menus_table > tbody").append("<tr>\n" +
-                   "    <td>"+count+"</td>\n" +
-                   "    <td class='test'><img src=\"\" alt=\"\" width='90' height='90'></td>\n" +
-                   "    <td><textarea name=\"menu_desc\" id=\"\" cols=\"25\" rows=\"5\"></textarea></td>\n" +
-                   "    <td>\n" +
-                   "        <select name=\"menu_type\" id=\"\">\n" +
-                   "            <option value=\"Normal\" selected>Normal</option>\n" +
-                   "            <option value=\"Breakfast\" >Breakfast</option>\n" +
-                   "            <option value=\"Lunch\" >Lunch</option>\n" +
-                   "            <option value=\"Tea\" >Tea</option>\n" +
-                   "            <option value=\"Dinner\" >Dinner</option>\n" +
-                   "        </select></td>\n" +
-                   "    <td><input type=\"file\" accept=\".png, .jpeg\" class=\"photo_upload\" name=\"menu_photo\"></td>\n" +
-                   "    <td><input type=\"button\" value=\"delete\"></td>\n" +
-                   "</tr>");
-                    }else{
+                        $("#menus_table > tbody").append("<tr>\n" +
+                                "    <td>" + count + "</td>\n" +
+                                "    <td class='test'><img src=\"\" alt=\"\" width='90' height='90'></td>\n" +
+                                "    <td><textarea name=\"menu_desc\" id=\"\" cols=\"25\" rows=\"5\"></textarea></td>\n" +
+                                "    <td>\n" +
+                                "        <select name=\"menu_type\" id=\"\">\n" +
+                                "            <option value=\"Normal\" selected>Normal</option>\n" +
+                                "            <option value=\"Breakfast\" >Breakfast</option>\n" +
+                                "            <option value=\"Lunch\" >Lunch</option>\n" +
+                                "            <option value=\"Tea\" >Tea</option>\n" +
+                                "            <option value=\"Dinner\" >Dinner</option>\n" +
+                                "        </select></td>\n" +
+                                "    <td><input type=\"file\" accept=\".png, .jpeg\" class=\"photo_upload\" name=\"menu_photo\"></td>\n" +
+                                "    <td><input type=\"button\" value=\"delete\"></td>\n" +
+                                "</tr>");
+                    } else {
                         $("tbody > tr").after("<tr>\n" +
-                   "    <td>"+count+"</td>\n" +
-                   "    <td class='test'><img src=\"\" alt=\"\" width='90' height='90'></td>\n" +
-                   "    <td><textarea name=\"menu_desc\" id=\"\" cols=\"25\" rows=\"5\"></textarea></td>\n" +
-                   "    <td>\n" +
-                   "        <select name=\"menu_type\" id=\"\">\n" +
-                   "            <option value=\"Normal\" selected>Normal</option>\n" +
-                   "            <option value=\"Breakfast\" >Breakfast</option>\n" +
-                   "            <option value=\"Lunch\" >Lunch</option>\n" +
-                   "            <option value=\"Tea\" >Tea</option>\n" +
-                   "            <option value=\"Dinner\" >Dinner</option>\n" +
-                   "        </select></td>\n" +
-                   "    <td><input type=\"file\" accept=\".png, .jpeg\" class=\"photo_upload\" name=\"menu_photo\"></td>\n" +
-                   "    <td><input type=\"button\" value=\"delete\"></td>\n" +
-                   "</tr>");
+                                "    <td>" + count + "</td>\n" +
+                                "    <td class='test'><img src=\"\" alt=\"\" width='90' height='90'></td>\n" +
+                                "    <td><textarea name=\"menu_desc\" id=\"\" cols=\"25\" rows=\"5\"></textarea></td>\n" +
+                                "    <td>\n" +
+                                "        <select name=\"menu_type\" id=\"\">\n" +
+                                "            <option value=\"Normal\" selected>Normal</option>\n" +
+                                "            <option value=\"Breakfast\" >Breakfast</option>\n" +
+                                "            <option value=\"Lunch\" >Lunch</option>\n" +
+                                "            <option value=\"Tea\" >Tea</option>\n" +
+                                "            <option value=\"Dinner\" >Dinner</option>\n" +
+                                "        </select></td>\n" +
+                                "    <td><input type=\"file\" accept=\".png, .jpeg\" class=\"photo_upload\" name=\"menu_photo\"></td>\n" +
+                                "    <td><input type=\"button\" value=\"delete\"></td>\n" +
+                                "</tr>");
                     }
                 })
-                
-                 $(".content").on('change', '.photo_upload', function () {
+
+                $(".content").on('change', '.photo_upload', function () {
                     var img = $(this).parent().siblings(".test").children("img");
                     readURL(this, img);
-                  
+
 
                 });
 
@@ -219,15 +225,61 @@
                             <option value='Saturday'>Saturday</option>
                         </select>)</p>
 
-                    <div>Upload Menu(s):
-
+                    <div>
+                        Uploaded Menu(s):
                         <%
                             mdb = new MenuDB();
-                            if (!mdb.queryByRestID(request.getParameter("id"))) {
+
+                            if (mdb.queryByRestID(request.getParameter("id")).size()==0) {
                                 out.println("No menu was found.");
+                            } else {
+                                mb = mdb.queryByRestID(request.getParameter("id"));
+                                out.println("  <table border=\"1\"  >\n"
+                                        + "                            <thead>\n"
+                                        + "                                <tr>\n"
+                                        + "                                    <th>No</th>\n"
+                                        + "                                    <th>Menu</th>\n"
+                                        + "                                    <th>Description</th>\n"
+                                        + "                                    <th>Type</th>\n"
+                                        + "                                    <th>Delete</th>\n"
+                                        + "                                </tr>\n"
+                                        + "                            </thead>\n"
+                                        + "                            <tbody>");
+
+                                for (int i = 0; i < mb.size(); i++) {
+                                    String desc = mb.get(i).getMenu_desc();
+                                    if (desc == null) {
+                                        desc = "";
+                                    }
+                                    out.println("<tr>\n"
+                                            + "    <td>" + (i + 1) + "</td>\n"
+                                            + "    <td class='test'><img src=\"" + mb.get(i).getPath() + "\" alt=\"\" width='90' height='90'></td>\n"
+                                            + "    <td><textarea name=\"menu_desc\" id=\"\" cols=\"25\" rows=\"5\">" + desc + "</textarea></td>\n"
+                                            + "    <td>\n"
+                                            + "        <select name=\"menu_type\" id=\"menu_type" + (i + 1) + "\">\n"
+                                            + "            <option value=\"Normal\" >Normal</option>\n"
+                                            + "            <option value=\"Breakfast\" >Breakfast</option>\n"
+                                            + "            <option value=\"Lunch\" >Lunch</option>\n"
+                                            + "            <option value=\"Tea\" >Tea</option>\n"
+                                            + "            <option value=\"Dinner\" >Dinner</option>\n"
+                                            + "        </select></td>\n"
+                                            + "    <td><a href='UpdateMenu?id=" + mb.get(i).getID() + "'>Delete</a></td>\n"
+                                            + "</tr>");
+                                }
+
+                                out.println("</tbody></table>");
                             }
 
                         %>
+
+
+
+                    </div>
+                    <div>
+
+                        Upload New Menu(s):
+
+
                         <table border="1" style="display: none;" id="menus_table">
                             <thead>
                                 <tr>
@@ -244,10 +296,10 @@
                             </tbody>
                         </table>
 
-<!--                        <div class="photo_upload_div"> 
-                            <input type="file" accept=".png, .jpeg" class="photo_upload" name="menu_photo">
-                            <img src="" alt="" width="200" height="200">
-                        </div>-->
+                        <!--                        <div class="photo_upload_div"> 
+                                                    <input type="file" accept=".png, .jpeg" class="photo_upload" name="menu_photo">
+                                                    <img src="" alt="" width="200" height="200">
+                                                </div>-->
                         <input type="hidden" value="public" name="menu_status" id="status_input">
                         <input type="button" value="+" id="add_upload">
                     </div>

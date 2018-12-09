@@ -5,11 +5,14 @@
  */
 package ict.db;
 
+import ict.bean.MenuBean;
+import ict.bean.RestaurantBean;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 /**
  *
@@ -24,7 +27,7 @@ public class MenuDB extends DB {
     private String type;
     private String menu_desc;
 
-    public MenuDB(String id, String path, String restID, String status, 
+    public MenuDB(String id, String path, String restID, String status,
             String type, String menu_desc) {
         this.id = id;
         this.path = path;
@@ -33,9 +36,9 @@ public class MenuDB extends DB {
         this.type = type;
         this.menu_desc = menu_desc;
     }
-    
-    public MenuDB(){
-        
+
+    public MenuDB() {
+
     }
 
     @Override
@@ -72,11 +75,11 @@ public class MenuDB extends DB {
         return isSuccess;
 
     }
-    
-    public String add(){
-         Connection cnnct = null;
+
+    public String add() {
+        Connection cnnct = null;
         PreparedStatement pStmnt = null;
-        String msg ="";
+        String msg = "";
         try {
             cnnct = getConnection();
             String preQueryStatement = "INSERT INTO menu VALUES (?,?,?,?,?,?)";
@@ -95,8 +98,8 @@ public class MenuDB extends DB {
             cnnct.close();
         } catch (SQLException ex) {
             while (ex != null) {
-                msg+=ex.toString();
-               ex.printStackTrace();
+                msg += ex.toString();
+                ex.printStackTrace();
                 ex = ex.getNextException();
             }
         } catch (IOException ex) {
@@ -106,10 +109,10 @@ public class MenuDB extends DB {
         }
         return msg;
     }
-    
-    public boolean findExistID(String id){
-       
-       Connection cnnct = null;
+
+    public boolean findExistID(String id) {
+
+        Connection cnnct = null;
         PreparedStatement pStmnt = null;
         boolean isFound = false;
         try {
@@ -136,12 +139,14 @@ public class MenuDB extends DB {
         }
         return isFound;
     }
-    
-    public boolean queryByRestID(String id){
-       
-       Connection cnnct = null;
+
+    public ArrayList<MenuBean> queryByRestID(String id) {
+
+        Connection cnnct = null;
         PreparedStatement pStmnt = null;
         boolean isFound = false;
+        ArrayList<MenuBean> menus = new ArrayList();
+        MenuBean rb = null;
         try {
             cnnct = getConnection();
             String preQueryStatement = "SELECT * FROM menu WHERE restID=?";
@@ -149,8 +154,17 @@ public class MenuDB extends DB {
             pStmnt = cnnct.prepareStatement(preQueryStatement);
             pStmnt.setString(1, id);
             re = pStmnt.executeQuery();
-            if (re.next()) {
-                isFound = true;
+            while (re.next()) {
+                rb = new MenuBean();
+                rb.setID(re.getString(1));
+                rb.setPath(re.getString(2));
+                rb.setRestID(re.getString(3));
+                rb.setStatus(re.getString(4));
+                rb.setStatus(re.getString(5));
+               rb.setType(re.getString(6));
+//                rb.setOpen_hrs(re.getString(12));
+//                rb.setNum_view(re.getString(13));
+                menus.add(rb);
             }
             pStmnt.close();
             cnnct.close();
@@ -164,8 +178,42 @@ public class MenuDB extends DB {
         } catch (ClassNotFoundException ex) {
             ex.printStackTrace();
         }
-        return isFound;
+        return menus;
     }
     
+    
+    public String deleteRestaurantInfo(String id) {
+        Connection cnnct = null;
+        PreparedStatement pStmnt = null;
+        String msg ="";
+        boolean isSuccess = false;
+        try {
+            cnnct = getConnection();
+            RestaurantDB db = new RestaurantDB();
+
+            String preQueryStatement = "delete from menu WHERE menuid=?";
+            pStmnt = cnnct.prepareStatement(preQueryStatement);
+            pStmnt.setString(1, id);
+         
+            int rowCount = pStmnt.executeUpdate();
+            if (rowCount >= 1) {
+                isSuccess = true;
+                msg="Yes";
+            }
+            pStmnt.close();
+            cnnct.close();
+        } catch (SQLException ex) {
+            while (ex != null) {
+                ex.printStackTrace();
+                ex = ex.getNextException();
+                msg+= ex.toString();
+            }
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        } catch (ClassNotFoundException ex) {
+            ex.printStackTrace();
+        }
+        return msg;
+    }
 
 }

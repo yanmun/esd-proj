@@ -40,7 +40,7 @@
 //            }
         %>
 <!--        <li><a href='ownedRestaurant.jsp'>Owned Restaurants</a></li>-->
-        <li><a href="uploadMenu.jsp">upload menu</a></li>
+       
 
 
         <%  if (session.getAttribute("userInfo") != null) {
