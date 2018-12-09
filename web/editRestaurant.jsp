@@ -26,9 +26,11 @@
             <jsp:include page="css/style.css" />
         </style>
         <link rel="stylesheet" href="./css/element_style.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <script src="./jslib/jquery-3.3.1.js">
 
         </script>
+        
         <script>
 
             var temp = '<%=r.getDistrict()%>';
@@ -65,7 +67,12 @@
             <jsp:include page="sidebar.jsp" />
             <div class="content">                
                 <form action="action" method="post">
-                    <p> <img src="" alt=""></p>
+             
+                        <a class="img" >
+                                <div class="im_overlay"><i class="fa fa-camera"></i></div>
+                                <img src="<%=r.getRest_pic()  %>" style="width:200px; height:200px;">
+                            </a>
+                
                     <p>Restaurant Name: <input type="text" name="rname" value="<%=r.getRestName()%>"></p>
                     <p>Telephone Number: <input type="text" name="tel" value="<%=r.getRestTel()%>"></p>
                     <p>Email: <input type="email" name="tel" value="<%=r.getRestEmail()%>"></p>

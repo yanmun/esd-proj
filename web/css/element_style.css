@@ -2,3 +2,37 @@
     color:red;
     display:none;
 }
+
+.img {
+    border-radius: 100%;
+    display: inline-flex;
+    flex: 0 0 150px;
+    height: 150px;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+    width: 150px;
+    cursor:pointer;
+}
+
+.im_overlay {
+    align-items: center;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    left: 0;
+    opacity: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    transition: opacity 0.25s;
+    z-index: 1;
+    background-color: rgba(0,0,0,0.4);
+    cursor:pointer;
+    color: #fafafa;
+    font-size: 24px;
+}
+
+.im_overlay:hover {
+    opacity: 1;
+}
