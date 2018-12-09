@@ -95,5 +95,36 @@ public class MenuDB extends DB {
         }
         return isFound;
     }
+    
+    public boolean queryByRestID(String id){
+       
+       Connection cnnct = null;
+        PreparedStatement pStmnt = null;
+        boolean isFound = false;
+        try {
+            cnnct = getConnection();
+            String preQueryStatement = "SELECT * FROM menu WHERE restID=?";
+            ResultSet re = null;
+            pStmnt = cnnct.prepareStatement(preQueryStatement);
+            pStmnt.setString(1, id);
+            re = pStmnt.executeQuery();
+            if (re.next()) {
+                isFound = true;
+            }
+            pStmnt.close();
+            cnnct.close();
+        } catch (SQLException ex) {
+            while (ex != null) {
+                ex.printStackTrace();
+                ex = ex.getNextException();
+            }
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        } catch (ClassNotFoundException ex) {
+            ex.printStackTrace();
+        }
+        return isFound;
+    }
+    
 
 }

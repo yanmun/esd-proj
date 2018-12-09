@@ -17,6 +17,7 @@
 
         </script>
         <script>
+            var count = 0;
             $(document).ready(function () {
 //                $(".photo_upload").change(function () {
 //                    var img = $(this).siblings("img");
@@ -36,10 +37,20 @@
                         reader.readAsDataURL(input.files[0]);
                     }
                 }
-                
-                $(".content").on('change', '.photo_upload', function(){
+
+                $(".content").on('change', '.photo_upload', function () {
                     var img = $(this).siblings("img");
                     readURL(this, img);
+                    if (count == 0) {
+                        $("<table boder>  <thead>\n" +
+                                "                            <tr>\n" +
+                                "                             <th>No</th>\n" +
+                                "                                <th>Menu</th>\n" +
+                                "                                <th></th>\n" +
+                                "                            </tr>\n" +
+                                "                        </thead> </table>").insertBefore("#status_input");
+                    }
+
                 });
 
                 $("#add_upload").click(function () {
@@ -56,11 +67,15 @@
             <jsp:include page="sidebar.jsp" />
             <div class="content">
 
-                <h1>Upload Menu(s)</h1>
+                <div style=" width:100%; height:50px; text-align: center; padding-top:30px;">
+                    Nice! Complete the last step to finish the registration! </div>
+
                 <form action="UploadMenuController" method="post">
+                    <p>Upload the menu(s) of the restaurant:</p>
+                    
                     <div class="photo_upload_div"> 
                         <input type="file" accept=".png, .jpeg" class="photo_upload" name="menu_photo">
-                        <img src="" alt="">
+                        <img src="" alt="" width="200" height="200">
                     </div>
                     <input type="hidden" value="public" name="status" id="status_input">
                     <input type="button" value="+" id="add_upload">

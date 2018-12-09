@@ -4,6 +4,7 @@
     Author     : pearh
 --%>
 
+<%@page import="ict.db.MenuDB"%>
 <%@page import="ict.bean.RestaurantBean"%>
 <%@page import="ict.db.RestaurantDB"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -11,7 +12,8 @@
 
 <%!
     RestaurantBean r;
-   
+    MenuDB mdb;
+
 %>
 <%
     if (request.getParameter("id") != null) {
@@ -46,7 +48,7 @@
 
             var end_day = "<%=r.getEnd_day()%>";
             var type = "<%=r.getRestTypeID()%>";
-            
+            var count = 0;
 
             $(document).ready(function () {
 
@@ -66,8 +68,53 @@
 
                 $("input[class='photo_upload']").change(function () {
                     readURL(this, $("#rest_photo"));
-                   
+
                 })
+
+                $("#add_upload").click(function () {
+                    count++;
+                    if (count == 1 && !mdb.queryByRestID(request.getParameter("id"))) {
+                        $("#menus_table").css("display", "block");
+                         $("#menus_table > tbody").append("<tr>\n" +
+                   "    <td>"+count+"</td>\n" +
+                   "    <td class='test'><img src=\"\" alt=\"\" width='90' height='90'></td>\n" +
+                   "    <td><textarea name=\"menu_desc\" id=\"\" cols=\"25\" rows=\"5\"></textarea></td>\n" +
+                   "    <td>\n" +
+                   "        <select name=\"menu_type\" id=\"\">\n" +
+                   "            <option value=\"Normal\" selected>Normal</option>\n" +
+                   "            <option value=\"Breakfast\" >Breakfast</option>\n" +
+                   "            <option value=\"Lunch\" >Lunch</option>\n" +
+                   "            <option value=\"Tea\" >Tea</option>\n" +
+                   "            <option value=\"Dinner\" >Dinner</option>\n" +
+                   "        </select></td>\n" +
+                   "    <td><input type=\"file\" accept=\".png, .jpeg\" class=\"photo_upload\" name=\"menu_photo\"></td>\n" +
+                   "    <td><input type=\"button\" value=\"delete\"></td>\n" +
+                   "</tr>");
+                    }else{
+                        $("tbody > tr").after("<tr>\n" +
+                   "    <td>"+count+"</td>\n" +
+                   "    <td class='test'><img src=\"\" alt=\"\" width='90' height='90'></td>\n" +
+                   "    <td><textarea name=\"menu_desc\" id=\"\" cols=\"25\" rows=\"5\"></textarea></td>\n" +
+                   "    <td>\n" +
+                   "        <select name=\"menu_type\" id=\"\">\n" +
+                   "            <option value=\"Normal\" selected>Normal</option>\n" +
+                   "            <option value=\"Breakfast\" >Breakfast</option>\n" +
+                   "            <option value=\"Lunch\" >Lunch</option>\n" +
+                   "            <option value=\"Tea\" >Tea</option>\n" +
+                   "            <option value=\"Dinner\" >Dinner</option>\n" +
+                   "        </select></td>\n" +
+                   "    <td><input type=\"file\" accept=\".png, .jpeg\" class=\"photo_upload\" name=\"menu_photo\"></td>\n" +
+                   "    <td><input type=\"button\" value=\"delete\"></td>\n" +
+                   "</tr>");
+                    }
+                })
+                
+                 $(".content").on('change', '.photo_upload', function () {
+                    var img = $(this).parent().siblings(".test").children("img");
+                    readURL(this, img);
+                  
+
+                });
 
                 function readURL(input, img) {
 
@@ -95,7 +142,7 @@
             <jsp:include page="sidebar.jsp" />
             <div class="content">                
                 <form action="EditRestaurantController" method="post">
-                    <input type="hidden" name="id" value="<%=request.getParameter("id") %>">
+                    <input type="hidden" name="id" value="<%=request.getParameter("id")%>">
                     <a class="img" style=" ">
                         <div class="im_overlay" style=""><i class="fa fa-camera"></i></div>
                         <img src="<%=r.getRest_pic()%>" style="width:200px; height:200px;" id="rest_photo">
@@ -169,6 +216,39 @@
                             <option value='Friday'>Friday</option>
                             <option value='Saturday'>Saturday</option>
                         </select>)</p>
+
+                    <div>Upload Menu(s):
+
+                        <%
+                            mdb = new MenuDB();
+                            if (!mdb.queryByRestID(request.getParameter("id"))) {
+                                out.println("No menu was found.");
+                            }
+
+                        %>
+                        <table border="1" style="display: none;" id="menus_table">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Menu</th>
+                                    <th>Description</th>
+                                    <th>Type</th>
+                                    <th>Upload</th>
+                                    <th>Delete</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                            </tbody>
+                        </table>
+
+<!--                        <div class="photo_upload_div"> 
+                            <input type="file" accept=".png, .jpeg" class="photo_upload" name="menu_photo">
+                            <img src="" alt="" width="200" height="200">
+                        </div>-->
+                        <input type="hidden" value="public" name="status" id="status_input">
+                        <input type="button" value="+" id="add_upload">
+                    </div>
                     <input type="submit" value="Confirm Edit">
                 </form>
                 <!--                        <th>Restaurant ID</th>
