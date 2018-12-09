@@ -23,11 +23,12 @@ public class EditRestaurantController extends HttpServlet {
 
     private RestaurantDB db;
     private PrintWriter out;
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         out = response.getWriter();
-        String state = request.getParameter("state");
+        String state = request.getParameter("status");
         String rname = request.getParameter("rname");
         String open_time = request.getParameter("open_time");
         String close_time = request.getParameter("close_time");
@@ -40,10 +41,16 @@ public class EditRestaurantController extends HttpServlet {
         String remail = request.getParameter("remail");
         String restid = request.getParameter("id");
         String r_desc = request.getParameter("r_desc");
-        String r_photo = request.getParameter("r_photo");
+        String r_photo;
+        if (!request.getParameter("r_photo").equals("")) {
+            r_photo = request.getParameter("r_photo");
+        } else {
+            r_photo = request.getParameter("ori");
+        }
         db = new RestaurantDB();
+
         out.println(db.updateRestaurantInfo(state, rname, open_time, close_time, start_day, end_day, district, address, rtype, rtel, remail, restid, r_desc, r_photo));
-        
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

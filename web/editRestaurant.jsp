@@ -100,10 +100,11 @@
                         <div class="im_overlay" style=""><i class="fa fa-camera"></i></div>
                         <img src="<%=r.getRest_pic()%>" style="width:200px; height:200px;" id="rest_photo">
                     </a>
-                    <input type="file" style="display:none;" class="photo_upload" name="r_photo">    
+                    <input type="hidden" name="ori" value="<%=r.getRest_pic()%>">
+                    <input type="file" style="display:none;" class="photo_upload" name="r_photo" >    
                     <p>Restaurant Name: <input type="text" name="rname" value="<%=r.getRestName()%>"></p>
-                    <p>Telephone Number: <input type="text" name="tel" value="<%=r.getRestTel()%>"></p>
-                    <p>Email: <input type="email" name="tel" value="<%=r.getRestEmail()%>"></p>
+                    <p>Telephone Number: <input type="text" name="rtel" value="<%=r.getRestTel()%>"></p>
+                    <p>Email: <input type="email" name="remail" value="<%=r.getRestEmail()%>"></p>
                     <p>Restaurant Type:
                         <select name='rtype' style='width:100%;' id="rtype">
                             <option value='4001'>Chinese</option>
@@ -138,7 +139,7 @@
                         </select></p>
 
                     <p>Address:
-                        <input type="email" name="address" value="<%=r.getAddress()%>" style="width: 100%;"></p>
+                        <input type="text" name="address" value="<%=r.getAddress()%>" style="width: 100%;"></p>
                     <p>Description: <br><textarea name="r_desc" cols="30" rows="10" ><%=r.getRest_desc()%></textarea></p>
                     <p>Status: 
                         <select name="status" id="status">

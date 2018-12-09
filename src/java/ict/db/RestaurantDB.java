@@ -586,19 +586,19 @@ public class RestaurantDB extends DB {
             cnnct = getConnection();
             RestaurantDB db = new RestaurantDB();
 
-            String preQueryStatement = "UPDATE RESTAURANT SET num_view=?, "
+            String preQueryStatement = "UPDATE RESTAURANT SET "
                     + "status=?, "
                     + "restName=?,  "
-                    + "start_hour=? "
-                    + "end_hour=? "
-                    + "start_day=? "
-                    + "end_day=? "
-                    + "district=? "
-                    + "address=? "
-                    + "restTypeID=? "
-                    + "restTel=? "
-                    + "restEmail=? "
-                    + "rest_desc=? "
+                    + "start_hour=?, "
+                    + "end_hour=?, "
+                    + "start_day=?, "
+                    + "end_day=?, "
+                    + "district=?, "
+                    + "address=?, "
+                    + "restTypeID=?, "
+                    + "restTel=?, "
+                    + "restEmail=?, "
+                    + "rest_desc=?, "
                     + "rest_pic=? WHERE restID=?";
             pStmnt = cnnct.prepareStatement(preQueryStatement);
             pStmnt.setString(1, state);
@@ -626,7 +626,7 @@ public class RestaurantDB extends DB {
             while (ex != null) {
                 ex.printStackTrace();
                 ex = ex.getNextException();
-                return ex.toString();
+                msg+= ex.toString();
             }
         } catch (IOException ex) {
             ex.printStackTrace();
