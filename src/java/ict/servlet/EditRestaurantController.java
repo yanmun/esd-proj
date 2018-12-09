@@ -8,6 +8,7 @@ package ict.servlet;
 import ict.db.RestaurantDB;
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -43,20 +44,24 @@ public class EditRestaurantController extends HttpServlet {
         String r_desc = request.getParameter("r_desc");
         String r_photo;
         if (!request.getParameter("r_photo").equals("")) {
-            r_photo = "./image/Restaurant/"+request.getParameter("r_photo");
+            r_photo = "./image/Restaurant/" + request.getParameter("r_photo");
         } else {
             r_photo = request.getParameter("ori");
         }
         db = new RestaurantDB();
 
-        if(db.updateRestaurantInfo(state, rname, open_time, close_time, start_day, end_day, 
-                district, address, rtype, rtel, remail, restid, r_desc, r_photo).equals("yes")){
-            
+        if (db.updateRestaurantInfo(state, rname, open_time, close_time, start_day, end_day,
+                district, address, rtype, rtel, remail, restid, r_desc, r_photo).equals("yes")) {
+            RequestDispatcher rd;
+//            request.setAttribute("msg", "<script type=\"text/javascript\"> alert('User or password incorrect');</script>");
+//            rd = getServletContext().getRequestDispatcher("/index.jsp");
+//            rd.forward(request, response);
+                RequestDispatcher dis = this.getServletContext().getRequestDispatcher("/index.jsp");
+                dis.forward(request, response);
         }
 //        out.println(db.updateRestaurantInfo(state, rname, open_time, close_time, start_day, end_day, district, address, rtype, rtel, remail, restid, r_desc, r_photo));
 
     }
-
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
