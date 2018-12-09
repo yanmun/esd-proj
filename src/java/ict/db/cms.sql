@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主機: 127.0.0.1
--- 產生時間： 2018 年 12 月 08 日 23:43
+-- 產生時間： 2018 年 12 月 09 日 23:15
 -- 伺服器版本: 10.1.30-MariaDB
 -- PHP 版本： 7.2.2
 
@@ -47,6 +47,7 @@ INSERT INTO `account` (`username`, `password`, `tel`, `email`, `firstName`, `las
 ('admin', '123', '999', 'admin@gmail.com', 'Siu', 'Jer', '0003'),
 ('hll', 'hll', '24132374', 'hym7743@gmail.com', 'jajasjk', 'asasds', '0002'),
 ('hlllily1119', '4345', '24132374', 'hym7743@gmail.com', 'jajasjk', 'asasds', '0001'),
+('po', '3434', '3494839', 'hym7743@gmail.com', 'Jajasjk', 'Asasds', '0001'),
 ('samgor', 'ewew', '23989222', 'hym7743@gmail.com', 'Jajasjk', 'Asasds', '0002');
 
 -- --------------------------------------------------------
@@ -105,9 +106,11 @@ CREATE TABLE `fav_rest` (
 
 CREATE TABLE `menu` (
   `menuid` char(6) NOT NULL,
-  `menupath` varchar(30) NOT NULL,
+  `menupath` varchar(100) NOT NULL,
   `restID` char(6) NOT NULL,
-  `status` varchar(10) NOT NULL
+  `status` varchar(10) NOT NULL,
+  `type` varchar(20) NOT NULL,
+  `menu_desc` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -140,10 +143,8 @@ CREATE TABLE `restaurant` (
 --
 
 INSERT INTO `restaurant` (`restID`, `restName`, `restTypeID`, `restTel`, `restEmail`, `district`, `address`, `ownerID`, `status`, `rest_pic`, `rest_desc`, `start_hour`, `end_hour`, `start_day`, `end_day`, `num_view`) VALUES
-('000001', 'HO LEE SIT', '4003', '12345454', '123@123', 'Eastern', 'dsadsadsadsd', 'hll', 'open', 'image\\Restaurant\\samgor.jpg', 'sam gor is very good', '', '', '', '', 83),
-('181415', 'samgor', '4001', '34455566', 'g@gmail.com', 'Wan Chai', 'ewewef', 'samgor', 'open', './image/Restaurant/22.jpg', 'rw', '', '', '', '', 0),
-('713530', 'mcdonald', '4001', '34455566', 'g@gmail.com', 'Southern', '323232', '4343', 'open', './image/Restaurant/1642694-200.png', '3232', '', '', '', '', 1),
-('918541', 'Le Viet', '4002', '34455566', 'g@gmail.com', 'Yau Tsim Mong', 'Shop 101-106, 108-109, 2/F, Bank Centre, 636 Nathan Road', 'hll', 'open', './image/Restaurant/leviet.jpg', 's', '', '', '', '', 0);
+('181415', 'samgor', '4001', '34455566', 'g@gmail.com', 'Wan Chai', 'ewewef', 'samgor', 'open', './image/Restaurant/22.jpg', 'rw', '08:00', '23:00', 'Sunday', 'Saturday', 0),
+('918541', 'Le Viet', '4002', '34455566', 'g@gmail.com', 'Yau Tsim Mong', 'Shop 101-106, 108-109, 2/F, Bank Centre, 636 Nathan Road', 'hll', 'open', './image/Restaurant/leviet.png', 's', '08:00', '23:00', 'Sunday', 'Saturday', 3);
 
 -- --------------------------------------------------------
 
@@ -196,14 +197,14 @@ CREATE TABLE `search_history` (
 
 CREATE TABLE `tags` (
   `tagid` char(4) NOT NULL,
-  `tagname` varchar(20) NOT NULL
+  `tag` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- 資料表的匯出資料 `tags`
 --
 
-INSERT INTO `tags` (`tagid`, `tagname`) VALUES
+INSERT INTO `tags` (`tagid`, `tag`) VALUES
 ('3001', 'Dessert'),
 ('3002', 'Hot pot'),
 ('3003', 'Mixian'),

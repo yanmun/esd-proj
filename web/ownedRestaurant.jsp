@@ -21,8 +21,6 @@
         RestaurantDB db = new RestaurantDB();
         rests = db.queryByUsername(ub.getUsername());
     }
-    
-   
 
 
 %>
@@ -39,12 +37,12 @@
         </script>
         <script>
             var success = '<%=request.getParameter("successUpdate")%>';
-            $(document).ready(function(){
-                if(success=="true"){
+            $(document).ready(function () {
+                if (success == "true") {
                     alert("The restaurant information has been successfully updated!");
                 }
             })
-         </script>
+        </script>
         <title>Owned Restaurant</title>
     </head>
     <body>
@@ -59,7 +57,7 @@
                     <table border="1">
                         <tr>
 
-                            <%                                
+                            <%
                                 if (rests != null) {
                                     for (int i = 0; i < rests.size(); i++) {
                                         if (count % 3 == 0) {
@@ -73,7 +71,8 @@
                                                 + "<p> Tel:" + rests.get(i).getRestTel() + "</p>"
                                                 + "<p>" + rests.get(i).getOpen_hrs() + "</p>"
                                                 + "<p>" + rests.get(i).getStatus() + "</p>"
-                                                + "<p> <a href='editRestaurant.jsp?id="+rests.get(i).getRestID()+"'>Edit</a></p></td>");
+                                                + "<p> Views: " + rests.get(i).getNum_view() + "</p>"
+                                                + "<p> <a href='editRestaurant.jsp?id=" + rests.get(i).getRestID() + "'>Edit</a></p></td>");
                                     }
                                 }
 
@@ -82,11 +81,11 @@
 
                     </table>
                 </div>
-                         
+
             </div>
             <jsp:include page="footer.jsp" />
         </div>
-       
-   
+
+
     </body>
 </html>
