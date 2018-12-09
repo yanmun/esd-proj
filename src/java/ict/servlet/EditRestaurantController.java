@@ -43,25 +43,21 @@ public class EditRestaurantController extends HttpServlet {
         String r_desc = request.getParameter("r_desc");
         String r_photo;
         if (!request.getParameter("r_photo").equals("")) {
-            r_photo = request.getParameter("r_photo");
+            r_photo = "./image/Restaurant/"+request.getParameter("r_photo");
         } else {
             r_photo = request.getParameter("ori");
         }
         db = new RestaurantDB();
 
-        out.println(db.updateRestaurantInfo(state, rname, open_time, close_time, start_day, end_day, district, address, rtype, rtel, remail, restid, r_desc, r_photo));
+        if(db.updateRestaurantInfo(state, rname, open_time, close_time, start_day, end_day, 
+                district, address, rtype, rtel, remail, restid, r_desc, r_photo).equals("yes")){
+            
+        }
+//        out.println(db.updateRestaurantInfo(state, rname, open_time, close_time, start_day, end_day, district, address, rtype, rtel, remail, restid, r_desc, r_photo));
 
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
