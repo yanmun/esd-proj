@@ -262,10 +262,13 @@ public class RestaurantDB extends DB {
         RestaurantBean rb = null;
         try {
             cnnct = getConnection();
-            String preQueryStatement = "SELECT * FROM RESTAURANT WHERE RESTNAME=?";
+            String preQueryStatement = "SELECT * FROM RESTAURANT WHERE RESTNAME like '%"+restName+"%' "
+                    + "or district like '%"+restName+"%' "
+                    + "or rest_desc like '%"+restName+"%'"
+                    + "or district like '%"+restName+"%'";
             ResultSet re = null;
             pStmnt = cnnct.prepareStatement(preQueryStatement);
-            pStmnt.setString(1, restName);
+//            pStmnt.setString(1, restName);
             re = pStmnt.executeQuery();
             while (re.next()) {
                 rb = new RestaurantBean();
