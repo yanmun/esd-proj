@@ -574,4 +574,66 @@ public class RestaurantDB extends DB {
         return like;
     }
 
+    public String updateRestaurantInfo(String state, String rname, String open_time,
+            String close_time, String start_day, String end_day,
+            String district, String address, String rtype, String rtel,
+            String remail, String restid, String r_desc, String r_photo) {
+        Connection cnnct = null;
+        PreparedStatement pStmnt = null;
+        String msg ="";
+        boolean isSuccess = false;
+        try {
+            cnnct = getConnection();
+            RestaurantDB db = new RestaurantDB();
+
+            String preQueryStatement = "UPDATE RESTAURANT SET num_view=?, "
+                    + "status=?, "
+                    + "restName=?,  "
+                    + "start_hour=? "
+                    + "end_hour=? "
+                    + "start_day=? "
+                    + "end_day=? "
+                    + "district=? "
+                    + "address=? "
+                    + "restTypeID=? "
+                    + "restTel=? "
+                    + "restEmail=? "
+                    + "rest_desc=? "
+                    + "rest_pic=? WHERE restID=?";
+            pStmnt = cnnct.prepareStatement(preQueryStatement);
+            pStmnt.setString(1, state);
+            pStmnt.setString(2, rname);
+            pStmnt.setString(3, open_time);
+            pStmnt.setString(4, close_time);
+            pStmnt.setString(5, start_day);
+            pStmnt.setString(6, end_day);
+            pStmnt.setString(7, district);
+            pStmnt.setString(8, address);
+            pStmnt.setString(9, rtype);
+            pStmnt.setString(10, rtel);
+            pStmnt.setString(11, remail);
+            pStmnt.setString(12, r_desc);
+            pStmnt.setString(13, r_photo);
+             pStmnt.setString(14, restid);
+            int rowCount = pStmnt.executeUpdate();
+            if (rowCount >= 1) {
+                isSuccess = true;
+                msg="Yes";
+            }
+            pStmnt.close();
+            cnnct.close();
+        } catch (SQLException ex) {
+            while (ex != null) {
+                ex.printStackTrace();
+                ex = ex.getNextException();
+                return ex.toString();
+            }
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        } catch (ClassNotFoundException ex) {
+            ex.printStackTrace();
+        }
+        return msg;
+    }
+
 }

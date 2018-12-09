@@ -11,6 +11,7 @@
 
 <%!
     RestaurantBean r;
+   
 %>
 <%
     if (request.getParameter("id") != null) {
@@ -45,6 +46,7 @@
 
             var end_day = "<%=r.getEnd_day()%>";
             var type = "<%=r.getRestTypeID()%>";
+            
 
             $(document).ready(function () {
 
@@ -92,13 +94,13 @@
             <jsp:include page="header.jsp" />
             <jsp:include page="sidebar.jsp" />
             <div class="content">                
-                <form action="action" method="post">
-
+                <form action="EditRestaurantController" method="post">
+                    <input type="hidden" name="id" value="<%=request.getParameter("id") %>">
                     <a class="img" style=" ">
                         <div class="im_overlay" style=""><i class="fa fa-camera"></i></div>
                         <img src="<%=r.getRest_pic()%>" style="width:200px; height:200px;" id="rest_photo">
                     </a>
-                    <input type="file" style="display:none;" class="photo_upload">    
+                    <input type="file" style="display:none;" class="photo_upload" name="r_photo">    
                     <p>Restaurant Name: <input type="text" name="rname" value="<%=r.getRestName()%>"></p>
                     <p>Telephone Number: <input type="text" name="tel" value="<%=r.getRestTel()%>"></p>
                     <p>Email: <input type="email" name="tel" value="<%=r.getRestEmail()%>"></p>

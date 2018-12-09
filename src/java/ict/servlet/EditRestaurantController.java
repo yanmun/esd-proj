@@ -5,6 +5,7 @@
  */
 package ict.servlet;
 
+import ict.db.RestaurantDB;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -20,9 +21,12 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "EditRestaurantController", urlPatterns = {"/EditRestaurantController"})
 public class EditRestaurantController extends HttpServlet {
 
+    private RestaurantDB db;
+    private PrintWriter out;
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        out = response.getWriter();
         String state = request.getParameter("state");
         String rname = request.getParameter("rname");
         String open_time = request.getParameter("open_time");
@@ -33,6 +37,13 @@ public class EditRestaurantController extends HttpServlet {
         String address = request.getParameter("address");
         String rtype = request.getParameter("rtype");
         String rtel = request.getParameter("rtel");
+        String remail = request.getParameter("remail");
+        String restid = request.getParameter("id");
+        String r_desc = request.getParameter("r_desc");
+        String r_photo = request.getParameter("r_photo");
+        db = new RestaurantDB();
+        out.println(db.updateRestaurantInfo(state, rname, open_time, close_time, start_day, end_day, district, address, rtype, rtel, remail, restid, r_desc, r_photo));
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
