@@ -150,7 +150,7 @@ public class RestaurantBean {
         return start_hour;
     }
 
-    public void getStart_hour(String start_hour) {
+    public void setStart_hour(String start_hour) {
         this.start_hour = start_hour;
     }
 

@@ -40,7 +40,7 @@ public class RestaurantDB extends DB {
 
     public RestaurantDB(String rname, String district, String address,
             String rtype, String rtel, String remail, String pic_path, String desc, String ownid, String state,
-             String restID, String open_time, String closeTime , String start_day, String end_day) {
+            String restID, String open_time, String closeTime, String start_day, String end_day) {
         super();
         this.rname = rname;
         this.hr = hr;
@@ -231,8 +231,13 @@ public class RestaurantDB extends DB {
                 rb.setStatus(re.getString(9));
                 rb.setRest_pic(re.getString(10));
                 rb.setRest_desc(re.getString(11));
-                rb.setOpen_hrs(re.getString(12));
-                rb.setNum_view(re.getString(13));
+//                rb.setOpen_hrs(re.getString(12));
+//                rb.setNum_view(re.getString(13));
+                rb.setStart_hour(re.getString(12));
+                rb.setEnd_hour(re.getString(13));
+                rb.setStart_day(re.getString(14));
+                rb.setEnd_day(re.getString(15));
+                rb.setNum_view(re.getString(16));
                 restaurants.add(rb);
             }
             pStmnt.close();
@@ -275,8 +280,14 @@ public class RestaurantDB extends DB {
                 rb.setStatus(re.getString(9));
                 rb.setRest_pic(re.getString(10));
                 rb.setRest_desc(re.getString(11));
-                rb.setOpen_hrs(re.getString(12));
-                rb.setNum_view(re.getString(13));
+//                rb.setOpen_hrs(re.getString(12));
+//                rb.setNum_view(re.getString(13));
+
+                rb.setStart_hour(re.getString(12));
+                rb.setEnd_hour(re.getString(13));
+                rb.setStart_day(re.getString(14));
+                rb.setEnd_day(re.getString(15));
+                rb.setNum_view(re.getString(16));
                 restaurants.add(rb);
             }
             pStmnt.close();
@@ -320,8 +331,13 @@ public class RestaurantDB extends DB {
                 rb.setStatus(re.getString(9));
                 rb.setRest_pic(re.getString(10));
                 rb.setRest_desc(re.getString(11));
-                rb.setOpen_hrs(re.getString(12));
-                rb.setNum_view(re.getString(13));
+//                rb.setOpen_hrs(re.getString(12));
+//                rb.setNum_view(re.getString(13));
+                rb.setStart_hour(re.getString(12));
+                rb.setEnd_hour(re.getString(13));
+                rb.setStart_day(re.getString(14));
+                rb.setEnd_day(re.getString(15));
+                rb.setNum_view(re.getString(16));
             }
             pStmnt.close();
             cnnct.close();
@@ -403,7 +419,7 @@ public class RestaurantDB extends DB {
         ArrayList<RestaurantBean> rests = new ArrayList<RestaurantBean>();
         Connection cnnct = null;
         PreparedStatement pStmnt = null;
-        
+
         RestaurantBean rb = null;
         try {
             cnnct = getConnection();
@@ -425,8 +441,13 @@ public class RestaurantDB extends DB {
                 rb.setStatus(re.getString(9));
                 rb.setRest_pic(re.getString(10));
                 rb.setRest_desc(re.getString(11));
-                rb.setOpen_hrs(re.getString(12));
-                rb.setNum_view(re.getString(13));
+//                rb.setOpen_hrs(re.getString(12));
+//                rb.setNum_view(re.getString(13));
+                rb.setStart_hour(re.getString(12));
+                rb.setEnd_hour(re.getString(13));
+                rb.setStart_day(re.getString(14));
+                rb.setEnd_day(re.getString(15));
+                rb.setNum_view(re.getString(16));
                 rests.add(rb);
             }
             pStmnt.close();
@@ -443,14 +464,14 @@ public class RestaurantDB extends DB {
         }
         return rests;
     }
-    
-     public RestaurantBean queryRestByRestID(String restid) {
+
+    public RestaurantBean queryRestByRestID(String restid) {
         Connection cnnct = null;
         PreparedStatement pStmnt = null;
 
         RestaurantBean rb = null;
         try {
-            cnnct = getConnection();            
+            cnnct = getConnection();
             String preQueryStatement = "SELECT * FROM restaurant WHERE restID=?";
             ResultSet re = null;
             pStmnt = cnnct.prepareStatement(preQueryStatement);
@@ -469,8 +490,13 @@ public class RestaurantDB extends DB {
                 rb.setStatus(re.getString(9));
                 rb.setRest_pic(re.getString(10));
                 rb.setRest_desc(re.getString(11));
-                rb.setOpen_hrs(re.getString(12));
-                rb.setNum_view(re.getString(13));
+//                rb.setOpen_hrs(re.getString(12));
+//                rb.setNum_view(re.getString(13));
+                rb.setStart_hour(re.getString(12));
+                rb.setEnd_hour(re.getString(13));
+                rb.setStart_day(re.getString(14));
+                rb.setEnd_day(re.getString(15));
+                rb.setNum_view(re.getString(16));
             }
             pStmnt.close();
             cnnct.close();
@@ -486,8 +512,8 @@ public class RestaurantDB extends DB {
         }
         return rb;
     }
-     
-     public boolean updateLike(String restname) {
+
+    public boolean updateLike(String restname) {
         Connection cnnct = null;
         PreparedStatement pStmnt = null;
         int like;
@@ -518,8 +544,8 @@ public class RestaurantDB extends DB {
         }
         return isSuccess;
     }
-    
-     public int getLike(String restname) {
+
+    public int getLike(String restname) {
         Connection cnnct = null;
         PreparedStatement pStmnt = null;
         int like = 0;
