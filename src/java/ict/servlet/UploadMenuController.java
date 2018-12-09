@@ -68,13 +68,13 @@ public class UploadMenuController extends HttpServlet {
                 }
             }
             
-            db = new MenuDB(id, path, restID, status);
-            if (db.addRecord()) {
-                out.println("yes");
-            } else {
-                out.println(path);
-
-            }
+//            db = new MenuDB(id, path, restID, status);
+//            if (db.addRecord()) {
+//                out.println("yes");
+//            } else {
+//                out.println(path);
+//
+//            }
 
         }
 

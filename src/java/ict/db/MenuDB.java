@@ -21,12 +21,17 @@ public class MenuDB extends DB {
     private String path;
     private String restID;
     private String status;
+    private String type;
+    private String menu_desc;
 
-    public MenuDB(String id, String path, String restID, String status) {
+    public MenuDB(String id, String path, String restID, String status, 
+            String type, String menu_desc) {
         this.id = id;
         this.path = path;
         this.restID = restID;
         this.status = status;
+        this.type = type;
+        this.menu_desc = menu_desc;
     }
     
     public MenuDB(){
@@ -40,12 +45,14 @@ public class MenuDB extends DB {
         boolean isSuccess = false;
         try {
             cnnct = getConnection();
-            String preQueryStatement = "INSERT INTO menu VALUES (?,?,?,?)";
+            String preQueryStatement = "INSERT INTO menu VALUES (?,?,?,?,?,?)";
             pStmnt = cnnct.prepareStatement(preQueryStatement);
             pStmnt.setString(1, id);
             pStmnt.setString(2, path);
             pStmnt.setString(3, restID);
             pStmnt.setString(4, status);
+            pStmnt.setString(5, type);
+            pStmnt.setString(6, menu_desc);
             int rowCount = pStmnt.executeUpdate();
             if (rowCount >= 1) {
                 isSuccess = true;
@@ -64,6 +71,40 @@ public class MenuDB extends DB {
         }
         return isSuccess;
 
+    }
+    
+    public String add(){
+         Connection cnnct = null;
+        PreparedStatement pStmnt = null;
+        String msg ="";
+        try {
+            cnnct = getConnection();
+            String preQueryStatement = "INSERT INTO menu VALUES (?,?,?,?,?,?)";
+            pStmnt = cnnct.prepareStatement(preQueryStatement);
+            pStmnt.setString(1, id);
+            pStmnt.setString(2, path);
+            pStmnt.setString(3, restID);
+            pStmnt.setString(4, status);
+            pStmnt.setString(5, type);
+            pStmnt.setString(6, menu_desc);
+            int rowCount = pStmnt.executeUpdate();
+            if (rowCount >= 1) {
+                msg = "yes";
+            }
+            pStmnt.close();
+            cnnct.close();
+        } catch (SQLException ex) {
+            while (ex != null) {
+                msg+=ex.toString();
+               ex.printStackTrace();
+                ex = ex.getNextException();
+            }
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        } catch (ClassNotFoundException ex) {
+            ex.printStackTrace();
+        }
+        return msg;
     }
     
     public boolean findExistID(String id){

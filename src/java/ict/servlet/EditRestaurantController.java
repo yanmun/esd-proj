@@ -5,7 +5,9 @@
  */
 package ict.servlet;
 
+import ict.db.MenuDB;
 import ict.db.RestaurantDB;
+import ict.random.GenerateID;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
@@ -23,6 +25,7 @@ import javax.servlet.http.HttpServletResponse;
 public class EditRestaurantController extends HttpServlet {
 
     private RestaurantDB db;
+     private MenuDB mdb;
     private PrintWriter out;
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -48,16 +51,47 @@ public class EditRestaurantController extends HttpServlet {
         } else {
             r_photo = request.getParameter("ori");
         }
-        db = new RestaurantDB();
 
+        String[] pics = request.getParameterValues("menu_photo");
+        String status = request.getParameter("menu_status");
+        String[] menu_desc = request.getParameterValues("menu_desc");
+        String[] menu_type = request.getParameterValues("menu_type");
+        int success =0;
+        db = new RestaurantDB();
+        for (int i = 0; i < pics.length; i++) {
+            String path = "./image/Restaurant/" + pics[i];
+            String id = "";
+            boolean isRepeat = true;
+            while (isRepeat) {
+                id = GenerateID.genSixDigitID();
+                if (new MenuDB().findExistID(id)) {
+                    isRepeat = true;
+                } else {
+                    isRepeat = false;
+                }
+            }
+
+            mdb = new MenuDB(id, path, restid, status, menu_type[i], menu_desc[i]);
+            if (mdb.addRecord()) {
+                success+=1;
+            } else {
+                out.println(path);
+
+            }
+
+            
+
+        }
         if (db.updateRestaurantInfo(state, rname, open_time, close_time, start_day, end_day,
-                district, address, rtype, rtel, remail, restid, r_desc, r_photo).equals("Yes")) {
+                district, address, rtype, rtel, remail, restid, r_desc, r_photo).equals("Yes") && success==pics.length) {
             RequestDispatcher dis;
-           
+
 //            rd = getServletContext().getRequestDispatcher("/index.jsp");
 //            rd.forward(request, response);
-                dis = getServletContext().getRequestDispatcher("/ownedRestaurant.jsp?successUpdate=true");
-                dis.forward(request, response);
+            dis = getServletContext().getRequestDispatcher("/ownedRestaurant.jsp?successUpdate=true");
+            dis.forward(request, response);
+        }else{
+            out.println(success);
         }
     }
 

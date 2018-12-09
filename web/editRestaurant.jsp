@@ -16,6 +16,7 @@
 
 %>
 <%
+    mdb = new MenuDB();
     if (request.getParameter("id") != null) {
         RestaurantDB db = new RestaurantDB();
 
@@ -73,7 +74,8 @@
 
                 $("#add_upload").click(function () {
                     count++;
-                    if (count == 1 && !mdb.queryByRestID(request.getParameter("id"))) {
+                    
+                    if (count == 1) {
                         $("#menus_table").css("display", "block");
                          $("#menus_table > tbody").append("<tr>\n" +
                    "    <td>"+count+"</td>\n" +
@@ -246,7 +248,7 @@
                             <input type="file" accept=".png, .jpeg" class="photo_upload" name="menu_photo">
                             <img src="" alt="" width="200" height="200">
                         </div>-->
-                        <input type="hidden" value="public" name="status" id="status_input">
+                        <input type="hidden" value="public" name="menu_status" id="status_input">
                         <input type="button" value="+" id="add_upload">
                     </div>
                     <input type="submit" value="Confirm Edit">
