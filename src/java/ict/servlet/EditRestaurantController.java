@@ -53,10 +53,10 @@ public class EditRestaurantController extends HttpServlet {
         if (db.updateRestaurantInfo(state, rname, open_time, close_time, start_day, end_day,
                 district, address, rtype, rtel, remail, restid, r_desc, r_photo).equals("Yes")) {
             RequestDispatcher dis;
-//            request.setAttribute("msg", "<script type=\"text/javascript\"> alert('User or password incorrect');</script>");
+           
 //            rd = getServletContext().getRequestDispatcher("/index.jsp");
 //            rd.forward(request, response);
-                dis = getServletContext().getRequestDispatcher("/index.jsp");
+                dis = getServletContext().getRequestDispatcher("/ownedRestaurant.jsp?successUpdate=true");
                 dis.forward(request, response);
         }
     }

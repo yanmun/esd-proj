@@ -21,6 +21,8 @@
         RestaurantDB db = new RestaurantDB();
         rests = db.queryByUsername(ub.getUsername());
     }
+    
+   
 
 
 %>
@@ -32,6 +34,17 @@
         <style type="text/css">
             <jsp:include page="css/style.css" />
         </style>
+        <script src="./jslib/jquery-3.3.1.js">
+
+        </script>
+        <script>
+            var success = '<%=request.getParameter("successUpdate")%>';
+            $(document).ready(function(){
+                if(success=="true"){
+                    alert("The restaurant information has been successfully updated!");
+                }
+            })
+         </script>
         <title>Owned Restaurant</title>
     </head>
     <body>
