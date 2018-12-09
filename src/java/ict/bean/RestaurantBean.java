@@ -123,7 +123,7 @@ public class RestaurantBean {
     }
 
     public String getOpen_hrs() {
-        return open_hrs;
+        return start_hour + " - " + end_hour + " (" + start_day + " to " + end_day + ")";
     }
 
     public void setOpen_hrs(String open_hrs) {
@@ -155,7 +155,7 @@ public class RestaurantBean {
     }
 
     public void setEnd_hour(String eh) {
-        this.end_hour = end_hour;
+        this.end_hour = eh;
     }
 
     public String getEnd_hour() {
@@ -179,4 +179,5 @@ public class RestaurantBean {
     public String getEnd_day(){
         return end_day;  
     }
+    
 }

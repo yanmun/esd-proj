@@ -5,7 +5,9 @@
  */
 package ict.db;
 
+import ict.bean.RestaurantBean;
 import ict.bean.UserBean;
+import java.util.ArrayList;
 
 /**
  *
@@ -28,11 +30,14 @@ public class Test {
 //        } else {
 //            System.out.print("NO");
 //        }
-
-        AccountDB db = new AccountDB();
-        UserBean user = db.queryUserByID("a");
-        String type = user.getType();
-        System.out.print(user);
+        RestaurantDB db = new  RestaurantDB();
+        RestaurantBean rb = null;
+        ArrayList <RestaurantBean> r = new ArrayList<RestaurantBean>();
+        r= db.queryByUsername("hll");
+        for(int i=0;i<r.size();i++){
+             System.out.println(r.get(i).getEnd_hour());
+        }
+       
 
     }
 
