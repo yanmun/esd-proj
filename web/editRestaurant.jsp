@@ -43,20 +43,16 @@
             var end_day = "<%=r.getEnd_day()%>";
 
             $(document).ready(function () {
-                alert(getStartDay());
+
                 $("#district option[value='" + temp + "']").attr('selected', 'selected');
                 $("#status option[value='" + status + "']").attr('selected', 'selected');
                 $("input[name=open_time]").val(start_hr);
                 $("input[name=close_time]").val(close_time);
+                $("#start_day option[value='" + start_day + "']").attr('selected', 'selected');
+                $("#end_day option[value='" + end_day + "']").attr('selected', 'selected');
             })
 
-            function getStartDay() {
-                for (var i = 0; i < time.length; i++) {
-                    if (time[i] == "t") {
-                        return i;
-                    }
-                }
-            }
+       
         </script>
         <title>Edit Restaurant Info</title>
     </head>
@@ -106,7 +102,8 @@
                     <p>Open Hour: 
                         <input type='time'  name='open_time'
                                min='00:00' max='23:59' /> - <input type='time' id='appt' name='close_time'
-                               min='00:00' max='23:59'  value=""/> ( <select name='start_day' >
+                               min='00:00' max='23:59'  value=""/> ( 
+                        <select name='start_day' id="start_day">
                             <option value='Sunday'>Sunday</option>
                             <option value='Monday'>Monday</option>
                             <option value='Tuesday'>Tuesday</option>
@@ -114,7 +111,8 @@
                             <option value='Thursday'>Thursday</option>
                             <option value='Friday'>Friday</option>
                             <option value='Saturday'>Saturday</option>
-                        </select> to  <select name='end_day' >
+                        </select> to  
+                        <select name='end_day' id="end_day">
                             <option value='Sunday'>Sunday</option>
                             <option value='Monday'>Monday</option>
                             <option value='Tuesday'>Tuesday</option>
