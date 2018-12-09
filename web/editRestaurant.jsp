@@ -24,13 +24,14 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <style type="text/css">
             <jsp:include page="css/style.css" />
+            <jsp:include page="css/element_style.css" />
         </style>
-        <link rel="stylesheet" href="./css/element_style.css">
+        <!--<link rel="stylesheet" href="./css/element_style.css">-->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <script src="./jslib/jquery-3.3.1.js">
 
         </script>
-        
+
         <script>
 
             var temp = '<%=r.getDistrict()%>';
@@ -43,7 +44,7 @@
             var start_day = "<%=r.getStart_day()%>";
 
             var end_day = "<%=r.getEnd_day()%>";
-            var type = "<%=r.getRestTypeID() %>";
+            var type = "<%=r.getRestTypeID()%>";
 
             $(document).ready(function () {
 
@@ -53,8 +54,33 @@
                 $("input[name=close_time]").val(close_time);
                 $("#start_day option[value='" + start_day + "']").attr('selected', 'selected');
                 $("#end_day option[value='" + end_day + "']").attr('selected', 'selected');
-                
+
                 $("#rtype option[value='" + type + "']").attr('selected', 'selected');
+
+                $(".img").click(function () {
+
+                    $("input[class='photo_upload']").click();
+                })
+
+                $("input[class='photo_upload']").change(function () {
+                    readURL(this, $("#rest_photo"));
+                   
+                })
+
+                function readURL(input, img) {
+
+                    if (input.files && input.files[0]) {
+                        var reader = new FileReader();
+
+                        reader.onload = function (e) {
+//                            $('img').attr('src', e.target.result);
+                            img.attr('src', e.target.result);
+                        }
+
+                        reader.readAsDataURL(input.files[0]);
+                    }
+                }
+
             })
 
 
@@ -67,12 +93,12 @@
             <jsp:include page="sidebar.jsp" />
             <div class="content">                
                 <form action="action" method="post">
-             
-                        <a class="img" >
-                                <div class="im_overlay"><i class="fa fa-camera"></i></div>
-                                <img src="<%=r.getRest_pic()  %>" style="width:200px; height:200px;">
-                            </a>
-                
+
+                    <a class="img" style=" ">
+                        <div class="im_overlay" style=""><i class="fa fa-camera"></i></div>
+                        <img src="<%=r.getRest_pic()%>" style="width:200px; height:200px;" id="rest_photo">
+                    </a>
+                    <input type="file" style="display:none;" class="photo_upload">    
                     <p>Restaurant Name: <input type="text" name="rname" value="<%=r.getRestName()%>"></p>
                     <p>Telephone Number: <input type="text" name="tel" value="<%=r.getRestTel()%>"></p>
                     <p>Email: <input type="email" name="tel" value="<%=r.getRestEmail()%>"></p>
