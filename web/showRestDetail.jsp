@@ -38,7 +38,7 @@
                     out.println("<td>");
                     out.println("<p>Description: " + r.getRest_desc() + "</p>");
                     out.println("</td>");
-                    out.println("<td rowspan='4' width='500'><img src='" + r.getRest_pic() + "' >");
+                    out.println("<td rowspan='4' width='500'><img src='" + r.getRest_pic() + "' width='200' height='200'>");
                     out.println("</td>");
                     out.println("</tr>");
                     out.println("<tr>");
