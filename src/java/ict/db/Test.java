@@ -30,13 +30,23 @@ public class Test {
 //        } else {
 //            System.out.print("NO");
 //        }
-        RestaurantDB db = new  RestaurantDB();
-        RestaurantBean rb = null;
-        ArrayList <RestaurantBean> r = new ArrayList<RestaurantBean>();
-        r= db.queryByUsername("hll");
-        for(int i=0;i<r.size();i++){
-             System.out.println(r.get(i).getEnd_hour());
-        }
+            String restName = "samgor";
+        KeywordDB kdb = new KeywordDB(restName);
+                if(!kdb.queryByKeyword(restName)){
+                    kdb.addRecord();
+                }else{
+                    System.out.println(kdb.getCount());
+                    kdb.updateView();
+                 
+                }
+
+//        RestaurantDB db = new  RestaurantDB();
+//        RestaurantBean rb = null;
+//        ArrayList <RestaurantBean> r = new ArrayList<RestaurantBean>();
+//        r= db.queryByUsername("hll");
+//        for(int i=0;i<r.size();i++){
+//             System.out.println(r.get(i).getEnd_hour());
+//        }
        
 
     }

@@ -29,6 +29,7 @@
                 
                 if (ub.getType().equals("System Administrator")) {
                     out.println("<li><a href='handleEdit?action=list'>All User</a></li>");
+                    out.println("<li><a href='SearchInfo.jsp'>View Search History</a></li>");
                 }
 
                 out.println("  <li><a href='welcome.jsp'>User Profile</a></li>   ");

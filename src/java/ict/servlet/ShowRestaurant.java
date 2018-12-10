@@ -8,6 +8,7 @@ package ict.servlet;
 import ict.bean.RestaurantBean;
 import ict.bean.CommentBean;
 import ict.db.CommentDB;
+import ict.db.KeywordDB;
 import ict.db.RestaurantDB;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -66,7 +67,12 @@ public class ShowRestaurant extends HttpServlet {
             if (restName != null) {
                 ArrayList<RestaurantBean> restaurants = db.queryRestByName(restName);
                 request.setAttribute("restaurants", restaurants); // redirect the result to the listCustomers.jsp
-
+                KeywordDB kdb = new KeywordDB(restName);
+                if(!kdb.queryByKeyword(restName)){
+                    kdb.addRecord();
+                }else{
+                    kdb.updateView();
+                }
                 RequestDispatcher rd;
                 rd = getServletContext().getRequestDispatcher("/listRest.jsp");
                 rd.forward(request, response);

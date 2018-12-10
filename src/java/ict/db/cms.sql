@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主機: 127.0.0.1
--- 產生時間： 2018 年 12 月 09 日 23:15
+-- 產生時間： 2018 年 12 月 10 日 00:56
 -- 伺服器版本: 10.1.30-MariaDB
 -- PHP 版本： 7.2.2
 
@@ -143,8 +143,8 @@ CREATE TABLE `restaurant` (
 --
 
 INSERT INTO `restaurant` (`restID`, `restName`, `restTypeID`, `restTel`, `restEmail`, `district`, `address`, `ownerID`, `status`, `rest_pic`, `rest_desc`, `start_hour`, `end_hour`, `start_day`, `end_day`, `num_view`) VALUES
-('181415', 'samgor', '4001', '34455566', 'g@gmail.com', 'Wan Chai', 'ewewef', 'samgor', 'open', './image/Restaurant/22.jpg', 'rw', '08:00', '23:00', 'Sunday', 'Saturday', 0),
-('918541', 'Le Viet', '4002', '34455566', 'g@gmail.com', 'Yau Tsim Mong', 'Shop 101-106, 108-109, 2/F, Bank Centre, 636 Nathan Road', 'hll', 'open', './image/Restaurant/leviet.png', 's', '08:00', '23:00', 'Sunday', 'Saturday', 3);
+('181415', 'samgor', '4001', '34455566', 'g@gmail.com', 'Wan Chai', 'ewewef', 'samgor', 'open', './image/Restaurant/samgor.png', 'rw', '08:00', '23:00', 'Sunday', 'Saturday', 0),
+('918541', 'Le Viet', '4002', '34455566', 'g@gmail.com', 'Yau Tsim Mong', 'Shop 101-106, 108-109, 2/F, Bank Centre, 636 Nathan Road', 'hll', 'open', './image/Restaurant/leviet.png', 's', '08:00', '23:00', 'Sunday', 'Saturday', 4);
 
 -- --------------------------------------------------------
 
@@ -186,8 +186,16 @@ CREATE TABLE `rest_tag` (
 
 CREATE TABLE `search_history` (
   `time` varchar(40) NOT NULL,
-  `keyword` varchar(50) NOT NULL
+  `keyword` varchar(50) NOT NULL,
+  `count` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- 資料表的匯出資料 `search_history`
+--
+
+INSERT INTO `search_history` (`time`, `keyword`, `count`) VALUES
+('1544398454406', 'samgor', 2);
 
 -- --------------------------------------------------------
 
@@ -278,6 +286,12 @@ ALTER TABLE `restauranttype`
 ALTER TABLE `rest_tag`
   ADD PRIMARY KEY (`restID`,`tagid`),
   ADD KEY `tagid` (`tagid`);
+
+--
+-- 資料表索引 `search_history`
+--
+ALTER TABLE `search_history`
+  ADD PRIMARY KEY (`keyword`);
 
 --
 -- 資料表索引 `tags`
